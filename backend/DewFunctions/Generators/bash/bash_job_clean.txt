@@ -1,0 +1,38 @@
+
+if [ "$#" -le 2 ]; then
+	printf "Usage: $0 proj exp label
+
+		proj - project under which to run
+		exp - experiment under which to run
+		label - label for the folder where to store results
+
+"
+	exit 1
+fi
+
+proj=$1
+exp=$2
+label=$3
+id=$label
+cnt=0
+path=`pwd`
+
+execute_stop()
+{
+    local node=$1
+    local cmd=$2
+    local cnt=$3
+    local aname=$4
+
+    if [ ! -d $path/DEW/$id ] ; then
+        mkdir $path/DEW/$id
+    fi
+    python3 /share/shared/dew/submitjob.py $node "stop all all" &
+}
+
+# This should be done conditionally if everything is stopped
+# rm -f $path/DEW/$id/*
+
+
+
+

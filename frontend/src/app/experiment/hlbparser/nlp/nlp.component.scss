@@ -1,0 +1,39 @@
+.behavior-list{
+    margin:.1em;
+    list-style: none;
+    padding: 0;
+}
+
+.behavior-box{
+    margin: .5em;
+    border: 1px solid #ccc;
+    padding: .5em;
+}
+
+.word-bubble{
+    border: 1px dotted black;
+    border-radius: 1em;
+    padding: 0.4em;
+    margin: 0.1em;
+    cursor: pointer;
+ 
+}
+.word-bubble-button{
+    border-radius: 1em;
+    padding: 0.4em;
+    margin: 0.1em;
+    cursor: pointer;
+ 
+}
+.float-left{
+    float:left;
+}
+
+.actions{
+    float:right;
+}
+
+.disabled{
+    pointer-events: none;
+    background-color: grey;
+}

@@ -1,0 +1,34 @@
+<div mat-dialog-content>
+  <div class="row" style="margin: 0.5em">
+    <div class="col-md-12">
+      <div style="text-align: center">
+        <h2>Run Variables</h2>
+      </div>
+
+      <hr />
+      <select (change)="onSelectChange()" [(ngModel)]="selectedLabelIndex" class="form-control">
+        <option value="">Select Label</option>
+        <option *ngFor="let label of labels;let i=index" [value]="i">{{label.label}}</option>
+      </select>
+      <ul class="variable-list">
+        <li *ngFor="let bindingItem of variable">
+          <div>
+            <mat-form-field style="width: 100%">
+              <mat-label>{{ bindingItem.message }}</mat-label>
+              <input matInput [(ngModel)]="variableList[bindingItem.variable]" />
+            </mat-form-field>
+
+            <span> </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Back</button>
+  <button mat-button [mat-dialog-close]="variableList" cdkFocusInitial>
+    Run
+  </button>
+</div>

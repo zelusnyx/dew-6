@@ -1,0 +1,40 @@
+<div mat-dialog-content>
+    <div class="row" style="margin: .5em;" >
+      <div class="col-md-12" style="padding: 0;">
+    
+        <table class="table">
+            <thead >
+                <tr >
+                 
+                    <th style="min-width:250px">Name</th>
+                    <th style="min-width:50px">Handle</th>
+                    <th style="min-width:50px">Access Level</th> 
+                   
+                    <th ></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="userAccessList.length!=0" >
+                <tr *ngFor="let item of userAccessList; let i=index" >
+                 
+                    <td><strong>{{ item.name }}</strong></td>
+                    <td><strong>{{ '@'+item.handle }}</strong></td>
+                     <td><strong>{{ item.accessLevel }}</strong></td> 
+    
+                    <td>
+           
+                      <i class="far fa-trash-alt pointer" (click)="deleteUser(item)"></i></td>
+      
+                </tr>
+            </tbody>
+            <tbody style="text-align: center;"  *ngIf="userAccessList.length==0" >
+              <tr >
+                <td colspan="3" ><span ><i>No User has been granted access for this experiment.</i> </span></td>
+                  
+      
+              </tr>
+          </tbody>
+       
+        </table>
+      </div>
+    </div> 
+  </div>

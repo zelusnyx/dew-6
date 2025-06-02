@@ -1,0 +1,91 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="wrapper">
+      
+  <nav id="sidebar" [ngClass]="{'active':menuFlag}">
+  
+    <div class="sidebar-header">
+      <i style="float:right"  class="fas fa-times menu_pointer"(click)=" toggle()"></i>
+     
+      <div class="navbar-nav pointer" >
+        <div class="profile" *ngIf="!loggedIn"></div>
+        <div class="profile_img" *ngIf="loggedIn"><img src="{{img}}" width="80px" height="80px">
+          <div class="username"><span *ngIf="!loggedIn">Login / Sign Up!</span><span *ngIf="loggedIn">{{fullName}}<br><i>{{'@'+userHandle}}</i></span></div>
+        </div>
+        
+        <!-- <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="loginWithGoogle()" *ngIf="!loggedIn">Login with Google</button>
+          <button mat-menu-item *ngIf="!loggedIn">Sign Up</button>
+          <button mat-menu-item *ngIf="loggedIn" (click)="logout()">Logout</button>
+        </mat-menu> -->
+      </div>
+    </div>
+
+    <ul class="list-unstyled components">
+        <!-- <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+            </ul>
+        </li> -->
+        <li>
+          <a href="/dashboard">Dashboard</a>
+      </li>
+      <li>
+        <a href="/docs">Documentation</a>
+      </li>
+      <li>
+        <a href="/profile/accounts">Profile</a>
+      </li>
+      <li>
+        <a href="/docs/contact_us">Contact us</a>
+      </li>
+      <li>
+        <a href="/auth/logout">Logout</a>
+    </li>
+    </ul>
+</nav>
+</div>
+  
+  <div id="content" style="border-bottom: 1px solid #eee;">
+
+  <div class="header d-flex">
+    <nav class="navbar navbar-expand-lg static-top flex-grow-1">
+          <div class="flex-grow-1"> 
+              <div class="navbar-header flex-grow-1 d-flex mr-2">
+                <i (click)=" toggle()" class="fas fa-bars menu_pointer navbar-brand p-2 align-self-center"></i>
+              
+                <a class="navbar-brand p-2 align-self-center flex-grow-1" href="#">
+                  <h3 class="navbar-heading">Distributed Experiment Workflows</h3>
+                </a>
+                <ul class="navbar-nav ml-auto p-2">
+                  <li class="nav-item align-self-center">
+                    <a class="nav-link" href="/docs">Help</a>
+                  </li>
+                  <li class="nav-item align-self-center">
+                    <a class="nav-link" href="/docs/contact_us">Contact us</a>
+                  </li>
+                </ul>
+              </div>
+      </div>
+    </nav>
+  </div>
+</div>
+<div id="mainRouter" (click)="closeMenu()">
+  <div class="container">
+  
+  <ng-content select="router-outlet"></ng-content>
+
+</div>
+</div>
+</div>
+</div>

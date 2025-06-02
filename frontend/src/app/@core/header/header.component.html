@@ -1,0 +1,58 @@
+<div class="header">
+  <nav class="navbar navbar-expand-lg static-top" style="padding: 0;">
+        <div class="container col-md-12">
+          <div class="navbar-header">
+            
+          <a class="navbar-brand" href="#">
+            <h3 style="font-family: serif; font-style: italic; margin-left: 3px; color: #900">Distributed Experiment Workflows</h3>
+
+          </a>
+         
+          </div>
+
+      
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-nav pointer" [matMenuTriggerFor]="menu">
+            <div class="profile" *ngIf="!loggedIn"></div>
+            <div class="profile_img" *ngIf="loggedIn"><img src="{{img}}" width="40px" height="40px"></div>
+            <div class="username"><span *ngIf="!loggedIn">Login / Sign Up!</span><span *ngIf="loggedIn">{{fullName}}</span></div>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="loginWithGoogle()" *ngIf="!loggedIn">Login with Google</button>
+              <button mat-menu-item *ngIf="!loggedIn">Sign Up</button>
+              <button mat-menu-item *ngIf="loggedIn" (click)="logout()">Logout</button>
+            </mat-menu>
+          </div>
+
+      
+    </div>
+    <!-- <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div> -->
+  </nav>
+</div>

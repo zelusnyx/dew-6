@@ -1,0 +1,60 @@
+.tab{
+    overflow: hidden;
+}
+.pointer{
+    margin: .2em;
+    cursor: pointer;
+}
+
+.action_menu ul{
+    list-style-type: none;
+    padding-left: 2rem;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+  }
+  .action_menu ul li{
+      float: left;
+  }
+ button{
+    width: 100%;
+ }
+  
+  .action_menu ul li i {
+      display: block;
+      color: #eee;
+      text-align: center;
+      padding: .31rem;
+      text-decoration: none;
+    }
+    
+  .action_menu ul li i:hover {
+      background-color: #ccc;
+    }
+
+    .table-row {
+        padding: 0.2em;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 3px 0px 0px 2px #f8f9fa;
+    
+    }
+    .bubble{
+        float: right;
+    margin: 1em;
+    border: 1px solid #2196F3;
+    padding: .6em;
+    border-radius: 14px;
+    width: 77px;
+    text-align: center;
+    }
+  
+    .header-experiment{
+        font-size: large;
+    font-weight: bold;
+    padding-top: .3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+   

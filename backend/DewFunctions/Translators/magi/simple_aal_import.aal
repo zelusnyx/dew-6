@@ -1,0 +1,24 @@
+monitor_group: [servernode]
+
+monitor_agent:
+  group: monitor_group
+  path: /share/magi/modules/pktcounters/pktCountersAgent.tar.gz
+  execargs: {}
+
+monitorstream:
+    - type: trigger
+      triggers: [ { event: serverStarted } ]
+
+    - type: event
+      agent: monitor_agent
+      method: startCollection
+      trigger: collectionServer
+      args: {}
+
+    - type: trigger
+      triggers: [ { event: clientStopped } ]
+
+    - type: event
+      agent: monitor_agent
+      method: stopCollection
+      args: {}

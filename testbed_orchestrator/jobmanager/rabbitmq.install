@@ -1,0 +1,5 @@
+sudo apt install rabbitmq-server -y
+sudo apt install python3-pip -y
+sudo pip3 install --target="/usr/local/lib/python3.6/dist-packages/" /share/shared/dew/pika-1.2.0-py2.py3-none-any.whl 
+sudo rabbitmqctl add_user 'dew' 'dew'
+sudo rabbitmqctl set_permissions -p "/" "dew" ".*" ".*" ".*"

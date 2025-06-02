@@ -1,0 +1,21 @@
+[Scenario]
+actor0 nohup emit nohup_done
+actor1 nohup_2 emit nohup_2_done
+actor2 nohup_3 emit nohup_3_done
+actor3 nohup_4 emit nohup_4_done
+actor4 nohup_5 emit nohup_5_done
+actor5 nohup_6 emit nohup_6_done
+actor6 nohup_7 emit nohup_7_done
+actor7 nohup_8 emit nohup_8_done
+
+[Constraints]
+
+[Bindings]
+nohup cd senss; nohup perl random.pl nosig 1 5 > random.nosig.correct.0 &
+nohup_2 cd senss; nohup perl random.pl nosig 10 5 > random.nosig.correct.1 &
+nohup_3 cd senss; nohup perl random.pl nosig 100 5 > random.nosig.correct.2 &
+nohup_4 cd senss; nohup perl random.pl nosig 1000 5 > random.nosig.correct.3 &
+nohup_5 cd senss; nohup perl top.pl nosig 1 5 > top.nosig.correct.0 &
+nohup_6 cd senss; nohup perl top.pl nosig 10 5 > top.nosig.correct.1 &
+nohup_7 cd senss; nohup perl top.pl nosig 100 5 > top.nosig.correct.2 &
+nohup_8 cd senss; nohup perl top.pl nosig 1000 5 > top.nosig.correct.3 &

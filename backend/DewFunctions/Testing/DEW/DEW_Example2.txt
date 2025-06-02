@@ -1,0 +1,15 @@
+[Scenario]
+Client pingServer emit pingDone
+when pingDone Server pingClient emit pingBackDone
+
+[Bindings]
+pingServer ping Server
+pingDone touch tmp/doneclient.txt
+pingClient ping Client
+pingBackDone touch tmp/doneserver.txt
+
+[Constraints]
+num Client 100
+num Server 10
+os Server ubuntu
+os Client fedora

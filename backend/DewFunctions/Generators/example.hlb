@@ -1,0 +1,25 @@
+# Comments start with a # sign.
+## This file has 2 sections: HLB and Constraints.
+## These sections can come in any order.
+#################
+#	HLB	Scenario #
+#################
+[Scenario]
+thing1 runAThing emit trigger1
+when trigger1 thing2 runAnotherThing
+##########################
+#	Constraints	 #
+##########################
+[Constraints]
+# Keywords in HLB and DEW Constraints are case insensitive.
+num thing1 3
+# This also works
+num thing2 2
+# This is also ok
+num thing3 3
+os thing2 anOStype
+lan thing1 thing2 thing3
+link thing1 thing2
+
+
+

@@ -1,0 +1,120 @@
+#!/usr/bin/perl
+
+# Provide a label and return summary of job status
+# as CSV. Look for this in ~/DEW/label
+# id, node, action, cmd, ran, status, error
+
+$usage = "$0 label\n";
+%tasks=();
+if ($#ARGV < 0)
+{
+    print $usage;
+    exit 1;
+}
+$label = $ARGV[0];
+if (! -d glob("~/DEW/$label"))
+{
+	exit 1;
+}
+opendir(my $dh, glob("~/DEW/$label"));
+@files = readdir($dh);
+for $f (@files)
+{
+    if ($f =~ /^\./)
+    {
+	next;
+    }
+    @items = split /\./, $f;
+    $id = $items[1];
+    if ($items[0] eq "script")
+    {
+	$node = $items[3];
+	$action = $items[2];
+	$tasks{$id}{'node'} = $node;
+	$tasks{$id}{'action'} = $action;
+	$fh = new IO::File(glob("~/DEW/$label/$f"));
+	while(<$fh>)
+	{
+	    if ($_ =~ /\&$/)
+	    {
+		$cmd = $_;
+	    }
+	}
+	close($fh);
+	@elems = split /2\>/, $cmd;
+	$cmd = $elems[0];
+	$tasks{$id}{'cmd'} = $cmd;
+	$tasks{$id}{'status'} = "";
+	$tasks{$id}{'ran'} = "";
+	$tasks{$id}{'error'} = "";
+	$tasks{$id}{'output'} = "";	    
+    }
+    elsif($items[0] eq "status")
+    {
+	$fh = new IO::File(glob("~/DEW/$label/$f"));
+	$status = <$fh>;
+	$status =~ s/\n//;
+	close($fh);
+	$tasks{$id}{'status'} = $status;
+    }
+    elsif($items[0] eq "pid")
+    {
+	$fh = new IO::File(glob("~/DEW/$label/$f"));
+	$ran = <$fh>;
+	$ran =~ s/\n//;
+	close($fh);
+	$tasks{$id}{'ran'} = $ran;	
+    }
+    elsif($items[0] eq "time")
+    {
+	$fh = new IO::File(glob("~/DEW/$label/$f"));
+	$time = <$fh>;
+	$time =~ s/\n//;
+	close($fh);
+	$tasks{$id}{'time'} = $time;	
+    }
+    elsif($items[0] eq "error")
+    {
+	$fh = new IO::File(glob("~/DEW/$label/$f"));
+	$error = <$fh>;
+	$error =~ s/\n//g;
+	close($fh);
+	$tasks{$id}{'error'} = $error;
+    }
+    elsif($items[0] eq "output")
+    {
+	@list = glob("~/DEW/$label/$f");
+	open(my $fh, "tail -10 $list[0] | ");
+	$output = "";
+	while(<$fh>)
+	{
+	    $output .= $_;
+	}
+	$output =~ s/\n/\\n/g;
+	close($fh);
+	$tasks{$id}{'output'} = $output;
+    }
+}
+print "[\n";
+$start = 0;
+for $id (sort {$a <=> $b} keys %tasks)
+{
+    if ($start == 1)
+    {
+	print ",";
+    }
+    $start = 1;
+    # id, node, action, cmd, ran, status, error
+    print "{ \n";
+    print "\"id\" : \"$id\",\n";
+    print "\"data\": \n";
+    print "\t{\"node\" : \"$tasks{$id}{'node'}\",\n";
+    print "\t\"action\" : \"$tasks{$id}{'action'}\",\n";
+    print "\t\"cmd\" : \"$tasks{$id}{'cmd'}\",\n";
+    print "\t\"ran\" : \"$tasks{$id}{'ran'}\",\n";
+    print "\t\"status\" : \"$tasks{$id}{'status'}\",\n";
+    print "\t\"error\" : \"$tasks{$id}{'error'}\",\n";
+    print "\t\"output\" : \"$tasks{$id}{'output'}\",\n";
+    print "\t\"time\" : \"$tasks{$id}{'time'}\"\n}\n}\n";
+}
+print "]\n";

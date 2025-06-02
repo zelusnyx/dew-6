@@ -1,0 +1,26 @@
+.tab{
+    overflow: hidden;
+}
+
+.mat-tab-label, .mat-tab-link{
+    font-size: 12px !important;
+}
+
+.mat-tab-label{
+    min-width: 125px !important;
+}
+
+nav {
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 50;
+    background-color: white;
+  }
+
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 95px;
+    margin-bottom: 10px;
+  }

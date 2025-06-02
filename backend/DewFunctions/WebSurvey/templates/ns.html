@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+       <title>Structure - NS File</title>
+       <link rel="stylesheet" media="screen" href="/static/bootstrap.min.css">
+       <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+  <h2>Structure - NS File</h2>
+
+  
+  {% if  scale  != '1' %}
+    <b>Below is the NS file you submitted.</b>
+  {% else %}
+      <p>
+       Below is a description of a simple experiment. 
+       </p>
+       {% block content %} 	 
+       {% include 'experiment.html' %}
+       {% endblock %}
+       <p>
+       Please take up to ten minutes to write an NS File for this basic set
+       up.
+  {% endif %}
+  
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    {{ form.csrf_token }}
+    <table>
+    <tr><th>{{ form.nsfile.label }}</th></tr>
+    <tr><td>{{ form.nsfile(rows='25',cols='60') }}</td></tr>
+    {% if scale == '1' %}
+    <tr><th>{{ form.nstools.label }}</th></tr>
+    <tr><td>{{ form.nstools(rows='10', cols='60') }}</td></tr>
+    {% endif %}
+    </table>
+    <button type="submit" class="btn btn-success">Save and Continue</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>

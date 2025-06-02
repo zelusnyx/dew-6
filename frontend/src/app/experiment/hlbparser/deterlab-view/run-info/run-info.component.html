@@ -1,0 +1,101 @@
+<div class="container" >
+    <div class="row" *ngIf="!errorFlag">
+        <div class="col-md-12" >
+            <div class="row" style="justify-content: space-between;">
+                <div class="col-md-4" *ngIf="logList.length!=0">
+                    <select class="form-control" [(ngModel)]="logid" (change)="onLogsSelectionChange()">
+                        <option *ngFor="let o of logList" [value]='o.id' >{{o.started_at | date:'d LLL yyyy HH:mm'}}</option>
+                    </select>
+                
+                
+                </div>
+                <!-- <div class="col-sm-4" >
+                    <button class="form-control" (click)="showDetails()">Show Details</button>
+                </div> -->
+                <div class="col-md-4" *ngIf="loader">
+                    <div class="spinner-border" role="status"></div>
+                </div>
+                <div class="col-md-4" *ngIf="logList.length!=0 && runScript">
+                    <button type="button" class="btn btn-outline-info" style="float: right;" data-toggle="modal" data-target="#run-script-modal">Run Script</button>
+                </div>
+            
+           
+            </div>
+            <div class="row" style="margin:0.5em" *ngIf="!loader">
+                <div class="col-md-12">
+
+                    <mat-accordion>
+                        
+                        <mat-expansion-panel *ngFor="let s of executionScript;let i=index" >
+                          <mat-expansion-panel-header [collapsedHeight]="'fit-content'" [expandedHeight]="'fit-content'" style="padding: 10px">
+                            <mat-panel-title style="width: 35%;">
+                              <p style="word-break: break-all;">{{s.node}} : <span style="color:blue;">{{s.action}}</span></p>
+                            </mat-panel-title>
+                            <mat-panel-description style="width: 65%;">
+                                <div class="row" style="width: 100%;">
+                                    <div class="col-7">
+                                        {{s.cmd}}
+                                    </div>
+                                    <div class="col-5">
+                                        <span style="margin-right: 5px;">
+                                            Status:
+                                        </span>
+                                        <span style="color:green" *ngIf="(s.status=='0')">
+                                            Successful
+                                        </span>
+                                        <span style="color:#17a2b8" *ngIf="s.status=='' && s.time!=''">
+                                            In Progress
+                                        </span>
+                                        <span style="color:#f0c929" *ngIf="s.status=='' && s.time==''">
+                                            Waiting
+                                        </span>
+                                        <span style="color:red" *ngIf="s.status!='0' && s.error!=''">
+                                            Unsuccessful
+                                        </span>
+                                        <span style="color:gray;" *ngIf="s.time!=''">{{getLocalTime(s.time)}}</span>
+                                    </div>
+                                </div>
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div class="col-md-12" >
+                            <span style="color:red" *ngIf="(s.error!='')" [innerHTML]="'Error: *'+ s.error.replace('\n', '<br>') +'*'">
+                            </span>
+                            <div class="col-md-12" *ngIf="(s.output!='')" style="background-color: black;color: white;">
+                                <p [innerHTML]="s.output.replace('\n', '<br>')"></p>
+                            </div>
+                        </div>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+
+                </div>
+            </div>
+
+            
+        
+    
+</div>
+    </div>
+    <div class="row" [hidden]="!errorFlag">
+        <div class="col-md-4">
+            <p>{{error}}</p>
+            </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="run-script-modal" role="dialog" aria-labelledby="run-script-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="run-script-modal-label">Run Script</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p [innerHTML]="runScript">
+            </p>
+        </div>
+        </div>
+    </div>
+</div>

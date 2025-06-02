@@ -1,0 +1,86 @@
+<div class="row" *ngIf="alive">
+  <div class="col-md-12">
+    <p>Authenticating User...</p>
+  </div>
+</div>
+
+<div
+  class="row"
+  *ngIf="!alive"
+  style="margin: 5%; margin-left: 26%; margin-right: 26%;"
+>
+  <div class="container">
+    <div class="col-md-12">
+      <mat-card>
+        <div class="row" style="text-align: center;">
+          <div class="col-md-12">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">
+                <img
+                  src="./assets/isi_logo.gif"
+                  class="img-thumbnail"
+                  style="border: none; height: 35px;"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+          Choose a user handle to proceed.
+        </div>
+        </div>
+        <div class="row" style="text-align: center;">
+          <mat-form-field class="col-md-12" appearance="outline">
+            <mat-label>User Handle</mat-label>
+            <input
+              matInput
+              [(ngModel)]="userHandle"
+              name="handle"
+              pattern="[a-zA-Z0-9_]*"
+              placeholder="Ex. @david_miller"
+              (change)="checkHandle()"
+            />
+            <mat-icon
+              matPrefix
+              class="fas fa-at pointer blue"
+              (click)="enablePassword()"
+            ></mat-icon>
+           
+           <mat-error>Pattern: combination of alphabet, number and underscore.</mat-error>
+           <mat-hint style="color:red"*ngIf="isExist()">User already Exists</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="row" style="text-align: center;">
+          <mat-form-field class="col-md-12" appearance="outline">
+            <mat-label>Institution</mat-label>
+            <input matInput [(ngModel)]="institution" name="institution"  />
+          </mat-form-field>
+        </div>
+        <div class="row" style="text-align: center;">
+          <mat-form-field class="col-md-12" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="emailId" name="email"  disabled />
+          </mat-form-field>
+        </div>
+        <div class="row" style="text-align: center;">
+          <mat-form-field class="col-md-12" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="fullName" name="name" disabled />
+          </mat-form-field>
+        </div>
+        <div class="row" style="text-align: center;">
+          <div class="col-md-12">
+            <button mat-stroked-button (click)="register()" class="button" [disabled]='!isEnable()'>
+              Register
+            </button>
+            <button mat-stroked-button (click)="cancel()" class="button">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.container{
+  margin-top: 0.3em
+}
+
+col-md-12 { 
+  /*  That create a ne line, when he word is to long*/
+  word-break: break-all 
+}
+
+.modal-dialog {
+  width: 80% !important;
+  max-width: unset !important;
+}

@@ -1,0 +1,48 @@
+if [ "$#" -le 2 ]; then
+	printf "Usage: $0 proj exp label
+
+		proj - project under which to run
+		exp - experiment under which to run
+		label - label for the folder where to store results
+
+"
+	exit 1
+fi
+
+proj=$1
+exp=$2
+label=$3
+id=$label
+cnt=0
+
+
+execute_clear()
+{
+    local node=$1
+    local cmd=$2
+    local cnt=$3
+    local aname=$4
+    
+    if [ ! -d ~/DEW/$id ] ; then
+	mkdir ~/DEW/$id
+    fi
+    file="DEW/$id/pid.$cnt"
+    pid=`cat $file`
+    if [[ $cmd =~ ^sudo ]] ; then
+        echo "sudo kill -9 $pid " >> ~/DEW/$id/clear.$cnt.$node.$aname.sh
+    else
+	echo "kill -9 $pid " >> ~/DEW/$id/clear.$cnt.$node.$aname.sh
+    fi
+    if [[ $cmd =~ apt && $cmd =~ install ]] ; then
+	for word in $cmd ; do
+	    if ! [[ $word =~ sudo || $word =~ ^apt || $word =~ install || $word =~ ^\- ]] ; then
+	       	echo "sudo apt-get remove -y "$word >> ~/DEW/$id/clear.$cnt.$node.$aname.sh
+	    fi
+	done
+    fi		  
+    ssh -o StrictHostKeyChecking=no $node.$exp.$proj "bash ~/DEW/$id/clear.$cnt.$node.$aname.sh" &
+}
+
+rm -f ~/DEW/$id/clear*
+
+

@@ -1,0 +1,69 @@
+#!/usr/bin/perl
+# Accept and run scripts in a separate process
+
+sub check_stragglers
+{
+    my $script = shift;
+    open(my $ps, "ps axuw |");
+    while(<$ps>)
+    {
+	if ($_ =~ /bash $script/)
+	{
+	    @items = split /\s+/, $_;
+	    $pid = $items[1];
+	    print "Still running $pid\n";
+	    system("kill -9 $pid");
+	    print "Killed $pid\n";
+	}
+    }
+}
+
+$usage = "$0 path-to-script proj exp label start|stop\n";
+if ($#ARGV < 4)
+{
+    print $usage;
+    exit 1;
+}
+$script = $ARGV[0];
+$proj =$ARGV[1];
+$exp = $ARGV[2];
+$label = $ARGV[3];
+$action = $ARGV[4];
+print "Running $script in $proj/$exp with label $label action $action\n";
+if ($action ne "start" && $action ne "stop")
+{
+    print "Non-supported action $action\n";
+    exit 1;
+}
+if (!-e $script)
+{
+    print "Script $script does not exist\n";
+    exit 1;
+}
+# Check if folder exists, and refuse to run if it does
+if ($action eq "start")
+{
+    if (-d glob("~/DEW/$label"))
+    {
+	print "It looks like script has already run. Please stop it first, before rerunning\n";
+	exit 1;
+    }
+    check_stragglers($script);
+    print("Will run script $script\n");
+    system("bash $script $proj $exp $label $action > runscript.out");
+    exit 0;
+}
+if ($action eq "stop")
+{
+    # Check if folder exists, and refuse to run if it does not
+    if (! -d glob("~/DEW/$label"))
+    {
+	print "The script is already inactive\n";
+	exit 1;
+    }
+    check_stragglers($script);
+    print("Will run script $script\n");
+    system("bash $script $proj $exp $label $action > runscript.out");
+    system("rm -rf ~/DEW/$label");
+    exit 0;
+}

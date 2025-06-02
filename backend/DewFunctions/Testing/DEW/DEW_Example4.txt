@@ -1,0 +1,29 @@
+[Scenario]
+Client1 pingServer emit pingDone1
+when pingDone1 Client2 pingServer emit pingDone2
+when pingDone2 Client3 pingServer emit pingDone3
+when pingDone3 Server runStats
+
+[Bindings]
+pingServer ping Server
+pingDone1 touch tmp/doneclient1.txt
+pingDone2 touch tmp/doneclient2.txt
+pingDone3 touch tmp/doneclient3.txt
+runStats python stats.py
+
+[Constraints]
+num Client1 100
+num Client2 10
+num Client3 34
+num Server 1
+os Server ubuntu
+os Client1 fedora
+os Client2 fedora
+os Client3 fedora
+lan Client3 Server
+lan Client1 Client2
+location Client1 deterlab
+location Client2 deterlab
+location Client3 deterlab
+location Server deterlab
+link Client2 Client3

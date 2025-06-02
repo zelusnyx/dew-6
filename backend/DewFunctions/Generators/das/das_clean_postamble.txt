@@ -1,0 +1,6 @@
+if test -f ~/DEW/$id/*.pid; then
+    echo "PID files still exist"
+else 
+    # rm -rf ~/DEW/$id
+    echo "no pid files"
+fi	

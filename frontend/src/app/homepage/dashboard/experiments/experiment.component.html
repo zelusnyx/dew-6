@@ -1,0 +1,110 @@
+<form *ngIf="show" [formGroup]="filterSelect">
+  <div class="row" style="margin: 0.5em;">
+    <div class="col-md-2">
+      <div style="padding: 11px;">
+        <button class="btn btn-light" (click)="create()">Create</button>
+      </div>
+      <div style="padding-bottom: 10px;">
+        <input
+          class="form-control"
+          formControlName="search"
+          placeholder="Search by..."
+          name="search"
+        />
+      </div>
+      <mat-card>
+        <label>Filter Access Level by:</label>
+        <ul style="list-style: none; padding: 0;">
+          <li>
+            <label style="padding: 0.2em;"
+              ><input
+                formControlName="accessLevel"
+                type="radio"
+                name="accessLevel"
+                [value]="0"
+                [checked]="true"
+              />
+              <span style="padding: 0.2em;">Show All</span></label
+            >
+          </li>
+          <li>
+            <label style="padding: 0.2em;"
+              ><input
+                formControlName="accessLevel"
+                type="radio"
+                name="accessLevel"
+                [value]="4"
+              /><span style="padding: 0.2em;">Admin</span></label
+            >
+          </li>
+          <li>
+            <label style="padding: 0.2em;"
+              ><input
+                formControlName="accessLevel"
+                type="radio"
+                name="accessLevel"
+                [value]="3"
+              /><span style="padding: 0.2em;">Developer</span></label
+            >
+          </li>
+          <li>
+            <label style="padding: 0.2em;"
+              ><input
+                formControlName="accessLevel"
+                type="radio"
+                name="accessLevel"
+                [value]="2"
+              /><span style="padding: 0.2em;">Spectator</span></label
+            >
+          </li>
+        </ul>
+      </mat-card>
+    </div>
+    <div class="col-md-10">
+      <div class="row table" *ngIf="experiments.length != 0">
+        <div class="col-md-12">
+          <div
+            class="row table-row pointer"
+            style="margin-top: 14px;"
+            
+            *ngFor="let item of filterExperiments | async; let i = index"
+          >
+            
+            <div class="col-md-10" matTooltip="Edit {{ item.name }}" (click)="edit(item)">
+              <div class="header-experiment">
+                {{ item.name }}
+                <span class="badge badge-info">
+                <strong
+                  matTooltip="{{
+                    item.accessLevel == 4
+                      ? 'Full Access'
+                      : item.accessLevel == 3
+                      ? 'Write only'
+                      : 'Read only'
+                  }}"
+                  >{{
+                    item.accessLevel == 4
+                      ? "Admin"
+                      : item.accessLevel == 3
+                      ? "Developer"
+                      : "Spectator"
+                  }}</strong
+                >
+              </span>
+              </div>
+              
+              <br />
+              <span><b>Created Date:</b> {{ item.created_date }}</span> |
+              <span><b>Updated Date:</b> {{ item.updated_date }}</span>
+            </div>
+            <div class="col-md-2">
+              
+              <button matTooltip="Duplicate the experiment" class="bubble" (click)="copy(item)">Duplicate</button>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

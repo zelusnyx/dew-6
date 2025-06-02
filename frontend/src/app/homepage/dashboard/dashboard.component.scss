@@ -1,0 +1,26 @@
+.tab{
+    overflow: hidden;
+}
+
+mat-toolbar {
+    --default-height: 46px;
+    z-index: 50;
+  }
+
+  mat-toolbar[color="primary"] {
+    height: 45px;
+    color: black;
+    font-size: 14px;
+    background-color: #eee;
+    top:var(--default-height);
+    position: relative;
+    margin-top: 22px;
+  }
+
+  .main {
+    margin-top: 60px;
+    position: relative;
+    padding-left: 16px;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }

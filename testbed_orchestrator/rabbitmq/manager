@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+# Accept and run scripts in a separate process
+
+# This assumes all nodes are connected
+sub get_node
+{
+    my ($proj, $exp) = @_;
+    my $fh = new IO::File("/proj/" . $proj . "/exp/" . $exp . "/tbdata/ltmap");
+    while(<$fh>)
+    {
+	if ($_ =~ /^h/)
+	{
+	    @items = split /\s+/, $_;
+	    $node = $items[1];
+	    return $node;
+	}
+    }			  
+}
+
+
+$usage = "$0 path-to-script proj exp label start|stop\n";
+if ($#ARGV < 4)
+{
+    print $usage;
+    exit 1;
+}
+$script = $ARGV[0];
+$proj =$ARGV[1];
+$exp = $ARGV[2];
+$label = $ARGV[3];
+$action = $ARGV[4];
+print "Running $script in $proj/$exp with label $label action $action\n";
+if ($action ne "start" && $action ne "stop")
+{
+    print "Non-supported action $action\n";
+    exit 1;
+}
+if (!-e $script)
+{
+    print "Script $script does not exist\n";
+    exit 1;
+}
+$node=get_node($proj, $exp);
+system("ssh $node.$exp.$proj \"/share/shared/dew/runscript $script $proj $exp $label $action > manager.out &\"");
+sleep(10);
+print("ran the script");
+exit 0;

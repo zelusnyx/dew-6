@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+       <title>New UI for Experiment Design</title>
+       <link rel="stylesheet" media="screen" href="/static/bootstrap.min.css">
+       <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+  <h2>New UI for Experiment Design.</h2>
+  <p>
+    For the last part, we are going to ask you to download and try a
+    prototype User Interface for Experiment Design. 
+  </p>  
+  <p>
+    The idea before the user interface is to allow users to focus on the
+    behavior and constraints of their experiment, and from this description,
+    create a topology (and generate the NS file) and script for actions and
+    orchestration.
+  </p>
+  <p>
+  Below is some help on the UI and highlights some features. 
+  </p>
+  <p>
+  In the following pages, this information can be accessed at any time.
+  </p>
+
+  {% block content %} 	 
+      {% include 'uihelp.html' %}
+  {% endblock %}
+  
+  <p> The `Download and Continue' button will start a ZIP file download
+  which contains three ways to run the UI. There is a Mac binary as well as the python (3.x) source. 
+  </p>
+  <p>
+  Please download, unzip and start the prototype UI.
+  </p>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    {{ form.csrf_token }}
+    <div class="form-group">
+    </div>
+    <button type="submit" class="btn btn-success">Download and Continue</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>

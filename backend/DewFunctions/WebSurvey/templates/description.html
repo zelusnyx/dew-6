@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+       <title>Testbed Experience</title>
+       <link rel="stylesheet" media="screen" href="/static/bootstrap.min.css">
+       <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+  <h2>Testbed experiment description.</h2>
+  <p>
+     Below is a description of a simple experiment. In the next steps,
+     you'll be asked what tools you would choose to run this experiment and
+     an NS file to set up the DETERLab topology for this experiment.
+  </p>
+  <p>
+      In the following screens, the below experiment description will be 
+      available to refer to at the top of each page.
+  </p>
+
+  {% block content %} 	 
+      {% include 'experiment.html' %}
+  {% endblock %}
+  
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    {{ form.csrf_token }}
+    <div class="form-group">
+      <table>
+      <tr><td> {{ form.expIsClear.label }} </td><td> {{ form.expIsClear }}</td></tr>
+      <tr><td> {{ form.firstStepUsually.label }} </td><td> {{ form.firstStepUsually }}</td></tr>
+      <tr><td> {{ form.firstStepNow.label }} </td><td> {{ form.firstStepNow }}</td></tr>
+      </table>
+      <br>
+      {{ form.expComments.label }}<br>{{ form.expComments(rows='5',cols='60') }}
+    </div>
+    <button type="submit" class="btn btn-success">Save and Continue</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>

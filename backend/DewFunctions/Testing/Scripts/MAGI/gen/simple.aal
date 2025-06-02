@@ -1,0 +1,87 @@
+groups:
+  client_group: [ nodeA ]
+  server_group: [ nodeB ]
+  capture_group: [ nodeB ]
+
+agents:
+  client_agent:
+    group: client_group
+    path: /share/magi/modules/http_client/http_client.tar.gz
+    execargs: { servers: [nodeB], interval: '5', sizes: 'minmax(1000,10000)' }
+  server_agent:
+    group: server_group
+    path: /share/magi/modules/apache/apache.tar.gz
+    execargs: []
+  capture_agent:
+    group: capture_group
+    path: /share/magi/modules/tcpdump/tcpdump.tar.gz
+    execargs: {}
+
+streamstarts: [ serverstream, capturestream, clientstream, cleanupstream ]
+
+eventstreams:
+  serverstream:
+    - type: event
+      agent: server_agent
+      method: startServer
+      trigger: serverStarted
+      args: {}
+      
+    - type: trigger
+      triggers: [ { event: clientStopped } ]
+      
+    - type: event
+      agent: server_agent
+      method: stopServer
+      trigger: serverStopped
+      args: {}
+      
+  clientstream:
+    - type: trigger
+      triggers: [ { event: serverStarted } ]
+
+    - type: event
+      agent: client_agent
+      method: startClient
+      args: {}
+
+    - type: trigger
+      triggers: [ { timeout: 60000 } ]
+
+    - type: event
+      agent: client_agent
+      method: stopClient
+      trigger: clientStopped
+      args: {}
+
+  capturestream:
+    - type: event
+      agent: capture_agent
+      method: setConfiguration
+      trigger: monitorConfigured
+      args:
+        dest: nodeA
+
+    - type: trigger
+      triggers: [ {event: monitorConfigured} ]
+
+    - type: event
+      agent: capture_agent
+      method: startCollection
+      args: {}
+
+    - type: trigger
+      triggers: [ {event: clientStopped} ]
+
+    - type: event
+      agent: capture_agent
+      method: stopCollection
+      trigger: collectionStopped
+      args: {}
+
+    - type: trigger
+      triggers: [ {event: collectionStopped, target: exit} ]
+
+  cleanupstream:
+    - type: trigger
+      triggers: [ { event: serverStopped, target: exit } ]

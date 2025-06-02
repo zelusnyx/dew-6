@@ -1,0 +1,11 @@
+
+
+<h2 mat-dialog-title>Content of {{file.name}}:</h2>
+<mat-dialog-content class="mat-typography">
+  <div [innerHTML]="fileContent"></div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">close</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>upload</button>
+  </mat-dialog-actions>

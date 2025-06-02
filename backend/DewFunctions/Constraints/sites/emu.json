@@ -1,0 +1,1145 @@
+{
+  "nodes": [
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "38f6eba1-636b-45d8-986c-48925adac980"
+        },
+        {
+          "props": {
+            "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "40418842-be82-4ff9-83bd-c29b1a072af7"
+        },
+        {
+          "props": {
+            "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "f1fb59e3-c74b-4416-a7b3-d2708fd685de"
+        },
+        {
+          "props": {
+            "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "b5375471-53f4-4f4b-9a0a-f08d7baa7f4b"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "debian",
+          "debian-9",
+          "centos",
+          "centos-7",
+          "ubuntu",
+          "ubuntu-1604"
+        ],
+        "disk": {
+          "capacity": 2000000000000.0
+        },
+        "memory": {
+          "capacity": 64000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "nodemu0",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 32
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "xl710da4",
+                "capability": [
+                  "dpdk"
+                ],
+                "type": "nic",
+                "id": "c7e72af6-cbc0-4657-b2b8-355fb7856ce2"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "63515a2e-2c9b-428d-887f-d48a0ec0576b"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "7c198a7c-aa99-407a-a3e8-20bb65783e0d"
+        },
+        {
+          "props": {
+            "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "2905d8f5-2f1a-45e3-a59f-c778f9204c0e"
+        },
+        {
+          "props": {
+            "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "5fff1e89-34ab-4820-9fb4-b46d904acda4"
+        },
+        {
+          "props": {
+            "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "7d802510-5cae-4365-89b0-c2a985689f92"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "debian",
+          "debian-9",
+          "centos",
+          "centos-7",
+          "ubuntu",
+          "ubuntu-1604"
+        ],
+        "disk": {
+          "capacity": 2000000000000.0
+        },
+        "memory": {
+          "capacity": 64000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "nodemu1",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 32
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "235eaa73-abee-4e44-9c24-88d6c6404cb3",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "xl710da4",
+                "capability": [
+                  "dpdk"
+                ],
+                "type": "nic",
+                "id": "235eaa73-abee-4e44-9c24-88d6c6404cb3"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "8984ca7c-c8c7-477c-8231-a1fb9123bd3d"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "f4326d59-fb19-40d0-94dd-c4ec211e7f54"
+        },
+        {
+          "props": {
+            "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "5d312311-9795-4ebc-8070-49e0459b6fc4"
+        },
+        {
+          "props": {
+            "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "04f7eb65-c61a-444f-a612-0126a9f3b103"
+        },
+        {
+          "props": {
+            "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "51da2b94-2091-4e77-91a9-7cac6dc0fec3"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "debian",
+          "debian-9",
+          "centos",
+          "centos-7",
+          "ubuntu",
+          "ubuntu-1604"
+        ],
+        "disk": {
+          "capacity": 2000000000000.0
+        },
+        "memory": {
+          "capacity": 64000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "nodemu2",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 32
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "01d1338c-d942-4d35-88f0-95b886e6d2c5",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "xl710da4",
+                "capability": [
+                  "dpdk"
+                ],
+                "type": "nic",
+                "id": "01d1338c-d942-4d35-88f0-95b886e6d2c5"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "fc55c9ad-06ed-4a94-8c72-f7f29be5895e"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "06e48c63-fb93-400f-8d9c-ac8aedd558a0"
+        },
+        {
+          "props": {
+            "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "f5684fd2-fc1d-4ef7-b178-a2e9ef086efb"
+        },
+        {
+          "props": {
+            "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "f5d25e63-983a-4f4c-8ee9-b682cbc7a8cc"
+        },
+        {
+          "props": {
+            "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "7261758c-2054-4deb-af83-1a1953712013"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "debian",
+          "debian-9",
+          "centos",
+          "centos-7",
+          "ubuntu",
+          "ubuntu-1604"
+        ],
+        "disk": {
+          "capacity": 2000000000000.0
+        },
+        "memory": {
+          "capacity": 64000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "nodemu3",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 32
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "9e999184-c8a3-4433-aba4-0ecc1d54b019",
+                    "speed": 10000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "xl710da4",
+                "capability": [
+                  "dpdk"
+                ],
+                "type": "nic",
+                "id": "9e999184-c8a3-4433-aba4-0ecc1d54b019"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "560ff842-1f45-42bb-96ac-a9a7b7f73a92"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "0ce49122-0dd1-47a9-9dab-9007c3486790",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "a5aae14e-7c8a-42a6-b144-cdc118b7c788"
+        },
+        {
+          "props": {
+            "nic": "0ce49122-0dd1-47a9-9dab-9007c3486790",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "dc16e2e0-4cd1-437d-9762-7df6278f7afa"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "lte-linux",
+          "lte-linux-2.1",
+          "lte-linux-2.2",
+          "cumulus",
+          "cumulus-3",
+          "cumulus-3.5",
+          "cumulus-2",
+          "cumulus-2.7"
+        ],
+        "disk": {
+          "capacity": 1000000000000.0
+        },
+        "memory": {
+          "capacity": 4000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "netmu0",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 4
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "0ce49122-0dd1-47a9-9dab-9007c3486790",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "0ce49122-0dd1-47a9-9dab-9007c3486790",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "netronome",
+                "capability": [
+                  "dpdk",
+                  "p4"
+                ],
+                "type": "nic",
+                "id": "0ce49122-0dd1-47a9-9dab-9007c3486790"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "b93bfc56-68ad-4a47-967e-f3888fb1d077"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "53d50432-9a8b-4044-9074-27859f64b1ba",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "80c112f0-268f-4bbd-b55e-052cbbf655de"
+        },
+        {
+          "props": {
+            "nic": "53d50432-9a8b-4044-9074-27859f64b1ba",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "508ab26c-03bd-41d7-afd6-e51647947c04"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "lte-linux",
+          "lte-linux-2.1",
+          "lte-linux-2.2",
+          "cumulus",
+          "cumulus-3",
+          "cumulus-3.5",
+          "cumulus-2",
+          "cumulus-2.7"
+        ],
+        "disk": {
+          "capacity": 1000000000000.0
+        },
+        "memory": {
+          "capacity": 4000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "netmu1",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 4
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "53d50432-9a8b-4044-9074-27859f64b1ba",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "53d50432-9a8b-4044-9074-27859f64b1ba",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "netronome",
+                "capability": [
+                  "dpdk",
+                  "p4"
+                ],
+                "type": "nic",
+                "id": "53d50432-9a8b-4044-9074-27859f64b1ba"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "b4175a13-bc5c-4083-9147-c44c32cab5f4"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "5a13ebc8-99d0-470b-a22a-42f58d1dd2be",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "3cc8fa1b-8f1b-4b03-ab9b-56865e96fe67"
+        },
+        {
+          "props": {
+            "nic": "5a13ebc8-99d0-470b-a22a-42f58d1dd2be",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "dae817ce-554b-49d8-871a-f4d5981361a6"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "lte-linux",
+          "lte-linux-2.1",
+          "lte-linux-2.2",
+          "cumulus",
+          "cumulus-3",
+          "cumulus-3.5",
+          "cumulus-2",
+          "cumulus-2.7"
+        ],
+        "disk": {
+          "capacity": 1000000000000.0
+        },
+        "memory": {
+          "capacity": 4000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "netmu2",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 4
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "5a13ebc8-99d0-470b-a22a-42f58d1dd2be",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "5a13ebc8-99d0-470b-a22a-42f58d1dd2be",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "netronome",
+                "capability": [
+                  "dpdk",
+                  "p4"
+                ],
+                "type": "nic",
+                "id": "5a13ebc8-99d0-470b-a22a-42f58d1dd2be"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "22e83879-7b75-4572-b72c-7ae9a7eea384"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "nic": "12ad15bb-bbd8-4d4f-81c1-c2f410132393",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "f3fbe27e-5d8c-4d4b-b28d-ff36ebae1605"
+        },
+        {
+          "props": {
+            "nic": "12ad15bb-bbd8-4d4f-81c1-c2f410132393",
+            "speed": 40000000000.0,
+            "type": "ethernet"
+          },
+          "id": "e6921ba4-5117-4ff5-9b94-a1d6cccd13a3"
+        }
+      ],
+      "props": {
+        "platform": "supermicro",
+        "image": [
+          "lte-linux",
+          "lte-linux-2.1",
+          "lte-linux-2.2",
+          "cumulus",
+          "cumulus-3",
+          "cumulus-3.5",
+          "cumulus-2",
+          "cumulus-2.7"
+        ],
+        "disk": {
+          "capacity": 1000000000000.0
+        },
+        "memory": {
+          "capacity": 4000000000.0
+        },
+        "alloc": [
+          "virtual",
+          "unit"
+        ],
+        "name": "netmu3",
+        "cpu": {
+          "arch": "x86_64",
+          "model": "xeon",
+          "cores": 4
+        },
+        "bus": [
+          {
+            "components": [
+              {
+                "ports": [
+                  {
+                    "nic": "12ad15bb-bbd8-4d4f-81c1-c2f410132393",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  },
+                  {
+                    "nic": "12ad15bb-bbd8-4d4f-81c1-c2f410132393",
+                    "speed": 40000000000.0,
+                    "type": "ethernet"
+                  }
+                ],
+                "model": "netronome",
+                "capability": [
+                  "dpdk",
+                  "p4"
+                ],
+                "type": "nic",
+                "id": "12ad15bb-bbd8-4d4f-81c1-c2f410132393"
+              }
+            ],
+            "type": "pci3"
+          }
+        ],
+        "virtmin": {
+          "cpu": {
+            "cores": {
+              "value__": 1,
+              "constraint__": "="
+            }
+          },
+          "disk": {
+            "capacity": {
+              "value__": 25000000000.0,
+              "constraint__": "="
+            }
+          },
+          "memory": {
+            "capacity": {
+              "value__": 256000000.0,
+              "constraint__": "="
+            }
+          }
+        }
+      },
+      "id": "a36fed41-0aa3-4d1c-a1db-a29f2dd3e0ec"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "e3f84a77-e1c7-4f7f-a76a-aaf500c1817b"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "d1924c0d-99c1-464e-a71b-b96dc5e34965"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "c386442f-f506-46da-9702-747d01365cda"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "c1b8c589-b41d-4dda-9035-9c0e4c6ba713"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "b7abf530-6211-4d68-9e90-dc5d965a7708"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "a796ec5d-7f92-4798-acba-33f39099ab58"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "4a214a43-f60b-4d74-8702-803a966cd929"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "517898c6-e6da-412e-9da1-1e083ba35ea8"
+        },
+        {
+          "props": {
+            "speed": 1000000000.0,
+            "type": "ethernet"
+          },
+          "id": "b6f9f8a0-1649-43a8-a8a8-a54acd1c84f9"
+        }
+      ],
+      "props": {
+        "name": "switch",
+        "platform": "cumulus",
+        "alloc": [
+          "virtual"
+        ]
+      },
+      "id": "c96a417b-e583-4bdb-8e5d-2e74f8c19064"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "35fdf2ca-ea1f-4c7e-9a41-f88fc0653a8f"
+        },
+        {
+          "props": {
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "e011bd16-4806-4204-9456-293c58515e94"
+        }
+      ],
+      "props": {
+        "name": "hummingbird",
+        "alloc": [
+          "static",
+          "virtual"
+        ]
+      },
+      "id": "c0067b4f-104f-4f92-a7a4-12cd94a711eb"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          },
+          "id": "1ccda506-b9d5-4831-ade9-311b21fb726d"
+        }
+      ],
+      "props": {
+        "name": "gateway",
+        "alloc": [
+          "static",
+          "virtual"
+        ]
+      },
+      "id": "e234f243-ce50-49ac-9041-171aa8b26271"
+    }
+  ],
+  "links": [
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "38f6eba1-636b-45d8-986c-48925adac980"
+        },
+        {
+          "props": {},
+          "id": "e3f84a77-e1c7-4f7f-a76a-aaf500c1817b"
+        }
+      ],
+      "props": {},
+      "id": "540efeda-cf07-4653-b814-9e24fc105252"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "7c198a7c-aa99-407a-a3e8-20bb65783e0d"
+        },
+        {
+          "props": {},
+          "id": "d1924c0d-99c1-464e-a71b-b96dc5e34965"
+        }
+      ],
+      "props": {},
+      "id": "a43874e0-989e-4b3c-96aa-54babb29143d"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "f4326d59-fb19-40d0-94dd-c4ec211e7f54"
+        },
+        {
+          "props": {},
+          "id": "c386442f-f506-46da-9702-747d01365cda"
+        }
+      ],
+      "props": {},
+      "id": "9cd2613b-539d-4f92-8d6e-f28af90dbf1a"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "06e48c63-fb93-400f-8d9c-ac8aedd558a0"
+        },
+        {
+          "props": {},
+          "id": "c1b8c589-b41d-4dda-9035-9c0e4c6ba713"
+        }
+      ],
+      "props": {},
+      "id": "8a1b3931-78b5-4b59-897a-a81094d34c0a"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "a5aae14e-7c8a-42a6-b144-cdc118b7c788"
+        },
+        {
+          "props": {},
+          "id": "b7abf530-6211-4d68-9e90-dc5d965a7708"
+        }
+      ],
+      "props": {},
+      "id": "5eff5dc5-6cae-42db-8a8c-d6d46e63c2a3"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "80c112f0-268f-4bbd-b55e-052cbbf655de"
+        },
+        {
+          "props": {},
+          "id": "a796ec5d-7f92-4798-acba-33f39099ab58"
+        }
+      ],
+      "props": {},
+      "id": "a818409a-509b-4c6d-b4a7-87bb8599875f"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "3cc8fa1b-8f1b-4b03-ab9b-56865e96fe67"
+        },
+        {
+          "props": {},
+          "id": "4a214a43-f60b-4d74-8702-803a966cd929"
+        }
+      ],
+      "props": {},
+      "id": "a48adb4a-287c-4500-b97d-f793590e3698"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "f3fbe27e-5d8c-4d4b-b28d-ff36ebae1605"
+        },
+        {
+          "props": {},
+          "id": "517898c6-e6da-412e-9da1-1e083ba35ea8"
+        }
+      ],
+      "props": {},
+      "id": "9a8109ba-7c14-43f6-b968-e57716c000a8"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "b6f9f8a0-1649-43a8-a8a8-a54acd1c84f9"
+        },
+        {
+          "props": {},
+          "id": "35fdf2ca-ea1f-4c7e-9a41-f88fc0653a8f"
+        }
+      ],
+      "props": {},
+      "id": "0c9fe5e4-3cc6-45d7-b87f-e40223d929dd"
+    },
+    {
+      "endpoints": [
+        {
+          "props": {},
+          "id": "35fdf2ca-ea1f-4c7e-9a41-f88fc0653a8f"
+        },
+        {
+          "props": {},
+          "id": "1ccda506-b9d5-4831-ade9-311b21fb726d"
+        }
+      ],
+      "props": {},
+      "id": "ecc79f8c-d614-4577-9195-ac473ca08338"
+    }
+  ],
+  "nets": [],
+  "props": {},
+  "id": "2199524e-a3c3-4c6f-823d-a3c40a96daef"
+}

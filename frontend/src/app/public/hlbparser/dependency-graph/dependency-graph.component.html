@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12" style="background-color: grey;"> 
+  <ngx-graph
+  class="chart-container"
+  [view]="[500, 700]"
+  [links]="[
+    {
+      id: 'a',
+      source: 'first',
+      target: 'second',
+      label: 'is parent of'
+    },{
+      id: 'b',
+      source: 'first',
+      target: 'third',
+      label: 'is parent of'
+    },{
+      id: 'c',
+      source: 'fourth',
+      target: 'first',
+      label: 'is parent of'
+    },{
+      id: 'd',
+      source: 'fourth',
+      target: 'third',
+      label: 'is parent of'
+    }
+    ,{
+      id: 'e',
+      source: 'fourth',
+      target: 'second',
+      label: 'is parent of'
+    }
+    ,{
+      id: 'f',
+      source: 'fourth',
+      target: 'fifth',
+      label: 'is parent of'
+    }
+  ]"
+  [nodes]="[
+    {
+      id: 'first',
+      label: 'A'
+    }, {
+      id: 'second',
+      label: 'B'
+    }, {
+      id: 'third',
+      label: 'C'
+    }
+    , {
+      id: 'fourth',
+      label: 'D'
+    }
+    , {
+      id: 'fifth',
+      label: 'E'
+    }
+    , {
+      id: 'six',
+      label: 'F'
+    }
+  ]"
+>
+
+</ngx-graph>
+</div>
+</div>

@@ -1,0 +1,6 @@
+binding
+monitor_group : /share/magi/modules/pktcounters/pktCountersAgent.tar.gz
+scenario
+when serverStarted collectionServer startCollection emit startCollection_done 
+when clientStopped actor stopCollection emit stopCollection_done 
+actor : servernode

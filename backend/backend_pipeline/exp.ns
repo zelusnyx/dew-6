@@ -1,0 +1,10 @@
+set ns [new Simulator]                 
+source tb_compat.tcl
+set nodeA [$ns node]
+set nodeB [$ns node]
+tb-allow-external $nodeA shared
+tb-allow-external $nodeB shared
+set link0 [$ns duplex-link $nodeB $nodeA 100Mb 0ms DropTail]
+$ns rtproto Static
+# Go!
+$ns run

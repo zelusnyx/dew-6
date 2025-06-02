@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="canonical" href="https://dew.isi.edu/docs/binding_suggestions/">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Built-in Functions - Distributed Experiment Workflows</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../css/style.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Built-in Functions";
+    var mkdocs_page_input_path = "binding_suggestions.md";
+    var mkdocs_page_url = "/docs/binding_suggestions/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Distributed Experiment Workflows</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">UI</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../first_time/">First time setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dashboard/">Dashboard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../profile_page/">Profile Page</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../experiment_page/">Experiment Page</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../run_deterlab_experiment/">Deterlab Page</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">DEW concepts</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../basics/">Basics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sharing_and_collaboration/">Sharing and Collaboration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../backup_and_recovery/">Backup and recovery</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../running_on_deter/">From DEW to testbed</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../manual_capture/">From testbed to DEW</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Built-in Functions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#action-bindings">Action Bindings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#event-bindings">Event Bindings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#os-built-in-functions">OS Built-in Functions</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contact_us/">Contact us</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../redirect-to-dew.html">Go back to DEW</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Distributed Experiment Workflows</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>DEW concepts &raquo;</li>
+        
+      
+    
+    <li>Built-in Functions</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="built-in-functions">Built-in Functions</h1>
+<p>As part of DEW, we provide some built-in functions, which we later expand into runnable code on the testbed during the export process.</p>
+<h2 id="action-bindings">Action Bindings</h2>
+<p>Currently supported built-in functions / suggestions for action bindings are:</p>
+<table>
+<thead>
+<tr>
+<th>Suggestion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tcpdump -i expeth($node) -w $file</code></td>
+</tr>
+<tr>
+<td><code>ping $node</code></td>
+</tr>
+<tr>
+<td><code>iperf -s</code></td>
+</tr>
+<tr>
+<td><code>iperf -c $node</code></td>
+</tr>
+<tr>
+<td><code>nmap $node</code></td>
+</tr>
+<tr>
+<td><code>wget $node</code></td>
+</tr>
+<tr>
+<td><code>dig $name</code></td>
+</tr>
+<tr>
+<td><code>start_apache</code></td>
+</tr>
+<tr>
+<td><code>start_bind</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="event-bindings">Event Bindings</h2>
+<p>Currently supported built-in functions for event bindings are:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Suggestion</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>pexists($action)</code></td>
+<td align="left">process exists that performs action in the binding</td>
+</tr>
+<tr>
+<td align="center"><code>psuccess($action)</code></td>
+<td align="left">process completed w success for the given action</td>
+</tr>
+</tbody>
+</table>
+<h2 id="os-built-in-functions">OS Built-in Functions</h2>
+<p>We have also provided some built-in functions in <code>Ubuntu-DEW</code> OS image on Deterlab. If you use that image you can use the following built-in functions in your bindings, and we will resolve them automatically.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Built-in function</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>expIP</code></td>
+<td align="left">experimental IP on the node</td>
+</tr>
+<tr>
+<td align="center"><code>ctlIP</code></td>
+<td align="left">control IP on the node</td>
+</tr>
+<tr>
+<td align="center"><code>expeth</code></td>
+<td align="left">experimental iface on the node</td>
+</tr>
+<tr>
+<td align="center"><code>ctleth</code></td>
+<td align="left">control iface on the node</td>
+</tr>
+<tr>
+<td align="center"><code>expIP(A)</code></td>
+<td align="left">experimental IP on the given node, leading</td>
+</tr>
+<tr>
+<td align="center"><code>expeth(A)</code></td>
+<td align="left">experimental iface on the given node,</td>
+</tr>
+<tr>
+<td align="center"><code>IP(A)</code></td>
+<td align="left">IP address of node A</td>
+</tr>
+<tr>
+<td align="center"><code>pid</code></td>
+<td align="left">project name</td>
+</tr>
+<tr>
+<td align="center"><code>eid</code></td>
+<td align="left">experiment name</td>
+</tr>
+<tr>
+<td align="center"><code>nid</code></td>
+<td align="left">node name</td>
+</tr>
+<tr>
+<td align="center"><code>epoch</code></td>
+<td align="left">epoch time</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../manual_capture/" class="btn btn-neutral" title="From testbed to DEW"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../manual_capture/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../examples/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

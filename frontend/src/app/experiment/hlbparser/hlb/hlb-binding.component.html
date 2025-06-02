@@ -1,0 +1,38 @@
+<div mat-dialog-content>
+<div class="row" style="margin: .5em;">
+    <div class="col-md-12">
+    
+              
+        <div style="text-align: center;">  
+          
+          <h2>Bindings</h2></div> 
+        
+          <hr>
+          <div *ngIf="bindingList.length==0" style="font-size: .8em;text-align: center;">
+            <span ><i>No Bindings Needed</i></span>
+          </div>
+            <div *ngIf="bindingList.length!=0">
+          <ul  class="behavior-list " >
+            <li class="binding-box" *ngFor="let item of bindingList;let index=index" ><div>
+            
+              <mat-form-field style="width:100%">
+                <input matInput placeholder="{{item.key+' represents: '}}" [(ngModel)]="item.value">
+              </mat-form-field>
+
+              <span>
+              </span>
+             
+            </div>
+              </li>
+        </ul>
+        </div>
+
+        
+
+      </div>
+      </div></div>
+
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Back</button>
+        <button mat-button [mat-dialog-close]="bindingList" cdkFocusInitial>Download</button>
+      </div> 

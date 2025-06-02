@@ -1,0 +1,57 @@
+id=$label
+cnt=0
+
+
+execute_fork()
+{
+    local node=$1
+    local cmd=$2
+    local cnt=$3
+    local aname=$4
+    
+    if [ ! -d ~/DEW/$id ] ; then
+	mkdir ~/DEW/$id
+    fi
+    echo "echo \"running $cmd\"" > ~/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "$cmd 2>~/DEW/$id/error.$cnt &" > ~/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "pid=\"\$!\""  >> ~/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "echo \$pid > ~/DEW/$id/pid.$cnt" >> ~/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "if wait \$pid; then" >> ~/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "    echo 0 > ~/DEW/$id/status.$cnt" >> ~/DEW/$id/script.$cnt.$aname.$node.sh	    
+    echo "else" >> ~/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "    echo 1 > ~/DEW/$id/status.$cnt" >> ~/DEW/$id/script.$cnt.$aname.$node.sh	    
+    echo "fi" >> ~/DEW/$id/script.$cnt.$aname.$node.sh	    
+    ssh -o StrictHostKeyChecking=no $node.$exp.$proj "bash ~/DEW/$id/script.$cnt.$aname.$node.sh" &
+}
+
+
+psuccess()
+{
+    local cnt=$1
+    while [ ! -f ~/DEW/$id/status.$cnt ] ; do
+	sleep 0.1
+    done
+}
+
+pexists()
+{
+    local cnt=$1
+    while [ ! -f ~/DEW/$id/pid.$cnt ] ; do
+	sleep 0.1
+    done
+    if [ ! -f ~/DEW/$id/status.$cnt ] ; then
+       echo "0"
+    else
+       echo "1"
+    fi     
+}
+
+if [ ! -d ~/DEW ] ; then
+   mkdir ~/DEW
+fi
+
+if [ ! -d ~/DEW/$id ] ; then
+   mkdir ~/DEW/$id
+fi
+
+rm -f ~/DEW/$id/*

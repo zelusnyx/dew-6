@@ -1,0 +1,57 @@
+
+id=$label
+cnt=0
+path=`pwd`
+
+execute_fork()
+{
+    local node=$1
+    local cmd=$2
+    local cnt=$3
+    local aname=$4
+    
+    if [ ! -d $path/DEW/$id ] ; then
+	    mkdir -p $path/DEW/$id
+    fi
+    echo "date +\"%s\" > $path/DEW/$id/time.$cnt " > $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "$cmd 2>$path/DEW/$id/error.$cnt 1>$path/DEW/$id/output.$cnt &" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "pid=\"\$!\""  >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "echo \$pid > $path/DEW/$id/pid.$cnt" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "if wait \$pid; then" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "    echo 0 > $path/DEW/$id/status.$cnt" >> $path/DEW/$id/script.$cnt.$aname.$node.sh	    
+    echo "else" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "    echo 1 > $path/DEW/$id/status.$cnt" >> $path/DEW/$id/script.$cnt.$aname.$node.sh	    
+    echo "fi" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    python3 /share/shared/dew/submitjob.py $node "start $path/DEW/$id/script.$cnt.$aname.$node.sh $cnt" &
+}
+
+
+psuccess()
+{
+    local cnt=$1
+    while [ ! -f $path/DEW/$id/status.$cnt ] ; do
+	sleep 0.1
+    done
+}
+
+pexists()
+{
+    local cnt=$1
+    while [ ! -f $path/DEW/$id/pid.$cnt ] ; do
+	sleep 0.1
+    done
+    if [ ! -f $path/DEW/$id/status.$cnt ] ; then
+       echo "0"
+    else
+       echo "1"
+    fi     
+}
+
+if [ ! -d $path/DEW ] ; then
+   mkdir $path/DEW
+fi
+if [ ! -d $path/DEW/$id ] ; then
+   mkdir $path/DEW/$id
+fi
+
+rm -f $path/DEW/$id/*

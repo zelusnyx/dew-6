@@ -1,0 +1,15 @@
+[Scenario]
+actor0 setup_victim emit setup_victim_done
+actor1 apparmor_parser emit apparmor_parser_done
+actor1 mkdir emit mkdir_done
+actor2 install emit install_done
+actor2 install_2 emit install_2_done
+
+[Constraints]
+
+[Bindings]
+apparmor_parser sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.tcpdump
+install cd ~/frade/traffic/smart_attacker; sudo bash install
+install_2 cd ~/frade/traffic/flood_attacker; sudo bash install
+mkdir sudo mkdir /zfs; sudo mkdir /zfs/FRADE; sudo mount -t nfs -o tcp,vers=3 zfs:/zfs/FRADE /zfs/FRADE
+setup_victim bash ~/frade/experiments/setup/setup_victim.sh $2

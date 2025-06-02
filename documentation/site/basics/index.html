@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="canonical" href="https://dew.isi.edu/docs/basics/">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Basics - Distributed Experiment Workflows</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../css/style.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Basics";
+    var mkdocs_page_input_path = "basics.md";
+    var mkdocs_page_url = "/docs/basics/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Distributed Experiment Workflows</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">UI</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../first_time/">First time setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dashboard/">Dashboard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../profile_page/">Profile Page</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../experiment_page/">Experiment Page</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../run_deterlab_experiment/">Deterlab Page</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">DEW concepts</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-dew">What is DEW?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scenario">Scenario</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#labels">Labels</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constraints">Constraints</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#actor-configuration-parameters">Actor Configuration Parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#os">os</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#num">num</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#nodetype">nodeType</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#location">location</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linklan-configuration-parameters">Link/LAN Configuration Parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#the-linklan-keyword">The Link/LAN Keyword</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#linklan-parameters">Link/LAN Parameters</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bindings">Bindings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dew-file-format">DEW file format</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#benefits">Benefits</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sharing_and_collaboration/">Sharing and Collaboration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../backup_and_recovery/">Backup and recovery</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../running_on_deter/">From DEW to testbed</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../manual_capture/">From testbed to DEW</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../binding_suggestions/">Built-in Functions</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contact_us/">Contact us</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../redirect-to-dew.html">Go back to DEW</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Distributed Experiment Workflows</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>DEW concepts &raquo;</li>
+        
+      
+    
+    <li>Basics</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="basics">Basics</h1>
+<p>This guide provides a quick introduction to Distributed Experiment Workflows (DEW).</p>
+<h2 id="what-is-dew">What is DEW?</h2>
+<p>DEW is an attempt to encode behavior and toplogical constraints which help with realization on testbeds. DEW consists of 4 major components. They are Actors, Scenario/Behavior, Constraints, and Bindings.</p>
+<p>DEW helps users encode behavior of an experiment, and uses that encoding to generate topology and runnable scripts. DEW representation has three major components: scenario, constraints, and bindings.</p>
+<h2 id="scenario">Scenario</h2>
+<p>Scenario defines the behavior of the the experiment. Each statement consists of the action (command or script being executed) and the actor (the machine or identical group of machines executing the action).</p>
+<p>To enforce the order of execution of actions, we use events. An actor can emit one or more events (e.g., when an action is completed). We use the emit keyword for this. Similarly, an actor can wait for one for more events to perform an action. The when keyword is used for this.</p>
+<p>A user may also want to wait for a certain amount of time before executing an action. For this purpose, the wait keyword is used. It accepts either a number or a variable, which can be filled later.</p>
+<p>Sometimes, we may have multiple instances of an actor and we need to define whether to wait for events from all instances or just any instance. Hence, we add ALL or ANY keyword before the events.
+The syntax of a DEW statement looks like:</p>
+<pre><code>[when [ALL/ANY] &lt;events&gt;][wait &lt;time&gt;] actor action [emit &lt;events&gt;]
+</code></pre>
+<p>(The parts enclosed in square brackets are optional.)</p>
+<p>It is also possible to provide labels by starting the line with <code>@</code>. With multiple labels, each label will have its own script when exported. We also support C++ style line comments <code>//</code> as well.</p>
+<h3 id="labels">Labels</h3>
+<p>Labels are <strong>user defined keywords</strong> which help in splitting the scenario into multiple phases. Labels help in generating multiple scripts for the scenario with each file name being the label provided. This helps the user in making multiple iterations quickly without running everything from scratch.</p>
+<p>For example, say you have to install <code>wget</code> and then run a script which uses <code>wget</code>. By using labels, we can create two scripts - an installation script and a test script (which you obtain on exporting to bash). The DEW scenario can look something like </p>
+<pre><code>@ install
+server install_wget_dependencies
+server install_wget
+
+@ test
+server run_wget_script
+</code></pre>
+<p>Upon exporting to bash, you get two scripts - <code>install.sh</code> and <code>test.sh</code> 
+Now, the user can run <code>install.sh</code> once and focus on the execution of <code>test.sh</code>. If it was a single script, the user must wait till the installation is finished everytime it is run.</p>
+<h2 id="constraints">Constraints</h2>
+<p>Constraints section defines how actors should be realized on a testbed, i.e., it describes topological constraints for actors. If no constraints are specified, all actors will be materialized in a disconnected topology; with a default OS, hardware type, and IP Address, with only one node per actor.</p>
+<h3 id="actor-configuration-parameters">Actor Configuration Parameters</h3>
+<p>Each Actor can be configured according to the requirements of the experiment. 
+The general syntax to configure the actor parameters is given below:</p>
+<pre><code>&lt;actor list&gt; [ &lt;parameter&gt; &lt;value&gt;, &lt;parameter&gt; &lt;value&gt;, ... ]
+</code></pre>
+<p>where <code>&lt;actor list&gt;</code> is the comma-separated list of actors to be configured (can also be a single actor), <code>&lt;parameter&gt;</code> is the actor parameter to be configured, and <code>&lt;value&gt;</code> is the correponding parameter value where each <code>&lt;parameter&gt; &lt;value&gt;</code> constitutes a parameter-value pair for a given actor or list of actors. </p>
+<p>The parameter-value pairs are optional. If the parameter-value pairs aren't specified in the constraints, the default values will be used for the corresponding actors.</p>
+<p><em><strong>Example:</strong></em> <code>actor1, actor2 [ os Ubuntu, num 2 ]</code>, <code>actor1 [ nodeType pc ]</code></p>
+<p>The parameters that can be configured are as follows:</p>
+<ul>
+<li>
+<h4 id="os">os</h4>
+<p>The <code>os</code> parameter defines the operating system of the actor(s). The format of the constraint is:
+<code>&lt;actor list&gt; [ os &lt;alphanumerical value&gt; ]</code>
+<br><br></p>
+</li>
+<li>
+<h4 id="num">num</h4>
+<p>The <code>num</code> parameter defines the number of instances of the actor(s). The format of the constraint is:
+<code>&lt;actor list&gt; [ num &lt;numerical value&gt; ]</code>
+<br><br></p>
+</li>
+<li>
+<h4 id="nodetype">nodeType</h4>
+<p>The <code>nodeType</code> parameter defines the hardware type of the actor(s). The format of the constraint is: 
+<code>&lt;actor list&gt; [ nodeType &lt;alphanumerical value&gt; ]</code>
+<br><br></p>
+</li>
+<li>
+<h4 id="location">location</h4>
+<p>The <code>location</code> parameter defines the IP Address of the actor(s). The format of the constraint is: 
+<code>&lt;actor list&gt; [ location &lt;IP Address&gt; ]</code>
+<br><br></p>
+</li>
+</ul>
+<h3 id="linklan-configuration-parameters">Link/LAN Configuration Parameters</h3>
+<p>Each link/LAN can be configured according to the requirements of the experiment. 
+The general syntax to configure the link/LAN parameters is given below:</p>
+<pre><code>&lt;link/lan&gt; &lt;actor list&gt; [ &lt;parameter&gt; &lt;value&gt;, &lt;parameter&gt; &lt;value&gt;, ... ]
+</code></pre>
+<p>where <code>&lt;link/lan&gt;</code> denotes the placement of a link or LAN between a set of actors, <code>&lt;actor list&gt;</code> is the space-separated list of actors to be configured, <code>&lt;parameter&gt;</code> is the link/LAN parameter to be configured, and <code>&lt;value&gt;</code> is the correponding parameter value where each <code>&lt;parameter&gt; &lt;value&gt;</code> constitutes a parameter-value pair for the link/LAN between the set of actors.</p>
+<p>The parameter-value pairs are optional. If the parameter-value pairs aren't specified in the constraints, the default values will be used for the corresponding links and LANs.</p>
+<p><em><strong>Example:</strong></em> <code>link actor1 actor2 [ bw 100 ]</code>, <code>lan actor1 actor2 actor3 [ bw 20, delay 4 ]</code></p>
+<h4 id="the-linklan-keyword">The Link/LAN Keyword</h4>
+<p>The keywords <code>link</code> and <code>lan</code> are explained below:</p>
+<ul>
+<li>
+<h5 id="link">link</h5>
+<p>The Link constraint denotes that there is a link between two actors. If there are multiple number of instances, you need to define the keyword <code>ALL</code> or <code>ANY</code> to indicate whether all instances need to be linked or any instance needs to be linked.
+The format of the constraint is</p>
+<p><code>link [ALL/ANY] actor1 [ALL/ANY] actor2 [ &lt;parameter&gt; &lt;value&gt;, &lt;parameter&gt; &lt;value&gt;, ... ]</code>
+<br><br></p>
+</li>
+<li>
+<h5 id="lan">lan</h5>
+<p>The LAN constraint creates a LAN between specified actors. The format of the statement is</p>
+<p><code>lan &lt;actor list&gt; [ &lt;parameter&gt; &lt;value&gt;, &lt;parameter&gt; &lt;value&gt;, ...]</code></p>
+</li>
+</ul>
+<h4 id="linklan-parameters">Link/LAN Parameters</h4>
+<p>The parameters that can be configured for any link/LAN are as follows:</p>
+<ul>
+<li>
+<h5 id="bw">bw</h5>
+<p>The <code>bw</code> parameter defines the bandwidth of the corresponding link or LAN. The format of the constraint is:</p>
+<p><code>&lt;link/lan&gt; &lt;actor list&gt; [ bw &lt;value&gt; ]</code></p>
+<p>The unit of measurement of the bandwidth is <strong>Gbps</strong>. </p>
+<p>(Do not mention the unit in the value. Example: <code>link actor1 actor2 [ bw 1 ]</code>)
+<br><br></p>
+</li>
+<li>
+<h5 id="delay">delay</h5>
+<p>The <code>delay</code> parameter defines the latency/delay of the corresponding link or LAN. The format of the constraint is:</p>
+<p><code>&lt;link/lan&gt; &lt;actor list&gt; [ delay &lt;value&gt; ]</code></p>
+<p>The unit of measurement of the latency/delay is <strong>ms</strong>. </p>
+<p>(Do not mention the unit in the value. Example: <code>lan actor1 actor2 actor3 [ delay 100 ]</code>)
+<br><br></p>
+</li>
+</ul>
+<h2 id="bindings">Bindings</h2>
+<p>Bindings provide the actual commands to be run on the nodes in the experiment to achieve actions and to detect events. </p>
+<h2 id="dew-file-format">DEW file format</h2>
+<p>The DEW file format consists of text statements, with each component (scenario, bindings, constraints) starting with its label within square brackets. The format is:</p>
+<pre><code>[Scenario]
+&lt;scenario_statements&gt;
+
+[Bindings]
+&lt;bindings&gt;
+
+[Constraints]
+&lt;constraint_statements&gt;
+</code></pre>
+<p>We also support inner labels in the scenario section. These labels will correspond to separate BASH scripts if you export your DEW specification as BASH scripts. The inner labels start with <code>@</code> character.</p>
+<pre><code>[Scenario]
+@setup
+&lt;setup_scenario_statements&gt;
+@execute
+&lt;execute_scenario_statements&gt;
+@cleanup
+&lt;cleanup_scenario_statements&gt;
+</code></pre>
+<h2 id="benefits">Benefits</h2>
+<ul>
+<li>Robust design - DEW format helps testbed users design an experiment at a high level, and in a flexible manner. It is easy to replace some pieces (e.g., which traffic generator to use) with others, and to scale the experiment up. </li>
+<li>History - DEW portal keeps a history of all changes in the experiment, which helps restore to a particular version when things go wrong</li>
+<li>Sharing and reuse - Since experiments can be shared, multiple researchers can collaborate on a single experiment. DEW experiments can also be published for anyone to use (by choosing the link sharing option).</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../sharing_and_collaboration/" class="btn btn-neutral float-right" title="Sharing and Collaboration">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../run_deterlab_experiment/" class="btn btn-neutral" title="Deterlab Page"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../run_deterlab_experiment/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../sharing_and_collaboration/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

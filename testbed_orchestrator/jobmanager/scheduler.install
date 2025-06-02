@@ -1,0 +1,7 @@
+sudo touch /tmp/scheduler.out
+sudo touch /tmp/scheduler.log
+sudo apt install -y sqlite
+sudo sqlite3 /tmp/dew.db < /share/shared/dew/createtable.sql
+sudo cp /share/shared/dew/scheduler.service /etc/systemd/system
+sudo systemctl enable scheduler
+sudo systemctl daemon-reload

@@ -1,0 +1,33 @@
+
+    <div class="row">
+      <div class="col-md-12" style="padding: 2em;">
+        <!-- <div style="margin: .6em;" >
+          <span>Suggestions:</span>
+          <button
+            type="button"
+            class="btn btn-outline-primary word-bubble-button"
+            *ngFor="let word of wordlist"
+            (click)="insertValue(word.value)"
+          >
+            {{ word.value }}
+          </button>
+        </div> -->
+        <div class="flex-container">
+          <quill-editor
+            [styles]="{ height: '100px' }"
+            [modules]="{ counter: { container: '#editor1' }, toolbar: false }"
+            [(ngModel)]="nlpText"
+            (onContentChanged)="logChange($event, 1)"
+            (onEditorCreated)="created($event)"
+          ></quill-editor>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+    
+        <div style="float:right">
+          <button mat-stroked-button  (click)="save()">Generate HLB</button>
+        
+      </div>
+    </div>
+

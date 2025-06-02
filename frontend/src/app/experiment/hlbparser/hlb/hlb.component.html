@@ -1,0 +1,492 @@
+<div style="height: 650px">
+<!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="drawer-sidenav" mode="side">
+    <div class="drawer-content">
+      <div
+        class="row"
+        style="font-size: 12px; font-family: Arial, Helvetica, sans-serif;"
+      >
+      <div class="col-md-12 text-center p-2">
+        In DEW, an experiment consists of a behavior (who does what and when), constraints (how experiment should be materialized on a testbed) and bindings (specific commands to run on nodes for each action). Click on <span class="fa fa-question-circle" matTooltip="Information"></span>  to learn more about each component or explore our <a href="/docs/experiment_page">documentation</a> and <a href="/docs/examples/">examples</a>.
+      </div>
+      </div>
+      <div
+        class="d-flex flex-column"
+        style="font-size: 12px; font-family: Arial, Helvetica, sans-serif; min-height: 500px;margin-top: 1em;"
+      >
+      <div class="d-flex align-items-stretch side-nav-container">
+      <div style="width: 50%;" class="p-2">
+        <div>
+          <div style="text-align: center; word-wrap: break-word;">
+            <i class="fa fa-question-circle info" matTooltip="Information" (click)="showInfo(1)"></i> 
+            <h2>Scenario</h2> 
+          </div>
+          <hr />
+          <pre class="code-snippet">[when &#60;event>][wait &#60;time>] actor action [emit &#60;event>]</pre>
+          <hr />
+          
+          <div class="row">
+            <div class="col-md-12" (click)="selectTextBox(2)">
+              <div
+                style="margin: 0.6em; border-bottom: 1px solid #eee;"
+            
+              >
+                <span>Suggestions:</span>
+  
+                <button
+                  type="button"
+                  class="btn btn-outline-primary word-bubble-button"
+                  *ngFor="
+                    let word of behaviorWordList
+                      | slice: 0:3
+                      | textfilter: behaviorTextFilter
+                  "
+                  (click)="insertValue(word.value, true)"
+                  [disabled]="word.flag"
+                >
+                  {{ word.value }}
+                </button>
+                <button
+                  type="button"
+                  *ngIf="suggestionbehaviorMessage != null"
+                  class="btn btn-outline-primary word-bubble-button"
+                  [disabled]="true"
+                >
+                  {{ suggestionbehaviorMessage }}
+                </button>
+              </div>
+              <div class="flex-container" style="min-height: 200px;">
+                <div class="dependency-cycle-alert" *ngIf="dependencyGraphCyclePath != null">
+                  <i class="fas fa-exclamation-triangle"></i> Dependency cycle detected
+                </div>
+                <quill-editor id='scenario-quill-box'
+                  [styles]="{  border: 'none', 'font-size':'12px' }"
+                  [modules]="{
+                    counter: { container: '#editor1' },
+                    toolbar: false
+                  }"
+                  placeholder="Steps to be executed during the experiment."
+                  format="object"
+                  [(ngModel)]="scenariosObjFormat"
+                  [disabled]="isExperimentDisabled()"
+                  (onContentChanged)="logChangeBehavior($event)"
+                  (onEditorCreated)="created($event, 2)"
+                  (focusout)="updateActors()"
+                ></quill-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div style="border-left: 1px dashed #ccc; border-right: 1px dashed #ccc;">
+        </div>
+        <div style="width: 50%;" class="p-2">
+        <div>
+          <div style="text-align: center; word-wrap: break-word;">
+            <i class="fa fa-question-circle info" matTooltip="Information" (click)="showInfo(2)"></i> 
+            <h2>Constraints</h2> 
+          </div>
+        
+          <hr />
+          <pre class="code-snippet">actor [ constraint value, constraint value ] | link actor [ constraint value, constraint value  ]</pre>
+          <hr />
+          <div class="row">
+            <div class="col-md-12" (click)="selectTextBox(3)">
+              <div
+                style="margin: 0.6em; border-bottom: 1px solid #eee;"
+            
+              >
+                <span>Suggestions:</span>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary word-bubble-button"
+                  *ngFor="
+                    let word of constraintWordList
+                      | slice: 0:4
+                      | textfilter: constraintTextFilter
+                  "
+                  (click)="insertValueInConstraint(word.value, true)"
+                  [disabled]="word.flag"
+                >
+                  {{ word.value }}
+                </button>
+                <button
+                  type="button"
+                  *ngIf="suggestionConstraintMessage != null"
+                  class="btn btn-outline-primary word-bubble-button"
+                  [disabled]="true"
+                >
+                  {{ suggestionConstraintMessage }}
+                </button>
+              </div>
+              <div class="flex-container" style="min-height: 200px;">
+                <quill-editor id='constraint-quill-box'
+                  [styles]="{  border: 'none', 'font-size':'12px' }"
+                  [modules]="{
+                    counter: { container: '#editor1' },
+                    toolbar: false
+                  }"
+                  format="object"
+                  [disabled]="isExperimentDisabled()"
+                  [(ngModel)]="constraintsObjFormat"
+                  (onContentChanged)="logChangeConstraints($event)"
+                  (onEditorCreated)="created($event, 3)"
+                  (focusout)="updateActorsConstraint()"
+                ></quill-editor>
+              </div>
+              <div class="d-flex flex-column hide">
+              <div class="d-flex flex-row convert-btn p-2 justify-content-center">
+                <span class="align-self-center">Convert from DEW 1.0 to 2.0</span>
+                <div class="align-self-center"><img src="../../../../assets/icons/svg/loop-circular.svg"/></div>
+              </div>
+              <div class="d-flex justify-content-center error-text hide">
+                <img class="align-self-center" src="../../../../assets/icons/svg/warning.svg"/>
+                <span class="align-self-center">Unable to convert the given constraints.</span>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div style="border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc;">
+      </div>
+        <div class="p-2 side-nav-container">
+          <div style="text-align: center; word-wrap: break-word;">
+            <i class="fa fa-question-circle info" matTooltip="Information" (click)="showInfo(3)"></i> <h2>Bindings</h2> 
+          </div>
+          
+          <hr />
+          <p class="code-snippet">Choose an option from drop-down boxes or input your own commands. Variables are preceded by $ to indicate that their values should be replaced by constants in the design stage.</p>
+          <hr />
+          <div
+            *ngIf="bindingList.length == 0"
+            style="font-size: 0.8em; text-align: center;"
+          >
+            <span><i>No Bindings Needed</i></span>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-light special-func-btn" (click)="toggleSpecialFuncDialog()"
+                    *ngIf="!showSpecialFuncDialog; else elseBlock">Show Special Functions</button>
+            <ng-template #elseBlock>
+              <button type="button" class="btn btn-light special-func-btn"
+                                            (click)="toggleSpecialFuncDialog()" >Hide Special Functions</button>
+            </ng-template>
+          </div>
+          <div *ngIf="bindingList.length != 0">
+            <ul class="behavior-list">
+              <li *ngFor="let item of bindingList; let index = index">
+                <div>
+                  <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>{{ item.key + " represents: " }}</mat-label>
+                    <input type="text"
+                          [disabled]="isExperimentDisabled()"
+                          [(ngModel)]="item.value"
+                          (change)="storeBinding(index)"
+                          aria-label="string"
+                          matInput
+                          (focus)="searchFilter(item.value, item.category)"
+                          (keyup)="searchFilter(item.value, item.category)"
+                          [matAutocomplete]="UserInfo">
+  
+                    <mat-autocomplete #UserInfo="matAutocomplete" (optionSelected)="storeBinding(index)">
+                      <mat-option *ngFor="let option of
+                      (item.category ==='event' ?
+                      (filteredBindingHandleForEvent | async) :
+                      (filteredBindingHandle | async))" [value]="option.replace('$action', item.key)">
+                        {{option.replace('$action', item.key)}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="special-func-div" cdkDrag *ngIf="showSpecialFuncDialog">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Special Functions</th>
+            <th scope="col">What they do</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let func of specialFunctions">
+            <th scope="row">{{func.name}}</th>
+            <td>{{func.value}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </mat-drawer>
+  
+  <div id="graph-container">
+    <div class="d-flex flex-row justify-content-between toggle-icons">
+      <div style="width: 30%">
+        <div (click)="drawer.toggle(); openSideNavBar()" class="side-nav-icon">
+          <img src="../../../../assets/icons/svg/arrow-circle-right.svg">
+          <img src="../../../../assets/icons/svg/arrow-circle-left.svg" class="hide">
+          <span class="text-left font-weight-bold">Textual Representation</span>
+        </div>
+      </div>
+
+      <div  style="width: 30%">
+        <div (click)="toggleDependencyView()" class="dependency-topology-toggle-icon-dependency">
+          <span class="text-left font-weight-bold">Dependency</span>
+        </div>
+        <div (click)="toggleTopologyView()" class="dependency-topology-toggle-icon-topology">
+          <span class="text-left font-weight-bold">Topology</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="graph-description-box">
+      <div class="graph-description-box-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="graph-description-box-content">
+        {{graphDescription}}
+      </div>
+    </div>
+
+    <div class="dialog-box hide">
+      <div class="dialog-box-content d-flex flex-column">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+          <div [hidden]="!(!topologyGraphSelectedNodeData || !topologyGraphSelectedNodeData.nameEditable)">
+            <span id="dialog-box-title" class="p-2"></span>
+            <i class="fas fa-edit topology-actor-name-action edit" *ngIf="topologyGraphSelectedNodeData && topologyGraphSelectedNodeData.nodetype == 'NODE'" (click)="topologyGraphSelectedNodeData.nameEditable = true"></i>
+          </div>
+          <div *ngIf="topologyGraphSelectedNodeData && topologyGraphSelectedNodeData.nameEditable">
+            <input [(ngModel)]="topologyGraphSelectedNodeData.name" (keyup)="onTopologyNodeChange()" (change)="onTopologyNodeSave()"/> 
+            <!-- <i class="fas fa-check topology-actor-name-action save" (click)="onTopologyNodeSave()" [class.disabled]="!!topologyGraphSelectedNodeData.nameEditableError"></i>
+            <i class="fas fa-times topology-actor-name-action cancel" (click)="onTopologyNodeCancel()"></i> -->
+            <div *ngIf="topologyGraphSelectedNodeData.nameEditableError" class="topology-actor-name-action-error">{{topologyGraphSelectedNodeData.nameEditableError}}</div>
+          </div>
+          <button type="button" class="btn dialog-box-action-button" data-toggle="modal" data-target="#add-action-modal" (click)="clearModalContent()">Add Action</button>
+        </div>
+        <hr>
+        <div class="dialog-box-fields d-flex flex-column is-node">
+
+          <!--Node Fields-->
+
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>IP Address</mat-label>
+            <input type="text" id="node-ip-address" aria-label="string" onkeypress="return ((event.charCode !=8 && event.charCode ==0) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46)" (change)="onTopologyParametersChange($event)" matInput>
+          </mat-form-field>
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>Operating System</mat-label>
+            <input type="text" id="node-operating-system" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+          </mat-form-field>
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>Hardware Type</mat-label>
+            <input type="text" id="node-hardware-type" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+          </mat-form-field>
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>Number of Nodes</mat-label>
+            <input type="text" id="node-num" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" value="1" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+          </mat-form-field>
+          <div class="mt-2" *ngIf="topologyGraphSelectedNodeData && topologyGraphSelectedNodeData.actions && topologyGraphSelectedNodeData.actions.length">
+            <h5>Actions</h5>
+            <div>
+              <div class="topology-actor-action" *ngFor="let action of topologyGraphSelectedNodeData.actions">
+                <div class="topology-actor-action-label">
+                  {{action.topologyLabel}}
+                </div>
+                <div class="topology-actor-action-name">
+                  {{action.action}}
+                </div>
+                <div class="topology-actor-action-edit" (click)="onEditActionFromTopologyDependencyClick(action.topologyLabel)">
+                  <i class="fas fa-edit"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Link/LAN Fields-->
+
+        <div class="dialog-box-fields d-flex flex-column">
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>BandWidth</mat-label>
+            <div class="d-flex flex-row">
+              <input type="text" value="1" class="flex-grow-1 align-self-center" id="link-bandwidth" onkeypress="return ((event.charCode !=8 && event.charCode ==0) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46)" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+              <div class="field-units align-self-center">
+                <span>Gbps</span>
+              </div>
+            </div>
+          </mat-form-field>
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>Delay</mat-label>
+            <div class="d-flex flex-row">
+              <input type="text" value="0" class="flex-grow-1 align-self-center" id="link-delay" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+              <div class="field-units align-self-center">
+                <span>ms</span>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="toastBox" style="display: none;">
+      Kindly select a node before attempting to change any of the links
+    </div>
+
+    <div class="graph-box hide">
+      <div class="graph-buttons d-flex flex-column noselect" style="text-align: center;">
+        <div id="graphActionButtonList" class="flex-grow-1">
+          <div class="d-flex flex-row justify-content-center">
+            <div class="graph-action-button" (click)="onAddNodeClick('Node')">Add Node</div>
+            <div class="graph-action-button" (click)="onAddNodeClick('LAN')">Add LAN</div>
+          </div>
+        </div>
+        <div id="actionMessage">
+          <span>Hold <kbd>Space</kbd> and click-and-drag between nodes to add edges, Select a node/edge and press <kbd>Del</kbd> to delete</span>
+        </div>
+    </div>
+      <div id="topologyGraphNetwork" #topologyGraphNetwork></div>
+    </div>
+    <div class="graph-box-dependency hide">
+      <div style="width: 200px; margin-top: 100px; margin-left: 50px; position: absolute;">
+        <div class="row" *ngFor="let actor of actorsGroup | keyvalue">
+          <div class="col-md-3 mt-1" [ngStyle]="{'background-color': graphColors[actor.value]}"></div><div class="col-md-9 mt-1">{{actor.key}}</div>
+        </div>
+      </div>
+      <!-- Dependency Cycle -->
+      <div id="dependencyGraphCycleContainer" style="width: 200px; height: 200px;">
+          <div style="height: 10%;">
+            Dependency Cycle
+          </div>
+          <div style="height: 90%;">
+            <div id="dependencyGraphCycleNetwork" #dependencyGraphCycleNetwork></div>
+          </div>
+      </div>
+      <div class="graph-buttons d-flex flex-column noselect" style="text-align: center;">
+        <div class="flex-grow-1">
+          <div class="d-flex flex-row justify-content-center">
+            <div class="graph-action-button" (click)="onAddActionDependencyClick()">Add Action</div>
+            <div class="graph-action-button dependency-edit-action-button hide" (click)="onEditActionDependencyClick()">Edit Action</div>
+          </div>
+        </div>
+    </div>
+      <div id="dependencyGraphNetwork" #dependencyGraphNetwork></div>
+    </div>
+  </div>
+
+</mat-drawer-container>
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="showAlertMsg">
+  {{this.alertMessage}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="unsetShowAlertMessage()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="add-action-modal" role="dialog" aria-labelledby="add-action-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-action-modal-label">Add Action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-column p-2">
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <span class="form-check-label">
+                Actor
+              </span>
+              <select class="form-select form-control" aria-label="modal-actor-input" id="modal-actor-input">
+                <option *ngFor="let item of actorsList">{{item.text}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <span class="form-check-label">
+                Action
+              </span>
+              <input type="text" class="form-control flex-grow-1" placeholder="Action Name" id="modal-action-name-input">
+            </div>
+          </div>
+          <div class="d-flex justify-content-start error-text modal-add-action-error hide">
+            <img class="align-self-center" src="../../../../assets/icons/svg/warning.svg"/>
+            <span class="align-self-center">Kindly add an Action Name</span>
+          </div>
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <span class="form-check-label">
+                Action Binding
+              </span>
+              <input type="text" class="form-control flex-grow-1" placeholder="Binding" id="modal-action-binding-input" list="action-bindings">
+              <datalist id="action-bindings">
+                <option *ngFor="let item of filterBindingOptions">{{item}}</option>
+             </datalist>
+            </div>
+          </div>
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <input class="form-check-input" type="checkbox" value="" id="modal-action-trigger-checkbox">
+              <label class="form-check-label" for="modal-action-trigger-checkbox">
+                Trigger
+              </label>
+              <select multiple class="form-control flex-grow-1" id="modal-action-trigger-selections" disabled>
+                <option *ngFor="let item of triggerSignals">{{item}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <input class="form-check-input" type="checkbox" value="" id="modal-action-wait-checkbox">
+              <label class="form-check-label" for="modal-action-wait-checkbox">
+                Wait
+              </label>
+              <div class="input-group">
+                <input type="number" class="form-control flex-grow-1" placeholder="Wait Time" id="modal-action-wait-input" disabled>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <input class="form-check-input" type="checkbox" value="" id="modal-action-emit-checkbox">
+              <label class="form-check-label" for="modal-action-emit-checkbox">
+                Emit
+              </label>
+              <input type="text" class="form-control flex-grow-1" placeholder="Emit Event" id="modal-action-emit-input" disabled>
+            </div>
+          </div>
+          <div class="d-flex flex-grow-1">
+            <div class="form-check modal-action-headers d-flex align-items-center flex-grow-1">
+              <input class="form-check-input" type="checkbox" value="" id="modal-action-event-checkbox" disabled>
+              <label class="form-check-label" for="modal-action-event-checkbox">
+                Event Binding
+              </label>
+              <input type="text" class="form-control flex-grow-1" placeholder="Binding" id="modal-event-binding-input" list="event-bindings" disabled  autocomplete="off">
+              <datalist id="event-bindings">
+                <option *ngFor="let item of filterBindingOptionsForEventCleaned">{{currentActionNameInModal ? item.replace('$action', currentActionNameInModal) : item}}</option>
+             </datalist>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn modal-delete-button" id="modal-delete-action-button" (click)="deleteActionFromUI()">Delete</button>
+        <button type="button" class="btn modal-add-button" id="modal-add-action-button" (click)="addActionFromUI()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

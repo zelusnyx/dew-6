@@ -1,0 +1,15 @@
+[Unit]
+Description=Scheduler
+IgnoreOnIsolate=yes
+
+[Service]
+Type=simple
+RemainAfterExit=no
+ExecStart=/share/shared/dew/scheduler.sh start
+ExecStop=/share/shared/dew/scheduler.sh stop
+PIDFile=/tmp/scheduler.pid
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

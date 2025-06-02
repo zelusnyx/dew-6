@@ -1,0 +1,159 @@
+#!/usr/bin/perl
+# Listen on socket for start and kill events
+
+
+use IO::Socket::INET;
+
+%tree=();
+%children=();
+%childpids=();
+
+# build a list of parent/child jobs
+sub pstree
+{
+    opendir(my $dh, "/proc") || die "cannot open dir";
+    # Rebuild tree
+    %tree=();
+    %children=();
+    @files = readdir($dh);
+    for $f (@files)	
+    {
+	if ($f =~ /^\d+$/)
+	{
+	    $fdh = new IO::File("/proc/$f/stat");
+	    $line = <$fdh>;
+	    @items = split /\s+/, $line;
+	    $pid = $items[0];
+	    $cmd = $items[1];
+	    $i = 2;
+	    if ($cmd =~ /^\(/)
+	    {
+		while ($cmd !~ /\)$/)
+		{
+		    $cmd = $cmd . " " . $items[$i++];
+		}
+	    }
+	    $state = $items[$i++];
+	    $ppid = $items[$i++];
+	    $tree{$pid}{'cmd'} = $cmd;
+	    $tree{$pid}{'state'} = $state;
+	    $tree{$pid}{'parent'} = $ppid;
+	    push(@{$children{$ppid}}, $pid);
+	}
+    }
+}
+
+sub clean
+{
+    my ($s,$num) = @_;
+    print "Argument $s\n";
+    my @el = glob($s);
+    $s = $el[0];
+    my @items = split /\//, $s;
+    if ($#items > 1)
+    {
+	my $folder = "$items[0]/$items[1]/$items[2]/$items[3]/$items[4]";
+	$s = $el[0];
+	my $pidfile = "$folder/pid.$num";
+	print "Script is $s look for $pidfile folder $folder num $num\n";
+	if (-e $s && -e $pidfile)
+	{
+	    print "Found script $s\n";
+	}
+	else
+	{
+	    print "no script $s\n";
+	}
+    }
+}
+  
+sub recursivekill
+{
+    my $pid = shift;
+    for my $g (@{$children{$pid}})
+    {
+	print "Should kill $g\n";
+	recursivekill($g);
+    }
+    kill HUP, $pid;
+    print "Killed $pid\n";
+}
+
+#Main program
+
+my ($socket,$received_data);
+my ($peeraddress,$peerport);
+
+open(my $hn, "/bin/hostname|") || die "Cannot run hostname";
+$myname = <$hn>;
+$myname =~ s/\n//;
+print "Name $myname\n";
+$socket = new IO::Socket::INET (
+    LocalHost => $myname,
+    LocalPort => '17711',
+    Proto => 'udp',
+    ) or die "ERROR in Socket Creation : $\n";
+
+while(1)
+{
+    # read operation on the socket
+    $socket->recv($received_data,1024);
+
+    #assume what we got is either in the format
+    #start scriptfile num or
+    #stop scriptfile num
+    @elems = split /\s+/, $received_data;
+    print "Received $received_data\n";
+    if ($#elems != 2)
+    {
+	#wrong format
+	next;
+    }
+    $cmd = $elems[0];
+    $script = $elems[1];
+    $num = $elems[2];
+    if ($cmd ne "start" && $cmd ne "stop")
+    {
+	next;
+    }
+    if ($cmd eq "start")
+    {
+	my $childpid = fork() or exec("/bin/bash $script");  # fork off a child
+	$childpids{$script . "-" . $num} = $childpid;
+	print "Got child pid $childpid\n";
+    }
+    else
+    {
+	pstree();
+	if (exists($childpids{$script . "-" . $num}))
+	{
+	    my $pid =  $childpids{$script . "-" . $num};
+	    if(exists($children{$pid}))
+	    {		
+		for $c (@{$children{$pid}})
+		{
+		    recursivekill($c);
+		}
+		#kill HUP, $pid;
+		# should do this recursively
+		$children{$pid} = "";
+	    }
+	    system("rm $script");
+	}
+	else
+	{
+	    print("No active script $script\n");
+	    clean($script, $num);
+	}
+    }
+    pstree();
+    for $p (keys %children)
+    {
+	#print "$p ($tree{$p}{'cmd'}): ";
+	for $c (@{$children{$p}})
+	{
+	 #   print "$c ";
+	}
+	#print "\n";
+    }
+}

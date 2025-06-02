@@ -1,0 +1,42 @@
+<div mat-dialog-content>
+  <div class="row" style="margin: .5em;" >
+    <div class="col-md-12" style="padding: 0;">
+  
+          <div class="row">
+           
+              <mat-form-field class="col-md-8" appearance="outline">
+                <mat-label>User Handle</mat-label>
+                <input type="text"
+                       placeholder="User Handle"
+                       aria-label="string"
+                       matInput
+                       [(ngModel)]="UserObj.handle"
+                       [formControl]="userHandleSelect"
+                       [matAutocomplete]="UserInfo">
+                <mat-autocomplete #UserInfo="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredUserHandle | async" [value]="option.value">
+                   {{option.name +" <"+option.value+"> "}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        
+              <mat-form-field class="col-md-4" appearance="outline">
+                <mat-label>Access Level</mat-label>
+                <mat-select [(ngModel)]="this.UserObj.access" required >
+                  <mat-option *ngFor="let option of filteredLevels | async" [value]="option.value">
+                    {{option.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+       
+      </div>
+
+
+    </div>
+  </div> 
+</div>
+
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button [disabled]="isAddDisabled()" [mat-dialog-close]="UserObj" cdkFocusInitial>Add</button>
+      </div>  

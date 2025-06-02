@@ -1,0 +1,593 @@
+{
+  "nets": [],
+  "links": [
+    {
+      "id": "b68d8968-7e32-4687-b3be-2e683c0adac2",
+      "endpoints": [
+        {
+          "id": "e6b000c2-b274-4a30-a15c-e7438509bec7",
+          "props": {}
+        },
+        {
+          "id": "b37067a8-95bc-48b2-b93c-bff90a616f5b",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "87b32ba1-97e4-48fe-b8f0-f635f8769f5a",
+      "endpoints": [
+        {
+          "id": "fa8b1e0a-326f-4ae7-b6ec-a8e6660b9de3",
+          "props": {}
+        },
+        {
+          "id": "f5e4d77e-c73f-4415-8626-277e644dbe34",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "cfe6bc70-6254-47bd-ab72-1f94b66befb5",
+      "endpoints": [
+        {
+          "id": "dfa95228-7cb5-422d-8ac9-290baf2254c3",
+          "props": {}
+        },
+        {
+          "id": "4e7635f7-fa37-4983-bd1f-50dd3f9c54ef",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "debb6ac0-4451-4309-b3c7-94746704826c",
+      "endpoints": [
+        {
+          "id": "2f07528e-83d5-4177-917f-7dba72ed94e8",
+          "props": {}
+        },
+        {
+          "id": "615f0cc0-ae43-4495-ad3b-e201a0c421cf",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "d47cea6b-03e7-41ea-8d4b-3da88c67cb05",
+      "endpoints": [
+        {
+          "id": "3a371d93-25fa-4a86-a6c0-350bd82f2056",
+          "props": {}
+        },
+        {
+          "id": "e163a166-8c2b-44ba-b466-bf5d3253dd57",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "fff74fb6-eed4-422b-9071-e6d054f87f1c",
+      "endpoints": [
+        {
+          "id": "7cf1086e-f5b4-4375-b958-480068c36df6",
+          "props": {}
+        },
+        {
+          "id": "aca88c7b-1064-4c5d-8045-cd28b012b20d",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "54bad72b-e3ef-484b-aa80-5aed495a5de9",
+      "endpoints": [
+        {
+          "id": "f9b457b8-3dd7-4a7b-ab3c-77b552a742ce",
+          "props": {}
+        },
+        {
+          "id": "10d2f9fd-1f12-451e-b6b1-7a17331d2bb2",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "da44401d-7455-4bed-85d5-3df4368f3c75",
+      "endpoints": [
+        {
+          "id": "8432ab77-d0cb-45cb-8135-490de7f54937",
+          "props": {}
+        },
+        {
+          "id": "8a58e857-c0e7-42f5-8128-7c6c10e8eee8",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "97234cef-17ad-466c-88bd-bdedd17d4224",
+      "endpoints": [
+        {
+          "id": "268f3ccb-fd70-4ee8-a834-74d34e513533",
+          "props": {}
+        },
+        {
+          "id": "3ec89d54-4eba-4499-b164-c413b717e2df",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "e982a98b-a5a7-4792-b326-dc26812b8bcc",
+      "endpoints": [
+        {
+          "id": "3ec89d54-4eba-4499-b164-c413b717e2df",
+          "props": {}
+        },
+        {
+          "id": "eef98854-bbc7-4cfc-b45d-ec4f82a22973",
+          "props": {}
+        }
+      ],
+      "props": {}
+    }
+  ],
+  "id": "dd99f55e-b4a7-43ce-b724-6146a2c4228e",
+  "nodes": [
+    {
+      "id": "d893d81e-b426-4c4f-85e0-d44e90a3d967",
+      "endpoints": [
+        {
+          "id": "e6b000c2-b274-4a30-a15c-e7438509bec7",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 32000000000.0
+        },
+        "image": [
+          "andriod",
+          "android-o",
+          "android-n"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "droid0",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "pixel",
+        "cpu": {
+          "arch": "armv8",
+          "model": "coretex",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "cb60ee4a-d05d-4310-963c-3257af842abf",
+      "endpoints": [
+        {
+          "id": "fa8b1e0a-326f-4ae7-b6ec-a8e6660b9de3",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 32000000000.0
+        },
+        "image": [
+          "andriod",
+          "android-o",
+          "android-n"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "droid1",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "pixel",
+        "cpu": {
+          "arch": "armv8",
+          "model": "coretex",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "88f62dfe-5ff7-46ea-829c-93b6d05fd2a9",
+      "endpoints": [
+        {
+          "id": "dfa95228-7cb5-422d-8ac9-290baf2254c3",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 32000000000.0
+        },
+        "image": [
+          "andriod",
+          "android-o",
+          "android-n"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "droid2",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "pixel",
+        "cpu": {
+          "arch": "armv8",
+          "model": "coretex",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "49dae6bb-c28b-4aec-bb20-ba219376c8fe",
+      "endpoints": [
+        {
+          "id": "2f07528e-83d5-4177-917f-7dba72ed94e8",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 32000000000.0
+        },
+        "image": [
+          "andriod",
+          "android-o",
+          "android-n"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "droid3",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "pixel",
+        "cpu": {
+          "arch": "armv8",
+          "model": "coretex",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "d1075317-d9e8-41e2-bb51-ce77eb04f75e",
+      "endpoints": [
+        {
+          "id": "3a371d93-25fa-4a86-a6c0-350bd82f2056",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "ios",
+          "ios-10",
+          "ios-11"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "iphone0",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "iphone7",
+        "cpu": {
+          "arch": "armv8",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "22bee606-cdb7-4a03-a044-b2f56b91981e",
+      "endpoints": [
+        {
+          "id": "7cf1086e-f5b4-4375-b958-480068c36df6",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "ios",
+          "ios-10",
+          "ios-11"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "iphone1",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "iphone7",
+        "cpu": {
+          "arch": "armv8",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "8906ec95-3631-4ca5-a74d-9aa6cd0a286f",
+      "endpoints": [
+        {
+          "id": "f9b457b8-3dd7-4a7b-ab3c-77b552a742ce",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "ios",
+          "ios-10",
+          "ios-11"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "iphone2",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "iphone7",
+        "cpu": {
+          "arch": "armv8",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "93acb530-2037-4728-82ab-27db1b79b9b1",
+      "endpoints": [
+        {
+          "id": "8432ab77-d0cb-45cb-8135-490de7f54937",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte",
+            "bus": "pci"
+          }
+        }
+      ],
+      "props": {
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "ios",
+          "ios-10",
+          "ios-11"
+        ],
+        "bus": [
+          {
+            "type": "pci"
+          }
+        ],
+        "name": "iphone3",
+        "memory": {
+          "capacity": 2000000000.0
+        },
+        "platform": "iphone7",
+        "cpu": {
+          "arch": "armv8",
+          "cores": 4
+        },
+        "alloc": [
+          "unit"
+        ]
+      }
+    },
+    {
+      "id": "f66464ed-5bdb-47bd-bcec-eee2b848daa0",
+      "endpoints": [
+        {
+          "id": "3ec89d54-4eba-4499-b164-c413b717e2df",
+          "props": {
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          }
+        },
+        {
+          "id": "380beaea-cc52-422b-a232-fee7fac6cda4",
+          "props": {
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          }
+        }
+      ],
+      "props": {
+        "name": "hummingbird",
+        "alloc": [
+          "virtual",
+          "static"
+        ]
+      }
+    },
+    {
+      "id": "7551c4da-e096-42cc-827f-366ceec7e4ef",
+      "endpoints": [
+        {
+          "id": "eef98854-bbc7-4cfc-b45d-ec4f82a22973",
+          "props": {
+            "speed": 10000000000.0,
+            "type": "ethernet"
+          }
+        }
+      ],
+      "props": {
+        "name": "gateway",
+        "alloc": [
+          "virtual",
+          "static"
+        ]
+      }
+    },
+    {
+      "id": "afd8f602-f34b-4ed8-aca9-fced2fd250f9",
+      "endpoints": [
+        {
+          "id": "b37067a8-95bc-48b2-b93c-bff90a616f5b",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "f5e4d77e-c73f-4415-8626-277e644dbe34",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "4e7635f7-fa37-4983-bd1f-50dd3f9c54ef",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "615f0cc0-ae43-4495-ad3b-e201a0c421cf",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "e163a166-8c2b-44ba-b466-bf5d3253dd57",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "aca88c7b-1064-4c5d-8045-cd28b012b20d",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "10d2f9fd-1f12-451e-b6b1-7a17331d2bb2",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "8a58e857-c0e7-42f5-8128-7c6c10e8eee8",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        },
+        {
+          "id": "268f3ccb-fd70-4ee8-a834-74d34e513533",
+          "props": {
+            "speed": 10000000.0,
+            "type": "lte"
+          }
+        }
+      ],
+      "props": {
+        "name": "tower",
+        "alloc": [
+          "static",
+          "virtual"
+        ]
+      }
+    }
+  ],
+  "props": {}
+}

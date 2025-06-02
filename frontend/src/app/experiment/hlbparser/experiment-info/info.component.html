@@ -1,0 +1,221 @@
+<mat-toolbar color="primary">
+  <div class="heading d-flex justify-content-between flex-grow-1">
+    <div class="flex-grow-1">
+      <input 
+      type="text" 
+      name="title" 
+      style="float: left; border: none;" 
+      class="heading-value" 
+      [(ngModel)]="experiment.name"
+      (blur)="checkDefault()"
+      />
+      <div style="padding: 5px; float: right;">
+        {{ 101 - experiment.name.length + " characters left" }}
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar color="warn" [ngClass]="{'green_saved':isSaved(),'grey_saved':!isSaved()}">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            href="dashboard"
+            id="navbarDropdown0"
+            role="button"
+            
+          >
+            Back
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            href="#"
+            id="navbarDropdown1"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            File
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <li>
+              <a
+              class="dropdown-item"
+              (click)="save()"
+              *ngIf="experimentControl > 2"
+              >Save</a>
+            </li>
+            <li class="dropdown-divider" *ngIf="id == -1" ></li>
+            <li>
+              <a class="dropdown-item disabled" aria-disabled="true" *ngIf="id == -1">You need to save the experiment to perform more file related operations</a>
+            </li>
+            <li class="dropdown-divider" *ngIf="id == -1" ></li>
+            <!-- <a class="dropdown-item" aria-disabled="true" *ngIf="id != -1">Save As...</a> -->
+            <li>
+              <a class="dropdown-item" (click)="saveDrive()" *ngIf="id != -1">Save To Google Drive</a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                (click)="delete()"
+                *ngIf="experimentControl > 3 && id!=-1"
+                >Delete</a
+              >
+            </li>
+            <li class="dropdown-divider" *ngIf="id != -1"></li>
+            <li>
+              <a class="dropdown-item" (click)="uploadInput()">Upload</a>
+            </li>
+            <li class="dropdown-submenu" *ngIf="id != -1">
+              <a
+                class="dropdown-item"
+                href="javascript:void(0)"
+                tabindex="-1">
+                Export
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-submenu">
+                  <a  class="dropdown-item">Topology</a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item" (click)="addBindings()"><a>NS File</a></li>
+                    <li class="dropdown-item" (click)="mergeTBGen()"><a>MergeTB File</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown-submenu">
+                  <a  class="dropdown-item">Script</a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a class="dropdown-item" (click)="bashGen()">BASH File</a></li>
+                  </ul>
+                </li>
+                <li><a class="dropdown-item" (click)="exportToDEW()">DEW</a></li>
+              </ul>
+            </li>
+            <li class="dropdown-divider" *ngIf="id != -1"></li>
+            <li>
+              <a
+                class="dropdown-item"
+                (click)="showVersionsPopup()"
+                *ngIf="experimentControl > 3 && id!=-1"
+                >View version history</a
+              >
+            </li>
+
+            <li class="dropdown-divider" *ngIf="id != -1"></li>
+            <li>
+              <a
+                class="dropdown-item"
+                *ngIf="experimentControl > 3 && id!=-1"
+                (click)="addUserPopUp()"
+                >Share to User</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                *ngIf="experimentControl > 3 && id!=-1"
+                (click)="listUserPopUp()"
+                >List of Users
+              </a>
+            </li>
+            <!-- <a class="dropdown-item" *ngIf="experimentControl > 3 && id!=-1"
+              >Share link
+            </a> -->
+            <li>
+              <a class="dropdown-item" (click)="closeExperiment()">Close</a>
+            </li>
+            
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            href="#"
+            id="navbarDropdown4"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            (click)="show(1)">Design</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown5"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+              Run
+            </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
+                <a class="dropdown-item" (click)="show(3)">Deterlab</a>
+              </div>
+         
+        </li>
+        <li class="nav-item dropdown">
+          
+          <a
+            class="nav-link"
+            href="#"
+            id="navbarDropdown6"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+            Help
+          </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+              <li><a class="dropdown-item" href="/docs">Docs</a></li>
+              <li><a class="dropdown-item" href="/docs/contact_us">Contact us</a></li>
+            </ul>
+       
+      </li>
+        
+      </ul>
+    </div>
+  </nav>
+  <span class="saved_bubble" [hidden]="savingFlag">
+    {{isSaved()? 'saved' :'unsaved'}}
+  </span>
+  <span class="saved_bubble loader" [hidden]="!savingFlag">
+  </span>
+  <span class="saved_bubble" [hidden]="!savingFlag">
+    saving...
+  </span>
+  <span class="bubble">
+    <strong
+      matTooltip="{{
+        experimentControl == 4
+          ? 'Full Access'
+          : experimentControl == 3
+          ? 'Write only'
+          : 'Read only'
+      }}"
+      >{{
+        experimentControl == 4
+          ? "Admin"
+          : experimentControl == 3
+          ? "Developer"
+          : "Spectator"
+      }}</strong
+    >
+  </span>
+</mat-toolbar>
+
+<!--<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="showAlertMsg">-->
+<!--  {{this.alertMessage}}-->
+<!--  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="unsetShowAlertMessage()">-->
+<!--    <span aria-hidden="true">&times;</span>-->
+<!--  </button>-->
+<!--</div>-->

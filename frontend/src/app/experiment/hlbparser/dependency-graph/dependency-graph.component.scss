@@ -1,0 +1,33 @@
+.taller{
+    // height: fit-content;
+    // min-height: 600px;
+    border: 1px solid #666;
+    max-height: 1000px;
+}
+
+.node{
+    max-height: 150px;
+}
+
+.padded{
+    padding: 30px;
+}
+
+.bottom-border{
+    border-bottom: 1px dotted #666;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.drag-line {
+    stroke-width: 2px;
+    stroke: #000;
+    stroke-dasharray: 4;
+}
+
+.wait_time_text{
+    font-size: small;
+    font-style: italic;
+    font-family: serif;
+    font-weight: bold;
+}

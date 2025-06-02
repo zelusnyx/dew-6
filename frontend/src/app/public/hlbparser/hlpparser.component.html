@@ -1,0 +1,27 @@
+
+  <mat-tab-group>
+    <mat-tab *ngFor="let x of menuList" label="{{ x.name }}">
+   
+    
+      <div *ngIf="x.id ==1" class="tab">
+        <experiment-info [id]=experimentId></experiment-info>
+      </div>
+      <div *ngIf="x.id ==2" class="tab">
+        <hlb></hlb>
+      </div>
+
+      <div *ngIf="x.id ==3" class="tab">
+        <nlp></nlp>
+      </div>
+
+      <div *ngIf="x.id ==4" class="tab">
+        <dependency-graph></dependency-graph>
+      </div> 
+
+      <!-- <div *ngIf="x.id ==5" class="tab">
+        <upload></upload>
+      </div>  -->
+      
+    </mat-tab>
+  </mat-tab-group> 
+

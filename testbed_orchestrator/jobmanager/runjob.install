@@ -1,0 +1,16 @@
+sudo apt-get install sqlite3 -y
+sudo touch /tmp/dew.db
+sudo touch /tmp/runjob.out
+sudo touch /tmp/runjob.log
+sudo sqlite3 /tmp/dew.db < /share/shared/dew/createtable.sql
+user=`whoami`
+sudo chown $user /tmp/dew.db /tmp/runjob.log /tmp/runjob.out
+sudo cp /share/shared/dew/runjob.service /etc/systemd/user
+#sudo cp /share/shared/dew/runjob.service /etc/systemd/system
+#sudo systemctl daemon-reload
+user=`whoami`
+loginctl enable-linger $user
+echo "Linger enabled for $user" > /tmp/linger
+systemctl --user daemon-reload
+systemctl enable --user runjob
+systemctl start --user runjob

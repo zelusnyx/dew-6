@@ -1,0 +1,14 @@
+[Scenario]
+Server startServer emit serverStarted
+when serverStarted Client startAttack
+
+[Bindings]
+startServer nginx -s start
+serverStarted touch tmp/ss1.txt
+startAttack ping Server
+
+[Constraints]
+num Client 1000
+num Server 1
+os Server ubuntu
+os Client ubuntu

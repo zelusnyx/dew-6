@@ -1,0 +1,44 @@
+<div mat-dialog-content>
+  <div class="row" style="margin: .5em;" >
+    <div class="col-md-12" style="padding: 0;">
+
+      <mat-form-field class="col-md-12" appearance="outline">
+        <mat-label>Name of actor</mat-label>
+        <input type="string"
+        placeholder="default"
+        aria-label="actorLabel"
+        matInput
+        [(ngModel)]="newLabel"
+        >
+      </mat-form-field>
+
+      <mat-form-field class="col-md-12" appearance="outline">
+        <mat-label>Number of instances</mat-label>
+        <input type="number"
+        placeholder="1"
+        aria-label="numConstraint"
+        matInput
+        [(ngModel)]="actor.data.num"
+        >
+      </mat-form-field>
+
+      <mat-form-field class="col-md-12" appearance="outline">
+        <mat-label>OS of actor</mat-label>
+        <input type="string"
+        placeholder="default"
+        aria-label="osConstraint"
+        matInput
+        [(ngModel)]="actor.data.os"
+        >
+      </mat-form-field>
+
+
+
+    </div>
+  </div> 
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="updateActorConstraints()" cdkFocusInitial>Update</button>
+</div>  

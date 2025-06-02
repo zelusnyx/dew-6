@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="canonical" href="https://dew.isi.edu/docs/experiment_page/">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Experiment Page - Distributed Experiment Workflows</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../css/style.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Experiment Page";
+    var mkdocs_page_input_path = "experiment_page.md";
+    var mkdocs_page_url = "/docs/experiment_page/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Distributed Experiment Workflows</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">UI</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../first_time/">First time setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dashboard/">Dashboard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../profile_page/">Profile Page</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Experiment Page</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#general-layout-of-the-page">General Layout of the Page</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#navigating-the-page">Navigating the Page</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials">Tutorials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#experiment-name">Experiment Name</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#menu-bar">Menu Bar</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#back-button">Back button</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#file-menu">File menu</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#save">Save</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#save-to-google-drive">Save to Google Drive</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#delete">Delete</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#version-history">Version history</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#share-to-user">Share to User</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#list-of-users">List of users</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#close">Close</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#save_1">Save</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#input">Input</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#upload">Upload</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#export">Export</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ns-file">NS file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#bash-file">BASH file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#dew">DEW</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#graph-views-and-manipulation">Graph Views and Manipulation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#network-topology-graph">Network Topology Graph</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#graph-creation-and-manipulation">Graph Creation and Manipulation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dependency-graph">Dependency Graph</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#graph-creation-and-manipulation_1">Graph Creation and Manipulation</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#behavior-constraints-and-bindings">Behavior, Constraints, and Bindings</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#behavior">Behavior</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#constraints">Constraints</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bindings">Bindings</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../run_deterlab_experiment/">Deterlab Page</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">DEW concepts</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../basics/">Basics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sharing_and_collaboration/">Sharing and Collaboration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../backup_and_recovery/">Backup and recovery</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../running_on_deter/">From DEW to testbed</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../manual_capture/">From testbed to DEW</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../binding_suggestions/">Built-in Functions</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contact_us/">Contact us</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../redirect-to-dew.html">Go back to DEW</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Distributed Experiment Workflows</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>UI &raquo;</li>
+        
+      
+    
+    <li>Experiment Page</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="experiment-page">Experiment page</h1>
+<!-- //TODO: Change this portion - 1-->
+<h2 id="general-layout-of-the-page">General Layout of the Page</h2>
+<p><img alt="Experiment page layout" src="../img/experiment_page_layout.png" /></p>
+<p>The experiment page is divided into 2 sections:</p>
+<ul>
+<li>Experiment Definition Section</li>
+<li>Visual Representation Section</li>
+</ul>
+<p>The <strong>Experiment Definition Section</strong> is comprised of 3 sub-sections:</p>
+<ul>
+<li>Scenario</li>
+<li>Constraint</li>
+<li>Bindings</li>
+</ul>
+<p>The <strong>Scenario</strong> section is used to define the actions and triggers of the experiment.</p>
+<p>The <strong>Constraint</strong> section is used to define the topology structure of the experiment.</p>
+<p>The <strong>Bindings</strong> section is used to bind the actions defined in the scenario to <em>actual computer commands</em>.</p>
+<p>The <strong>Visual Representation Section</strong> depicts two kinds of graphs:</p>
+<ul>
+<li>The Network Topology</li>
+<li>The Dependency Graph</li>
+</ul>
+<p>The <strong>Network Topology</strong> is used to depict the nodes of the nodes, and the connections that exist between them.</p>
+<p>The <strong>Dependency Graph</strong> is used to depict the actions of the experiment, and the dependencies that exist between these actions.</p>
+<p>A few general views of the page and its various components are shown below.</p>
+<p><img alt="Experiment page unopened" src="../img/experiment_page_untoggled_annotated.png" /></p>
+<p><img alt="Experiment page opened" src="../img/experiment_page_toggled_annotated.png" /></p>
+<!-- ![Experiment page topology options](./img/experiment_page_topology_options_annotated.png) -->
+
+<h2 id="navigating-the-page">Navigating the Page</h2>
+<ul>
+<li>The initial page that opens once you create/open an experiment depicts the network topology of the experiment.</li>
+<li>You can click on the <code>Graph Selector</code> to toggle between the <strong>topology network</strong> and the <strong>dependency graph</strong> views.</li>
+<li>You can click on the <code>Experiment Definition Section Toggle</code> to toggle the <strong>Experiment Definition Section</strong> view.</li>
+</ul>
+<!-- * Clicking on any of the nodes in the network topology view opens up a `Topology Node/Link Parameter Definition` popup menu, where you can define certain parameter values of the node/link. -->
+
+<h2 id="tutorials">Tutorials</h2>
+<p>View video tutorials on using the experiment page below: <br><br></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JNOLuf4gwUc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5q8fAJtRyUA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><br></p>
+<!-- Upto here - 1-->
+
+<h2 id="experiment-name">Experiment Name</h2>
+<ul>
+<li>The name of the experiment is displayed on the top left corner of the page.</li>
+<li>To edit the name, click on the name and update the text. (just like Google docs)</li>
+<li>The name can be a maximum of 101 characters. The number of characters remaining is shown to the right of the name. <br><br> <!---->
+<img alt="Experiment name" src="../img/experiment_page_experiment_name.png" /></li>
+</ul>
+<h2 id="menu-bar">Menu Bar</h2>
+<ul>
+<li>The menu bar is colored green when the experiment does not contain any unsaved changes.
+<img alt="Saved menu" src="../img/experiment_page_saved_menu.png" /> </li>
+<li>It is colored grey if the experiment contains unsaved changes. The status is also shown next to the access level to the right.
+<img alt="Saved menu" src="../img/experiment_page_unsaved_menu.png" /></li>
+<li>
+<p>Your level of access with the experiment is displayed towards the extreme right.
+  <br><br>
+    The various buttons and their functions are as follows:</p>
+<h3 id="back-button">Back button</h3>
+<ul>
+<li>Click on the back button to go to the dashboard. Alternatively, you can use the back button in the browser.
+<!-- //TODO: Change this portion - 2-->
+<br><br></li>
+</ul>
+<h3 id="file-menu">File menu</h3>
+<p><img alt="File for existing experiment" src="../img/experiment_page_file_menu_existing.png" /></p>
+<ul>
+<li>
+<p>This menu contains a number of file related operations. They are:</p>
+<h4 id="save">Save</h4>
+<ul>
+<li>Clicking on save will save the current experiment to the database.
+<br><br></li>
+</ul>
+<h4 id="save-to-google-drive">Save to Google Drive</h4>
+<ul>
+<li>This button allows you to save the experiment to Google Drive. The experiment is saved in the DEW format.</li>
+<li>The user will have a top level directory called “Distributed Experiment Workflows” in their Google Drive. </li>
+<li>Inside the top level directory, we have folders created for each experiment.</li>
+<li>Files relevant to the experiment will be contained in the respective experiment folders.</li>
+<li>For example, if we have an experiment named "test", the DEW file will be located at <code>MyDrive &gt; Distributed Experiment Workflows &gt; test &gt; test.dew</code>.
+<br><br></li>
+</ul>
+<h4 id="delete">Delete</h4>
+<ul>
+<li>Deletes the experiment in the DEW portal. This is a <strong>non-recoverable</strong> action. But, the experiment will still remain on your Google Drive, if you have saved it there.
+<br><br></li>
+</ul>
+<h4 id="version-history">Version history</h4>
+<ul>
+<li>View the changes made previously to the experiment. </li>
+<li>To revert to a particular version, click on the revert button. <br><br>
+<img alt="Version history" src="../img/experiment_page_version_history.png" />
+<br><br></li>
+</ul>
+<h4 id="share-to-user">Share to User</h4>
+<ul>
+<li>Share the experiment with another DEW user for access. To learn more about sharing and access levels, visit the <a href="./sharing_and_collaboration/">Sharing and Collaboration page</a>
+<img alt="Share to user" src="../img/experiment_page_share_user.png" />
+<br><br></li>
+</ul>
+<h4 id="list-of-users">List of users</h4>
+<ul>
+<li>View and manage the list of users who can access the experiment. To learn more about sharing and access levels, visit <a href="./sharing_and_collaboration/">Sharing and Collaboration page</a>.
+<br><br>
+<img alt="List of users" src="../img/experiment_page_list_users.png" />
+<br><br></li>
+</ul>
+<h4 id="close">Close</h4>
+<ul>
+<li>Close the experiment and go back to the dashboard.
+<!--Upto here -2-->
+    <br><br>
+    <!--TODO: Indent this part--></li>
+</ul>
+</li>
+</ul>
+<p><em>Note: If the user has not saved the file, the file menu would have a restricted set of options as shown below.</em>
+<br><br>
+<img alt="File menu for new experiment" src="../img/experiment_page_file_menu_new.png" />
+    <br><br>   </p>
+<h4 id="save_1"><em>Save</em></h4>
+<ul>
+<li><em>This menu option is used to save the experiment to the database. Other file operations cannot be performed until the user has saved the experiment.</em>
+<br><br></li>
+</ul>
+<h3 id="input">Input</h3>
+<p>This menu option allows the user to upload an experiment saved locally in the DEW format or as a bash script. We hope to support more experiment formats in the near future.
+<br><br>
+<img alt="Input menu" src="../img/experiment_page_input_menu.png" />
+<br><br> <!--TODO: Add indentation here - 3--></p>
+<h4 id="upload">Upload</h4>
+<p>Upload DEW files to load the experiment. For example, the DEW file saved in Google Drive can be used for upload.</p>
+<p><img alt="Upload dialog" src="../img/experiment_page_upload_dialog.png" />
+<!--Upto here - 3-->
+<br><br></p>
+<h3 id="export">Export</h3>
+<p>This menu is used to export the experiment to different formats</p>
+<p><img alt="Export menu" src="../img/experiment_page_export_menu.png" /></p>
+<p><!--TODO: See what this line does: <img alt="Export popup" src="./img/experiment_page_export_popup.png" /> -->
+<!--TODO: Add indentation - 4--></p>
+<h4 id="ns-file">NS file</h4>
+<ul>
+<li>Download the NS file for the current experiment
+<br><br></li>
+</ul>
+<h4 id="bash-file">BASH file</h4>
+<ul>
+<li>Download the Bash script or scripts for the experiment. Currently the scripts should be run on Deterlab, from the users machine. Running the script without arguments will display a help message to tell you which input parameters you need to specify.
+<br><br></li>
+</ul>
+<h4 id="dew">DEW</h4>
+<ul>
+<li>Download the DEW file of the current experiment.
+<!--Upto here - 4--></li>
+</ul>
+</li>
+</ul>
+<h2 id="graph-views-and-manipulation">Graph Views and Manipulation</h2>
+<p>As mentioned previously in the document, the <em>Visual Representation Section</em> comprises of the <strong>Network Topology Graph</strong> and the <strong>Dependency Graph</strong>. The steps to create and manipulate the graphs are shown below:</p>
+<ul>
+<li>
+<h3 id="network-topology-graph">Network Topology Graph</h3>
+<p>The Network Topology Graph depicts the experiment nodes and the connections that exist between these nodes. </p>
+<ul>
+<li>
+<h4 id="graph-creation-and-manipulation">Graph Creation and Manipulation</h4>
+<ul>
+<li>Switch to the <code>Network Topology Network View</code> by clicking on the <strong>Topology Button</strong> in the <em>Graph Selector</em> bar.</li>
+<li>You can add nodes to the network by clicking on the <code>Add Node</code> button on the bottom portion of the screen. Nodes are represented as <em>server icons</em> in the graph.</li>
+<li>You can add a LAN to the network by clicking on the <code>Add LAN</code> button on the bottom portion of the screen. LANS are represented as black dots in the graph.</li>
+<li>You can add links between the nodes by clicking and holding <code>Ctrl + Left Mouse Button</code> between the 2 nodes that need to be linked. Links are represented as black lines in the graph.</li>
+<li>The <code>Action Number</code> towards the side of the node icon denotes the <em>action sequence numbers</em> of the actions associated with the actors (nodes).</li>
+<li>The network topology components and their symbols are shown below.
+<img alt="Network Topology Icons" src="../img/network_topology_sample_annotated.png" /></li>
+<li>You can define the parameters of a network node such as the <strong>Operating System</strong>, <strong>IP Address/Location</strong>, <strong>Number of Nodes</strong>, and <strong>Hardware Type</strong> by clicking on a node and modifying the fields in the popup that displays on the top-right portion of the screen.</li>
+<li>You can also define the parameters of a link/LAN such as the <strong>Bandwidth</strong> and <strong>Delay</strong> by clicking on the link/LAN and modifying the fields in the popup that displays on the top-right portion of the screen.</li>
+<li>The Topology Node/Link Parameter Definition popup is shown below.<br><br>
+<img alt="Experiment page topology options" src="../img/experiment_page_topology_options_annotated.png" /><br><br></li>
+<li>Any changes made to the network topology graph also reflects in the scenario and constraints in the <em>Experiment Definition Section</em> of the page.
+<br><br></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="dependency-graph">Dependency Graph</h3>
+<p>In order to understand the experiment better, we have a graph view which displays the experiment as a flowchart of actions. The nodes denote actions, with the color of the node denoting the actor that performs the given action. Edges denote a dependency, where one action results in an event and a following action waits for that event. You can create new edges (dependencies) between nodes, or delete existing edges (dependencies). As you modify the dependency graph, the modifications are propagated to the Experiment view.
+The Dependency Graph depicts the actions of the experiment, and the dependencies that exist between the actions.</p>
+<ul>
+<li>
+<h4 id="graph-creation-and-manipulation_1">Graph Creation and Manipulation</h4>
+<ul>
+<li>Switch to the <code>Dependency Graph View</code> by clicking on the <strong>Dependency Button</strong> in the <em>Graph Selector</em> bar.</li>
+<li>You can add actions to the dependency graph by clicking on the <code>Add Action</code> button in the bottom portion of the screen. This will open up the <strong>Add Action Popup</strong>.</li>
+<li><em>Note that you can access the same <strong>Add Action Popup</strong> when you click on the <code>Add Action</code> button in the <strong>Topology Node/Link Parameter Definition</strong> popup that shows up when you click on a node in the network topology graph.</em></li>
+<li>Using the <em>Add Action Popup</em>, you can create an action by assigning an <strong>action name</strong>, <strong>trigger event</strong>, <strong>emit event</strong>, <strong>wait time</strong>, <strong>action binding</strong>, and <strong>event binding</strong>; and then clicking on the <code>Add Action</code> button.</li>
+<li>You can also <strong>edit an action</strong> by clicking on the <code>Edit Action</code> button that shows up in the bottom portion of the screen when you click on the respective action.</li>
+<li>The <em>Add Action Popup</em> is shown in the image below.<br><br>
+<img alt="Dependency Add Action" src="../img/dependency_add_action.png" /><br><br></li>
+<li>The <code>Action Number</code> towards the side of the action icon denotes the <em>action sequence numbers</em> of the actions associated with the actors (nodes in the graph legend).</li>
+<li>Any changes made to the dependency graph also reflects in the scenario and bindings in the <em>Experiment Definition Section</em> of the page.</li>
+<li>The dependency graph components and their symbols are shown below.<br><br>
+<img alt="Dependency Graph Sample" src="../img/dependency_graph_sample.png" /><br><br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ## Dependency graph
+
+
+* In order to understand the experiment better, we have a graph view which displays the experiment as a flowchart of actions. The nodes denote actions, with the color of the node denoting the actor that performs the given action. Edges denote a dependency, where one action results in an event and a following action waits for that event. You can create new edges (dependencies) between nodes or delete existing edges (dependencies). As you modify the dependency graph the modifications are propagated to the Experiment view. 
+* The graph viewer also supports editing edges.
+* To access the graph, click on the **Dependency graph** option in the menu bar.
+* To go back to the experiment, click on the **Experiment** option in the menu bar.
+
+![Dependency graph page](./img/dependency_graph_page.png)
+
+
+### Editing edges
+* To add an edge, toggle the switch, click on the source (hold the button and do not release) and drag the arrow till the destination.
+
+![Add edge](./img/dependency_graph_add_edge.png)
+
+* To delete an edge, click on the red box next to the edge. Please note that the mouse icon changes when a node or edge is clickable.
+
+![Delete edge](./img/dependency_graph_remove_edge.png)
+
+### Zoom and scroll
+* To zoom in or zoom out, use the (+) and (-) buttons to increase or decrease the zoom level
+* Please use the panning functionality instead of scrolling. (Click on the white area and drag in the desired direction) -->
+
+<h2 id="behavior-constraints-and-bindings">Behavior, Constraints, and Bindings</h2>
+<ul>
+<li>In DEW, an experiment consists of a scenario (who does what and when), constraints (how experiment should be materialized on a testbed) and bindings (specific commands to run on nodes for each action). </li>
+</ul>
+<h3 id="behavior">Behavior</h3>
+<ul>
+<li>Behavior defines the actions to be executed by actors during the experiment. You can think of an actor as a node in an experiment, or as many nodes that perform the same set of actions. You can think of an action as one or more commands executed on a node in an experiment. An action can result in an event (we say that it emits an event) and a later action will occur only when that event is generated. For example you may want to install an Apache application on the “server” node, and then generate traffic to it from a “client” node when the installation is completed. Two actions that are not connected by emit-when rules occur independently and in parallel. Please explore our <a href="/examples">examples</a> to get familiar with some common uses of DEW language.</li>
+<li>Behavior statements are in the form of</li>
+</ul>
+<pre><code>[when &lt;event&gt;][wait &lt;time&gt;] actor action [emit &lt;event&gt;]
+</code></pre>
+<ul>
+<li>For example, if you want to express the following behavior <strong>"A pings B, after that B waits 5 sec and pings A"</strong> you would write:</li>
+</ul>
+<pre><code>A start_ping1 emit ping1_done
+when ping1_done wait 5 B start_ping2
+</code></pre>
+<p>Conversely if you wanted <strong>A and B to ping each other in parallel</strong> you would write:</p>
+<pre><code>A start_ping1
+B start_ping2
+</code></pre>
+<p>Names of actors will eventually correspond to names of nodes in your experiments. Names of actions are chosen by you. You will get to define what they mean in the bindings section.</p>
+<ul>
+<li>As you start typing there will be auto-suggestion displayed near the top of the text area.</li>
+<li>Press tab to use the first auto suggested word. It will append the word near the cursor in the textarea.</li>
+<li>There will also be suggestion displayed along with suggested text. This will help you to write the next word or phrase. </li>
+</ul>
+<h3 id="constraints">Constraints</h3>
+<ul>
+<li>The constraints section helps define any constraints about the topology of the experiment, as it will be materialized on a testbed.</li>
+<li>The statements are in the form of</li>
+</ul>
+<pre><code>constraint_type actor1 [actor2|value]
+</code></pre>
+<ul>
+<li>The allowed constraint types are<ul>
+<li>os</li>
+<li>num</li>
+<li>link</li>
+<li>lan</li>
+<li>interfaces</li>
+<li>location</li>
+<li>nodetype</li>
+</ul>
+</li>
+<li>For example:</li>
+</ul>
+<pre><code>os server ubuntu
+num attacker 3
+lan client attacker
+link router server 
+</code></pre>
+<ul>
+<li>As you start typing there will be auto-suggestion displayed near the top of the text area.</li>
+<li>Press tab to use the first auto suggested word. It will append the word near the cursor in the textarea.</li>
+<li>There will also be suggestion displayed along with suggested text. This will help you to write the next word or phrase. </li>
+</ul>
+<h3 id="bindings">Bindings</h3>
+<ul>
+<li>The bindings section defines the commands to be executed on testbed nodes for the given action or event in your experiment.</li>
+<li>Choose an option from drop-down boxes or input your own commands. Variables are preceded by <code>$</code> to indicate that their values should be replaced by constants in the design stage, or specified by user at run-time on the command line.</li>
+<li>For example:</li>
+</ul>
+<pre><code>install_iperf apt-get install iperf -y
+run_tcpdump tcpdump -i expIP -w $file
+install_flooder /scripts/common/install_flooder.sh
+start_server iperf -s 
+</code></pre>
+<ul>
+<li>As you start typing behavior above this area will be populated with the terms which require definition for the experiment to execute. </li>
+</ul>
+<p>We have provided some suggestions for action and event bindings. Please look at the <a href="/binding_suggestions">binding suggestions</a> page for more information.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../run_deterlab_experiment/" class="btn btn-neutral float-right" title="Deterlab Page">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../profile_page/" class="btn btn-neutral" title="Profile Page"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../profile_page/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../run_deterlab_experiment/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

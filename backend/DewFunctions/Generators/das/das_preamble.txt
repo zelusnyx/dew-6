@@ -1,0 +1,38 @@
+
+id=$label
+cnt=0
+path=`pwd`
+
+execute_fork()
+{
+    local node=$1
+    local cmd=$2
+    local cnt=$3
+    local aname=$4
+    local wait=$5	
+
+    if [ $wait -gt 0 ] ; then
+        echo "sleep $wait" >  $path/DEW/$id/script.$cnt.$aname.$node.sh
+    fi   
+
+    echo "date +\"%s\" > $path/DEW/$id/time.$cnt " >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "$cmd 2>$path/DEW/$id/error.$cnt 1>$path/DEW/$id/output.$cnt &" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "pid=\"\$!\""  >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "echo \$pid > $path/DEW/$id/pid.$cnt" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "if wait \$pid; then" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "    echo 0 > $path/DEW/$id/status.$cnt" >> $path/DEW/$id/script.$cnt.$aname.$node.sh	    
+    echo "else" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+    echo "    echo 1 > $path/DEW/$id/status.$cnt" >> $path/DEW/$id/script.$cnt.$aname.$node.sh	    
+    echo "fi" >> $path/DEW/$id/script.$cnt.$aname.$node.sh
+}
+
+
+if [ ! -d $path/DEW ] ; then
+   mkdir $path/DEW
+fi
+
+if [ ! -d $path/DEW/$id ] ; then
+   mkdir $path/DEW/$id
+fi
+
+rm -f $path/DEW/$id/*

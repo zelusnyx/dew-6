@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+       <title>New UI for Experiment Design</title>
+       <link rel="stylesheet" media="screen" href="/static/bootstrap.min.css">
+       <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+  <h2>Try out the New UI for Experiment Design.</h2>
+  <p>
+    Earlier, you wrote and NS file and scripting for a simple set up. 
+  </p>  
+  <p>
+    In this next step, we would like you to take up to 20 minutes to create
+    this experiment set up using the new UI you downloaded.
+  </p>
+  <p>
+  For your reference, you can click below to open the UI help and hints
+  information you were show earlier.
+  <a href="/UIHelp"  target='_blank'>UI Help Info</a>
+  </p>
+
+  <p>
+  Please use the UI to create the simple set up. When the topology and
+  behavior is to your liking, hit the save button in the UI. This will
+  create an NS File, a file listing your HLB and NLP input and a bash script
+  based on your input. 
+  </p>
+  <p>
+  Please up load these files when you are ready.
+  </p>
+  {% block content %} 	 
+      {% include 'experiment.html' %}
+  {% endblock %}
+  
+  <p> The `Download and Continue' button will start a ZIP file download
+  which contains three ways to run the UI. There is a Mac and a Windows
+  binary as well as the python (3.x) source. 
+  </p>
+  <p>
+  Please download, unzip and start the prototype UI.
+  </p>
+  <form  action="" method="post" enctype="multipart/form-data">
+    {{ form.csrf }}
+    {{ form.csrf_token }}
+    <div class="form-group">
+    <table>
+    <tr><td>{{ form.nsfile.label }} </td><td> {{ form.nsfile() }} </td></tr>
+    <tr><td>{{ form.inputSummary.label }} </td><td> {{ form.inputSummary() }} </td></tr>
+    </table>
+    <button type="submit" class="btn btn-success">Continue</button>
+    </div>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>

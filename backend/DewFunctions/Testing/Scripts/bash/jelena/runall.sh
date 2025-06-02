@@ -1,0 +1,8 @@
+ssh node-0.large.senss "cd senss; nohup perl random.pl nosig 1 5 > random.nosig.correct.0 &"
+ssh node-1.large.senss "cd senss; nohup perl random.pl nosig 10 5 > random.nosig.correct.1 &"
+ssh node-2.large.senss "cd senss; nohup perl random.pl nosig 100 5 > random.nosig.correct.2 &"
+ssh node-3.large.senss "cd senss; nohup perl random.pl nosig 1000 5 > random.nosig.correct.3 &"
+ssh node-4.large.senss "cd senss; nohup perl top.pl nosig 1 5 > top.nosig.correct.0 &"
+ssh node-5.large.senss "cd senss; nohup perl top.pl nosig 10 5 > top.nosig.correct.1 &"
+ssh node-6.large.senss "cd senss; nohup perl top.pl nosig 100 5 > top.nosig.correct.2 &"
+ssh node-7.large.senss "cd senss; nohup perl top.pl nosig 1000 5 > top.nosig.correct.3 &"

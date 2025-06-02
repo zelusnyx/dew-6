@@ -1,0 +1,7 @@
+When contributing orchestration scripts 
+create a new folder with contributor's name or handle.
+If the whole experiment is contributed then deposit it in 
+WholeExperiments folder, in the separate folder.
+In both cases note the contributor's name and email in contributor.txt
+file. If there are any orchestration scripts in the bundle
+copy them to the appropriate script folder.

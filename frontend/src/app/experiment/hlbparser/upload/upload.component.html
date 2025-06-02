@@ -1,0 +1,50 @@
+
+
+    <div class="row">
+      <div class="col-md-12" >
+  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept=".dew">
+      <ng-template accept="ns" multiple="false" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+        <div > Drag & drop a file. or Click on 
+        <span (click)="openFileSelector()" style="cursor: pointer;"><u>Browse Files</u></span> to upload.
+            (accepts <b>.dew</b> files only)
+        </div>
+      
+      </ng-template>
+  </ngx-file-drop>
+</div>
+</div>
+<br>
+<!-- <div class="row" >
+  <div class="col-md-12">
+    <table class="table">
+      <thead class="upload-name">
+          <tr >
+            <th style="min-width:150px">Sr.</th>
+              <th style="min-width:150px">Name</th>
+              <th style="min-width:150px"></th>
+          </tr>
+      </thead>
+      <tbody class="upload-name"  *ngIf="files.length!=0">
+          <tr *ngFor="let item of files; let i=index" >
+            <td>{{i+1}}</td>
+              <td><strong>{{ item.relativePath }}</strong></td>
+              <td>
+                <i class="fas fa-eye pointer" (click)="preview(item)"></i>
+                <i class="fas fa-upload pointer" (click)="upload(item)"></i>
+                <i class="far fa-trash-alt pointer" (click)="delete(i)"></i></td>
+
+          </tr>
+      </tbody>
+      <tbody class="upload-name"  *ngIf="files.length==0">
+        <tr >
+          <td colspan="3" ><span ><i>No file found.</i> </span></td>
+            
+
+        </tr>
+    </tbody>
+ 
+  </table>
+    </div>
+</div> -->
+

@@ -1,0 +1,15 @@
+[Scenario]
+A runping1 emit Adone 
+when Adone B runping2
+ 
+[Bindings]
+runping1 ping B -c 1
+runping2 ping C -c 1 
+Adone STATUS(runping1,0)
+ 
+[Constraints]
+num A 1
+num B 1
+num C 1
+link A B
+link B C

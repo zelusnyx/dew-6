@@ -1,0 +1,433 @@
+{
+  "nodes": [
+    {
+      "id": "273c3dd7-cfc6-4ff7-b4d8-533a1b9c96f5",
+      "endpoints": [
+        {
+          "id": "257c0d13-2cae-4202-b807-3c5896f6323a",
+          "props": {
+            "latency": {
+              "value__": 10000000.0,
+              "constraint__": "="
+            },
+            "bandwidth": {
+              "value__": 1000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "lte",
+              "constraint__": "="
+            }
+          }
+        }
+      ],
+      "props": {
+        "name": "droid",
+        "image": {
+          "value__": [
+            {
+              "value__": "android-o",
+              "constraint__": "[]"
+            },
+            {
+              "value__": "android-n",
+              "constraint__": "[]"
+            },
+            {
+              "value__": "android-m",
+              "constraint__": "[]"
+            }
+          ],
+          "constraint__": "?"
+        }
+      }
+    },
+    {
+      "id": "75880215-d187-4312-9ee0-e6fb7f5da7ed",
+      "endpoints": [
+        {
+          "id": "2b9e89bb-4af1-4260-a382-a8edce8eba89",
+          "props": {
+            "latency": {
+              "value__": 10000000.0,
+              "constraint__": "="
+            },
+            "bandwidth": {
+              "value__": 1000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "lte",
+              "constraint__": "="
+            }
+          }
+        },
+        {
+          "id": "5544a443-094f-4a05-8626-496ebe8fc188",
+          "props": {
+            "bandwidth": {
+              "value__": 3000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        },
+        {
+          "id": "a77c0df2-9f2c-4aed-8062-93ed7d50686c",
+          "props": {
+            "bandwidth": {
+              "value__": 10000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        }
+      ],
+      "props": {
+        "config": {
+          "ansible": "tower.yml"
+        },
+        "name": "tower",
+        "image": {
+          "value__": "lte-linux-2.2",
+          "constraint__": "[]"
+        }
+      }
+    },
+    {
+      "id": "1318b791-aec2-41b4-968a-bce6828b5eb3",
+      "endpoints": [
+        {
+          "id": "4fdbfd21-bd98-42f9-8b31-63ec582ce979",
+          "props": {
+            "loss": {
+              "value__": 0.25,
+              "constraint__": "="
+            },
+            "bandwidth": {
+              "value__": 100000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "zigbee",
+              "constraint__": "="
+            }
+          }
+        }
+      ],
+      "props": {
+        "name": "breaker",
+        "image": {
+          "value__": "riot",
+          "constraint__": "[]"
+        }
+      }
+    },
+    {
+      "id": "d1e0aaf5-26ae-47bc-a7e9-b045044eae63",
+      "endpoints": [
+        {
+          "id": "929d9d9c-3504-4af6-8cc8-143c25ca27fd",
+          "props": {
+            "loss": {
+              "value__": 0.25,
+              "constraint__": "="
+            },
+            "bandwidth": {
+              "value__": 100000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "zigbee",
+              "constraint__": "="
+            }
+          }
+        },
+        {
+          "id": "95bd7ec5-b92e-4708-a5d0-60dfe618b476",
+          "props": {
+            "bandwidth": {
+              "value__": 3000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        },
+        {
+          "id": "1e3a2e27-4cb0-456b-99e6-a2e5af65175f",
+          "props": {
+            "bandwidth": {
+              "value__": 2000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        }
+      ],
+      "props": {
+        "name": "xbeehub",
+        "image": {
+          "value__": "debian-9",
+          "constraint__": "[]"
+        }
+      }
+    },
+    {
+      "id": "a823d08d-f9d3-4419-b760-96772ab5f97e",
+      "endpoints": [
+        {
+          "id": "112df75c-1a71-43b1-9b9c-4134c2849982",
+          "props": {
+            "bandwidth": {
+              "value__": 10000000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        }
+      ],
+      "props": {
+        "config": {
+          "ansible": "router.yml"
+        },
+        "name": "server",
+        "image": {
+          "value__": "debian-9",
+          "constraint__": "[]"
+        },
+        "cpu": {
+          "cores": {
+            "value__": 8,
+            "constraint__": ">="
+          }
+        }
+      }
+    },
+    {
+      "id": "b58ca45c-293a-4023-85b6-19c8d2cb5eb5",
+      "endpoints": [
+        {
+          "id": "8d4a5bce-bc33-4315-92b5-e70ed44bbbf7",
+          "props": {
+            "bandwidth": {
+              "value__": 10000000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        },
+        {
+          "id": "a1deb224-ade6-4338-8c36-b09223b22cde",
+          "props": {
+            "bandwidth": {
+              "value__": 2000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        },
+        {
+          "id": "e8797470-c9fb-4d3e-a1be-412ccad67f61",
+          "props": {
+            "bandwidth": {
+              "value__": 10000000.0,
+              "constraint__": "="
+            },
+            "stack": {
+              "value__": "ip",
+              "constraint__": "="
+            }
+          }
+        }
+      ],
+      "props": {
+        "config": {
+          "ansible": "router.yml"
+        },
+        "name": "router",
+        "image": {
+          "value__": "cumulus-3",
+          "constraint__": "[]"
+        },
+        "cpu": {
+          "cores": {
+            "value__": 4,
+            "constraint__": ">="
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "b2352ab1-7470-4523-8f66-b747a1516556",
+      "endpoints": [
+        {
+          "id": "257c0d13-2cae-4202-b807-3c5896f6323a",
+          "props": {}
+        },
+        {
+          "id": "2b9e89bb-4af1-4260-a382-a8edce8eba89",
+          "props": {}
+        }
+      ],
+      "props": {
+        "latency": {
+          "value__": 10000000.0,
+          "constraint__": "="
+        },
+        "bandwidth": {
+          "value__": 1000000.0,
+          "constraint__": "="
+        },
+        "stack": {
+          "value__": "lte",
+          "constraint__": "="
+        }
+      }
+    },
+    {
+      "id": "100ddb21-afda-49f4-b7f2-914642ebafa5",
+      "endpoints": [
+        {
+          "id": "4fdbfd21-bd98-42f9-8b31-63ec582ce979",
+          "props": {}
+        },
+        {
+          "id": "929d9d9c-3504-4af6-8cc8-143c25ca27fd",
+          "props": {}
+        }
+      ],
+      "props": {
+        "loss": {
+          "value__": 0.25,
+          "constraint__": "="
+        },
+        "bandwidth": {
+          "value__": 100000.0,
+          "constraint__": "="
+        },
+        "stack": {
+          "value__": "zigbee",
+          "constraint__": "="
+        }
+      }
+    },
+    {
+      "id": "81a431e3-c215-4a7f-8921-b963fffd44e9",
+      "endpoints": [
+        {
+          "id": "112df75c-1a71-43b1-9b9c-4134c2849982",
+          "props": {}
+        },
+        {
+          "id": "8d4a5bce-bc33-4315-92b5-e70ed44bbbf7",
+          "props": {}
+        }
+      ],
+      "props": {
+        "bandwidth": {
+          "value__": 10000000000.0,
+          "constraint__": "="
+        },
+        "stack": {
+          "value__": "ip",
+          "constraint__": "="
+        }
+      }
+    },
+    {
+      "id": "539b1051-b096-4566-8b05-697abe96a3aa",
+      "endpoints": [
+        {
+          "id": "5544a443-094f-4a05-8626-496ebe8fc188",
+          "props": {}
+        },
+        {
+          "id": "95bd7ec5-b92e-4708-a5d0-60dfe618b476",
+          "props": {}
+        }
+      ],
+      "props": {
+        "bandwidth": {
+          "value__": 3000000.0,
+          "constraint__": "="
+        },
+        "stack": {
+          "value__": "ip",
+          "constraint__": "="
+        }
+      }
+    },
+    {
+      "id": "7853dffa-a9a0-4957-8cce-c4711638bb23",
+      "endpoints": [
+        {
+          "id": "1e3a2e27-4cb0-456b-99e6-a2e5af65175f",
+          "props": {}
+        },
+        {
+          "id": "a1deb224-ade6-4338-8c36-b09223b22cde",
+          "props": {}
+        }
+      ],
+      "props": {
+        "bandwidth": {
+          "value__": 2000000.0,
+          "constraint__": "="
+        },
+        "stack": {
+          "value__": "ip",
+          "constraint__": "="
+        }
+      }
+    },
+    {
+      "id": "b863891f-549d-4f83-94c7-3ef7f65cf8e9",
+      "endpoints": [
+        {
+          "id": "e8797470-c9fb-4d3e-a1be-412ccad67f61",
+          "props": {}
+        },
+        {
+          "id": "a77c0df2-9f2c-4aed-8062-93ed7d50686c",
+          "props": {}
+        }
+      ],
+      "props": {
+        "bandwidth": {
+          "value__": 10000000.0,
+          "constraint__": "="
+        },
+        "stack": {
+          "value__": "ip",
+          "constraint__": "="
+        }
+      }
+    }
+  ],
+  "id": "97ddecc5-fd13-4d8b-8ecf-c88c97b82ee8",
+  "nets": [],
+  "props": {}
+}

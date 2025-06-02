@@ -1,0 +1,21 @@
+Sivaram Ramanathan <satyaman@usc.edu>
+
+I have created one script which executes the entire installation process. It's easy to navigate through the script, as each function in the script performs one task. I will go through each one the task ranking them based on their difficulty. I have left out some functions which may have dependencies. Please reach out to me if you have any problems. 
+
+Simple setup
+- Setting up databases - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L27
+- Adding entries to databases - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L36
+- Installing dependencies - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L46
+- Starting the SDN controller - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L55
+- Starting OVS - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L67
+
+
+Medium to hard setup
+- Configuring BGP using quagga and zebra https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L431
+
+- Configuring OVS - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L87
+
+- Installing DPDK - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L178
+
+
+Each one of these tasks should be performed in a particular order. Please refer the function on this line for the ordering - https://github.com/sivaramakrishnansr/SENSS/blob/master/Setup/Netronome/setup.py#L235

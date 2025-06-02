@@ -1,0 +1,187 @@
+
+ <div class="row">
+  <div class="col-md-9">
+  
+    
+      <div class="row" style="margin: .5em;">
+          <div class="col-md-12" style="padding: 0;">
+              <mat-card> 
+                 
+                   <div style="text-align: center;">  Behavior</div> 
+                 <hr>
+                 <div class="row">
+                 <div class="col-md-12" (click)="selectTextBox(2)">
+                    <div *ngIf="!onlyReadable()" style="margin: .6em;border-bottom: 1px solid #eee;" [hidden]="!isEnable(2)">
+                        <span>Suggestions:</span>
+                       
+                        <button type="button" class="btn btn-outline-primary word-bubble-button" *ngFor="let word of behaviorWordList | slice:0:3 | textfilter:behaviorTextFilter "  (click)="insertValue(word.value)" [disabled]="word.flag">{{word.value}}</button>
+                        <button type="button" *ngIf="suggestionbehaviorMessage!=null" class="btn btn-outline-primary word-bubble-button" [disabled]="true">{{suggestionbehaviorMessage}}</button>
+                        
+                        
+                     </div>
+                  <div class="flex-container" (blur)="onBlurMethod()" >
+                      
+                        <quill-editor [disabled]="onlyReadable()"
+                       
+                        [styles]="{height: '400px',border:'none'}"
+                        [modules]="{  counter: { container: '#editor1'} ,toolbar: false }"
+                        [(ngModel)]="behaviorText" 
+                        (onContentChanged)="logChangeBehavior($event);"
+                        (onEditorCreated)="created($event,2)"></quill-editor>
+                      </div>
+                       
+                    
+                    </div>
+                    </div>
+                   
+              </mat-card>
+     
+          </div>
+        </div> 
+        <div class="row" style="margin: .5em;">
+            <div class="col-md-12" style="padding: 0;">
+                <mat-card> 
+                  
+                  <div style="text-align: center;">  Constraints</div> 
+                  
+                    <hr>
+                    <div class="row">
+                    <div class="col-md-12" (click)="selectTextBox(3)">
+                      <div *ngIf="!onlyReadable()" style="margin: .6em;border-bottom: 1px solid #eee;" [hidden]="!isEnable(3)">
+                         <span>Suggestions:</span>
+                         <button type="button" class="btn btn-outline-primary word-bubble-button" *ngFor="let word of constraintWordList | slice:0:3 | textfilter:constraintTextFilter"  (click)="insertValueInConstraint(word.value)">{{word.value}}</button>
+                        <button type="button" *ngIf="suggestionConstraintMessage!=null" class="btn btn-outline-primary word-bubble-button" [disabled]="true">{{suggestionConstraintMessage}}</button>
+                             
+                  
+                      </div>
+                        <div class="flex-container">
+                      
+                            <quill-editor 
+                            [disabled]="onlyReadable()"
+                            [styles]="{height: '400px',border:'none'}"
+                            [modules]="{  counter: { container: '#editor1'} ,toolbar: false }"
+                            [(ngModel)]="constraintText" 
+                            (onContentChanged)="logChangeConstraints($event);"
+                            (onEditorCreated)="created($event,3)"></quill-editor>
+                          </div>
+                        </div>
+                        </div>
+                </mat-card>
+            </div>
+          </div>
+           <div class="row" style="margin: .5em;">
+            <div class="col-md-12" style="padding: 0;">
+              <mat-card> 
+                      
+                <div style="text-align: center;">  Bindings</div> 
+                
+                  <hr>
+                  <div *ngIf="bindingList.length==0" style="font-size: .8em;text-align: center;">
+                    <span ><i>No Bindings Needed</i></span>
+                  </div>
+                    <div *ngIf="bindingList.length!=0">
+                  <ul  class="behavior-list " >
+                    <li *ngFor="let item of bindingList;let index=index" ><div>
+                    
+                      <mat-form-field style="width:100%" appearance="outline">
+                        <mat-label>{{item.key+' represents: '}}</mat-label>
+                        <input [disabled]="onlyReadable()" matInput [(ngModel)]="item.value" (change)="storeBinding()">
+                      </mat-form-field>
+        
+                      <span>
+                      </span>
+                     
+                    </div>
+                      </li>
+                </ul>
+                </div>
+        
+                
+              </mat-card> 
+              </div>
+              </div> 
+     
+  
+   
+    </div>
+  <div class="col-md-3" style="margin-top: .5em;">
+  
+    <div class="row" *ngIf="!onlyReadable()">
+      <div class="col-md-12" style="padding: 1em;">
+          
+        <div style="text-align: center;padding: .1em;">     
+           <button mat-stroked-button (click)="addBindings()" >Generate Ns File</button>
+           
+      </div>
+   
+      </div>
+      </div>
+    
+    <div class="row" style="margin-top: .1em;
+    margin-bottom: .1em;">
+      <div class="col-md-12" style="padding: 0;">
+  
+        <mat-card>  
+          <div style="text-align: center;">Actors
+           </div>
+  
+          
+          <hr>
+          <div *ngIf="actorsList.length==0" style="font-size: .8em;text-align: center;">
+            <span ><i>No Actors</i></span>
+          </div>
+            <div *ngIf="actorsList.length!=0" style="  height: auto;
+            display: flow-root;
+            padding: 0;">
+          
+  
+        <div *ngFor="let item of actorsList;let index=index" class="binding-word-bubble" style="  border: 1px solid black;">
+            
+          <span>
+          {{item.text}} </span>
+         
+          </div>
+        </div>
+        </mat-card>
+  
+      </div>
+    </div>
+  
+    <div class="row" style="margin-top: .1em;
+    margin-bottom: .1em;">
+      <div class="col-md-12" style="padding: 0;">
+  
+        <mat-card>  
+          <div style="text-align: center;">Bindings Needed
+  
+          
+           </div>
+  
+          
+          <hr>
+          <div *ngIf="bindingList.length==0" style="font-size: .8em;text-align: center;">
+            <span ><i>No Bindings Needed.</i></span>
+          </div>
+          
+            <div *ngIf="bindingList.length!=0" style="  height: auto;
+            display: flow-root;
+            padding: 0;">
+          
+            <div *ngFor="let item of bindingList;let index=index" class="binding-word-bubble" >
+            
+              <span>
+              {{item.key}} </span>
+              <i class="fas fa-exclamation-circle" style="color: red;" *ngIf="isEmpty(item)"></i>
+              <i class="fa fa-check-circle" style="color: green;"  *ngIf="!isEmpty(item)" ></i>
+             
+              </div>
+        
+        </div>
+        </mat-card>
+  
+      </div>
+    </div>
+    </div>
+  </div> 
+  
+  

@@ -1,0 +1,24 @@
+
+streamstarts: [start]
+
+groups:
+  clicks: [vrouter] 
+
+agents:
+  Clicks:
+    group: clicks 
+    dock: clicks 
+    path: /users/ekline/montage/backend/magi/modules/clickControl/
+    execargs: []
+
+eventstreams:
+  start:
+    - type: event
+      agent: Clicks
+      method: updateLinks
+      args:
+        links: ["link_2_3", "link_3_2"]
+        losses: ["0.1"] 
+
+# Configure vim for editing. Make vim stupid. Not AAL stuff, please ignore.
+# vim: noautoindent:nosmartindent:nocindent:expandtab:filetype=:ts=2:sw=2

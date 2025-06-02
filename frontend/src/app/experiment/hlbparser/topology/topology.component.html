@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="row sticky-top">
+    <mat-toolbar>
+    <button mat-raised-button color="warn" class="col-md-3" (click)="showEditor()">Previous : Go back to editor</button>
+    <div class="col-md-6"></div>
+    <button mat-raised-button color="accent" class="col-md-3" (click)="showSlides()">Next :Go  to Slides</button>
+  </mat-toolbar></div>
+  <div class="row">
+    <p>This graph outlines the toplogy of the experiment.</p>
+  </div>
+  <div class="row">
+    <div class="col-md-8 taller"> 
+      <ngx-graph #graph
+        [links]="links"
+        [nodes]="nodes"
+        [layout]="layout"
+        [layoutSettings]="layoutSettings"
+        [curve]="curve"
+        [draggingEnabled]="draggingEnabled"
+        [panningEnabled]="panningEnabled"
+        [enableZoom]="zoomEnabled"
+        [zoomSpeed]="zoomSpeed"
+        [minZoomLevel]="minZoomLevel"
+        [maxZoomLevel]="maxZoomLevel"
+        [panOnZoom]="panOnZoom"
+        [autoZoom]="autoZoom"
+        [autoCenter]="autoCenter"
+        [zoomToFit$]="zoomToFit$"
+        >
+
+        <ng-template #defsTemplate>
+          <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+            <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+          </svg:marker>
+        </ng-template>
+
+        <ng-template #nodeTemplate let-node>
+          <svg:g class="node" (contextmenu)="editNode($event, node)">        
+            <svg:rect stroke-width="15" [attr.stroke]="getColor(node)" [attr.width]="node.dimension.width" [attr.height]="node.dimension.height" [attr.fill]="getColor(node)" (mousedown)="onNodeCircleMouseDown($event, node)"
+              (mouseup)="onNodeCircleMouseUp($event, node)" [attr.rx]="isLanNode(node, 'x')" [attr.ry]="isLanNode(node, 'y')" [attr.title]="getTitle(node)"/>
+              <svg:g>
+                <svg:rect fill="red" width="20" height="20" [attr.visibility]="isEditable()" (click)="removeNode(node)"></svg:rect>
+              </svg:g>
+              <svg:text font-size="large" [attr.x]="node.dimension.width/2" [attr.y]="node.dimension.height / 4" (mousedown)="onNodeCircleMouseDown($event, node)" (mouseup)="onNodeCircleMouseUp($event, node)">
+                <svg:tspan dominant-baseline="middle" x="10" dy="1em">{{node.label}}</svg:tspan>
+                <svg:tspan x="10" dy="1em" class="wait_time_text">{{getSubText(node)}}</svg:tspan>
+                <svg:tspan x="10" dy="2em" visibility="hidden">action</svg:tspan>
+              </svg:text>
+            </svg:g>
+          </ng-template>
+
+          <ng-template #clusterTemplate let-cluster>
+            <svg:g class="node cluster">
+              <svg:rect rx="5" ry="5" [attr.width]="cluster.dimension.width" [attr.height]="cluster.dimension.height" [attr.fill]="getColor(cluster)" />
+              <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="30">(Actor: {{cluster.label}})</svg:text>
+            </svg:g>
+          </ng-template>
+
+          <ng-template #linkTemplate let-link>
+            <svg:g class="edge">
+              <svg:path [attr.id]="link.id" class="line" stroke-width="2"></svg:path>
+              <svg:text text-anchor="middle">
+                <svg:textPath class="text-path" [attr.href]="'#' + link.id" [style.dominant-baseline]="link.dominantBaseline" startOffset="50%">
+                  {{link.label}}
+                </svg:textPath>
+              </svg:text>
+            </svg:g>
+            <svg:g
+              class="linkMidpoint"
+              *ngIf="link.midPoint"
+              [attr.transform]="'translate('+link.midPoint.x+','+link.midPoint.y + ')'"
+              >
+              <svg:rect fill="red" width="20" height="20" [attr.visibility]="isEditable()" (click)="removeEdge(link)"></svg:rect>
+
+            </svg:g>
+          </ng-template>
+
+          <svg:line
+            class="line drag-line"
+            *ngIf="draggingNode"
+            [attr.x1]="startingDragPosition.x"
+            [attr.y1]="startingDragPosition.y"
+            [attr.x2]="currentDragPosition.x"
+            [attr.y2]="currentDragPosition.y"
+            marker-end="url(#arrow)"
+            />
+
+          </ngx-graph>
+        </div>
+        <div class="col-md-4 padded">
+          <div class="row"><h5>Legend</h5></div>
+          <div *ngFor="let item of matching | keyvalue">
+            <div class="row bottom-border">
+              <div class="col-md-3" [ngStyle]="{'background-color': item.value}">
+
+              </div>
+              <div class="col-md-9">
+                {{item.key}}
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-3">Zoom level</div>
+            <div class="col-md-9">
+              <button type="button" class="btn btn-info" (click)="zoomIn()">
+                <i class="fa fa-plus info"></i>
+              </button>
+              <button type="button" class="btn btn-danger" (click)="fitToView()">
+                Fit to view
+              </button>
+              <button type="button" class="btn btn-warning" (click)="zoomOut()">
+                <i class="fa fa-minus info"></i>
+              </button>
+            </div>
+          </div>
+          <br/>
+          <div class="row bottom-border">
+            <div class="col-md-6">
+              <button type="button" class="btn btn-primary btn-block" (click)="addActor($event)">Add a new actor</button>
+            </div>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-primary btn-block" (click)="addLan($event)">Add Lan</button>
+            </div>
+          </div>
+          <br/>
+          <div class="row bottom-border">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="editmode" (click)="toggleDragging()"/>
+              <label class="custom-control-label" for="editmode">Edit edges and Delete nodes</label>
+            </div>
+
+          </div>
+          <br/>
+          <div class="row">
+            Right click on nodes to update their information.
+          </div>
+          <br/>
+        </div>
+      </div>
+    </div>

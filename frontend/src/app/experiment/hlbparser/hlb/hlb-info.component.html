@@ -1,0 +1,140 @@
+<div mat-dialog-content>
+    <div class="row" style="margin: 0.5em;" [hidden]="showId !=1">
+      <ul>
+        <li>Define steps to be executed during this experiment.</li>
+        <li>
+          <dl>
+            <dt>
+              For example:
+            </dt>
+            <ul>
+              <li>
+                <span class="actor_example_color">actor0</span>&nbsp;<span
+                  class="binding_example_color"
+                  >start_log</span
+                >
+              </li>
+              <li>
+                wait t0
+                <span class="actor_example_color">actor1</span>&nbsp;<span
+                  class="binding_example_color"
+                  >legitimate</span
+                >
+              </li>
+              <li>
+                when&nbsp;<span class="binding_example_color"
+                  >stop_attack_done</span
+                >&nbsp;wait t3&nbsp;<span class="actor_example_color">actor1</span
+                >&nbsp;<span class="binding_example_color">stop_legitimate</span
+                >&nbsp;emit&nbsp;<span class="binding_example_color"
+                  >stop_legitimate_done</span
+                >
+              </li>
+            </ul>
+          </dl>
+        </li>
+        <li>
+          As you start typing there will be auto-suggestion displayed near the top
+          of the text area.
+        </li>
+        <li>
+          Press tab to use the first auto suggested word. It will append the word
+          near the cursor in the textarea.
+        </li>
+        <li>
+          There will also be suggestion displayed along with suggested text. This
+          will help you to write the next word or phrase.
+        </li>
+        <li>
+          For more information, refer to the documentation <a href="/docs/experiment_page/#behavior">here</a>.
+        </li>
+      </ul>
+    </div>
+    <div class="row" style="margin: 0.5em;" [hidden]="showId !=2">
+      <ul>
+        <li>Define all the constraints for this experiment.</li>
+        <li>
+          <dl>
+            <dt>
+              For example:
+            </dt>
+            <ul>
+              <li>
+                server&nbsp;[&nbsp;os&nbsp;ubuntu&nbsp;]
+              </li>
+              <li>
+                attacker&nbsp;[&nbsp;num&nbsp;3&nbsp;]
+              </li>
+              <li>
+                lan&nbsp;client&nbsp;attacker&nbsp;server&nbsp;[&nbsp;bw&nbsp;1&nbsp;]
+              </li>
+              <li>
+                link&nbsp;router&nbsp;server&nbsp;[&nbsp;bw&nbsp;1,&nbsp;delay&nbsp;5&nbsp;]
+              </li>
+            </ul>
+          </dl>
+        </li>
+        <li>
+          As you start typing there will be auto-suggestion displayed near the top
+          of the text area.
+        </li>
+        <li>
+          Press tab to use the first auto suggested word. It will append the word
+          near the cursor in the textarea.
+        </li>
+        <li>
+          There will also be suggestion displayed along with suggested text. This
+          will help you to write the next word or phrase.
+        </li>
+        <li>
+          For more information, refer to the documentation <a href="/docs/experiment_page/#constraints">here</a>.
+        </li>
+      </ul>
+    </div>
+  
+    <div class="row" style="margin: 0.5em;" [hidden]="showId !=3">
+      <ul>
+          <li>Define all the constraints for this experiment.</li>
+          <li>
+            <dl>
+              <dt>
+                For example:
+              </dt>
+              <ul>
+                <li>
+                  <span class="binding_example_color"> install_iperf</span
+                  >&nbsp;apt-get install iperf -y
+                </li>
+                <li>
+                  <span class="binding_example_color"> install_tcpdump</span
+                  >&nbsp;apt-get install tcpdump -y
+                </li>
+                <li>
+                  <span class="binding_example_color"> install_flooder</span
+                  >&nbsp;/scripts/common/install_flooder.sh
+                </li>
+                <li>
+                  <span class="binding_example_color"> start_server</span
+                  >&nbsp;iperf -s
+                </li>
+              </ul>
+            </dl>
+          </li>
+          <li>
+            As you start typing behavior above this area will be populated with the
+            terms which require definition for the experiment to execute.
+          </li>
+          <li>
+            For more information, refer to the documentation <a href="/docs/experiment_page/#bindings">here</a>.
+          </li>
+          <!-- <li>
+            Below will be a list of text box with the term that requires more input.
+            As you fill the script, there will be a green tick ( like this
+            <i class="fa fa-check-circle" style="color: green;"></i>&nbsp;) inside
+            the binding needed section on the top. This shows that the binding is
+            complete for that term
+          </li> -->
+        </ul>
+  </div>
+  </div>
+  

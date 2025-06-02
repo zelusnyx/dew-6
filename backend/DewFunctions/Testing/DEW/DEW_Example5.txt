@@ -1,0 +1,48 @@
+[Scenario]
+configure:
+server install_iperf
+client install_iperf
+client install_flooder
+server install_tcpdump
+monitor:
+server start_measure emit mstarted
+server start_server emit sstarted
+run:
+when mstarted, sstarted client start_traffic emit cstarted
+when cstarted wait t1 attacker start_attack emit astarted
+when astarted wait t2 attacker stop_attack emit astopped
+when astopped wait t3 client stop_traffic emit cstopped
+analyze:
+when cstopped server stop_measure emit mstopped
+when mstopped server calculate_entropy
+store:
+server COPY_TO_GITHUB
+
+[Bindings]
+install_iperf apt-get install iperf -y
+install_tcpdump apt-get install tcpdump -y
+install_flooder /scripts/common/install_flooder.sh
+start_measure tcpdump -i ETH(IP(server)) -w DUMP_OUTPUT
+start_server iperf -s
+start_traffic iperf -c IP(server)
+start_attack flooder --dst IP(server) --proto 6 —rate RATE
+stop_attack pkill -9 flooder
+stop_traffic pkill -9 iperf
+stop_measure pkill -9 tcpdump
+calculate_entropy /scripts/entropy_calculator.sh ANALYSIS_OUTPUT
+mstarted EXIST_PROCESS(tcpdump)
+sstarted EXIST_PROCESS(iperf)
+cstarted EXIST_PROCESS(iperf)
+astarted EXIST_PROCESS(flooder)
+astopped NOT EXIST_PROCESS(flooder)
+cstopped NOT EXIST_PROCESS(iperf)
+mstopped NOT EXIST_PROCESS(tcpdump)
+
+[Constraints]
+num attacker 2
+num server 1
+num client 2
+num router 1
+os server Ubuntu
+lan client attacker
+link router server

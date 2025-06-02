@@ -1,0 +1,23 @@
+site_name: Distributed Experiment Workflows
+site_url: https://dew.isi.edu/docs
+nav:
+- Home: 'index.md'
+- UI:
+  - First time setup: 'first_time.md'
+  - Dashboard: 'dashboard.md'
+  - Profile Page: 'profile_page.md'
+  - Experiment Page: 'experiment_page.md'
+  - Testbed Page: 'run_deterlab_experiment.md'
+- DEW concepts:
+  - Basics: 'basics.md'
+  - Sharing and Collaboration: 'sharing_and_collaboration.md'
+  - Backup and recovery: 'backup_and_recovery.md'
+  - From DEW to Testbed: 'running_on_deter.md'
+  - From Testbed to DEW: 'manual_capture.md'
+  - Built-in Functions: 'binding_suggestions.md'
+- Examples: 'examples.md'
+- Contact us: 'contact_us.md'
+- Go back to DEW: 'redirect-to-dew.html'
+theme: 'readthedocs'
+extra_css:
+  - css/style.css

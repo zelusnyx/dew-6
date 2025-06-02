@@ -1,0 +1,609 @@
+{
+  "id": "d50ff5df-0465-4702-9a43-94aa2b366a89",
+  "nets": [],
+  "nodes": [
+    {
+      "id": "de6f13fe-5c90-4509-b2b8-94b63db9e6ce",
+      "endpoints": [
+        {
+          "id": "312b81de-5d39-4b69-ae55-f5d45a833d82",
+          "props": {
+            "bus": "pcie3",
+            "type": "ethernet",
+            "speed": 1000000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "pci3"
+          }
+        ],
+        "name": "minnow0",
+        "disk": {
+          "capacity": 64000000000.0
+        },
+        "image": [
+          "riot",
+          "debian",
+          "fedora",
+          "riot-18.01",
+          "debian-9",
+          "fedora-27"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "x86_64",
+          "model": "atom"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "minnowboard"
+      }
+    },
+    {
+      "id": "e6d22a7a-97c5-44a4-9a37-428fda817e0f",
+      "endpoints": [
+        {
+          "id": "65fbb6ad-9447-4557-9606-77e32fc86ab0",
+          "props": {
+            "bus": "pcie3",
+            "type": "ethernet",
+            "speed": 1000000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "pci3"
+          }
+        ],
+        "name": "minnow1",
+        "disk": {
+          "capacity": 64000000000.0
+        },
+        "image": [
+          "riot",
+          "debian",
+          "fedora",
+          "riot-18.01",
+          "debian-9",
+          "fedora-27"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "x86_64",
+          "model": "atom"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "minnowboard"
+      }
+    },
+    {
+      "id": "11a5a160-cc57-471a-80e3-77669d537c13",
+      "endpoints": [
+        {
+          "id": "2d26327b-55dd-4548-9774-8821c1660657",
+          "props": {
+            "bus": "pcie3",
+            "type": "ethernet",
+            "speed": 1000000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "pci3"
+          }
+        ],
+        "name": "minnow2",
+        "disk": {
+          "capacity": 64000000000.0
+        },
+        "image": [
+          "riot",
+          "debian",
+          "fedora",
+          "riot-18.01",
+          "debian-9",
+          "fedora-27"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "x86_64",
+          "model": "atom"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "minnowboard"
+      }
+    },
+    {
+      "id": "f91319b9-aa93-4fc8-a4c6-c44cda68e6b7",
+      "endpoints": [
+        {
+          "id": "fd2c2f3f-79ed-4d1e-b7ef-563757bbb614",
+          "props": {
+            "bus": "pcie3",
+            "type": "ethernet",
+            "speed": 1000000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "pci3"
+          }
+        ],
+        "name": "minnow3",
+        "disk": {
+          "capacity": 64000000000.0
+        },
+        "image": [
+          "riot",
+          "debian",
+          "fedora",
+          "riot-18.01",
+          "debian-9",
+          "fedora-27"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "x86_64",
+          "model": "atom"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "minnowboard"
+      }
+    },
+    {
+      "id": "e42ee31d-0405-447a-aaab-5db8ef8218c6",
+      "endpoints": [
+        {
+          "id": "0b451808-e011-4349-a44b-27d90ef8d685",
+          "props": {
+            "bus": "usb2",
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "usb2"
+          }
+        ],
+        "name": "pi0",
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "riot",
+          "riot-18.01",
+          "raspbian",
+          "raspbian-17.11"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "armv7"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "rpi"
+      }
+    },
+    {
+      "id": "999733de-209c-409c-a75a-42bd498d02df",
+      "endpoints": [
+        {
+          "id": "93acba75-d653-428d-9944-9cb25459140e",
+          "props": {
+            "bus": "usb2",
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "usb2"
+          }
+        ],
+        "name": "pi1",
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "riot",
+          "riot-18.01",
+          "raspbian",
+          "raspbian-17.11"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "armv7"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "rpi"
+      }
+    },
+    {
+      "id": "d8955208-a0f5-4c64-998a-ff406609190e",
+      "endpoints": [
+        {
+          "id": "cab5a201-f810-4a69-bdf3-708af3495992",
+          "props": {
+            "bus": "usb2",
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "usb2"
+          }
+        ],
+        "name": "pi2",
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "riot",
+          "riot-18.01",
+          "raspbian",
+          "raspbian-17.11"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "armv7"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "rpi"
+      }
+    },
+    {
+      "id": "c6a8bd9e-a0bc-4c84-ba33-1ef1b78c71fc",
+      "endpoints": [
+        {
+          "id": "046b7753-14ac-4d30-b124-94dbf0f2811c",
+          "props": {
+            "bus": "usb2",
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        }
+      ],
+      "props": {
+        "memory": {
+          "capacity": 1000000000.0
+        },
+        "bus": [
+          {
+            "type": "usb2"
+          }
+        ],
+        "name": "pi3",
+        "disk": {
+          "capacity": 16000000000.0
+        },
+        "image": [
+          "riot",
+          "riot-18.01",
+          "raspbian",
+          "raspbian-17.11"
+        ],
+        "cpu": {
+          "cores": 2,
+          "arch": "armv7"
+        },
+        "alloc": [
+          "unit"
+        ],
+        "platform": "rpi"
+      }
+    },
+    {
+      "id": "d5c3a371-572c-45ba-88fc-4fb55a0f7864",
+      "endpoints": [
+        {
+          "id": "b7fb4f33-be1e-4f0b-8525-c93932666873",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "854bd5d1-31fc-4a3b-a652-22e6ba064d20",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "6a614fcc-58cd-41c9-8962-3b135ed5515a",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "d7e3c1c7-1bb9-404e-a77e-9c645097ef66",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "36fc479f-b1b5-4447-953f-13208e308c00",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "e8d5807f-0fc5-49ba-906a-9b9aa89b47bb",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "267d91e7-4c12-4906-b128-d012c2bcb271",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "2307c958-286f-4514-b7b2-85c41a3b340e",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        },
+        {
+          "id": "654e5d9c-6aa5-41c3-941b-23f21aeeadb5",
+          "props": {
+            "type": "xbee",
+            "speed": 1000000.0
+          }
+        }
+      ],
+      "props": {
+        "alloc": [
+          "static",
+          "virtual"
+        ],
+        "name": "xbee"
+      }
+    },
+    {
+      "id": "ce84038e-0eb5-481a-b0b4-5b55b30931df",
+      "endpoints": [
+        {
+          "id": "fd9071f7-7b5b-49fd-888e-436021210f58",
+          "props": {
+            "type": "ethernet",
+            "speed": 10000000000.0
+          }
+        },
+        {
+          "id": "6369f2e4-6095-4dfd-bf75-af86371602aa",
+          "props": {
+            "type": "ethernet",
+            "speed": 10000000000.0
+          }
+        }
+      ],
+      "props": {
+        "alloc": [
+          "static",
+          "virtual"
+        ],
+        "name": "hummingbird"
+      }
+    },
+    {
+      "id": "322930f4-c966-4bc0-bf83-e2450c6be001",
+      "endpoints": [
+        {
+          "id": "3efc831b-2f52-452f-9019-8728e3db5657",
+          "props": {
+            "type": "ethernet",
+            "speed": 10000000000.0
+          }
+        }
+      ],
+      "props": {
+        "alloc": [
+          "static",
+          "virtual"
+        ],
+        "name": "gateway"
+      }
+    }
+  ],
+  "props": {},
+  "links": [
+    {
+      "id": "3537ef7a-b072-44a1-84e5-6ff81bcebb37",
+      "endpoints": [
+        {
+          "id": "312b81de-5d39-4b69-ae55-f5d45a833d82",
+          "props": {}
+        },
+        {
+          "id": "b7fb4f33-be1e-4f0b-8525-c93932666873",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "5a1b0aa9-f025-4d9e-a077-9f8e44bbde0a",
+      "endpoints": [
+        {
+          "id": "65fbb6ad-9447-4557-9606-77e32fc86ab0",
+          "props": {}
+        },
+        {
+          "id": "854bd5d1-31fc-4a3b-a652-22e6ba064d20",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "61dea726-d8d5-4a34-b1bd-d31e2dd6175f",
+      "endpoints": [
+        {
+          "id": "2d26327b-55dd-4548-9774-8821c1660657",
+          "props": {}
+        },
+        {
+          "id": "6a614fcc-58cd-41c9-8962-3b135ed5515a",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "2b094450-92d6-442d-8188-0bb10788d0b5",
+      "endpoints": [
+        {
+          "id": "fd2c2f3f-79ed-4d1e-b7ef-563757bbb614",
+          "props": {}
+        },
+        {
+          "id": "d7e3c1c7-1bb9-404e-a77e-9c645097ef66",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "9cef798a-2fe7-42bb-8792-c6971ef8a133",
+      "endpoints": [
+        {
+          "id": "0b451808-e011-4349-a44b-27d90ef8d685",
+          "props": {}
+        },
+        {
+          "id": "36fc479f-b1b5-4447-953f-13208e308c00",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "ea87463f-0944-43a6-8e63-70afbd32cd0e",
+      "endpoints": [
+        {
+          "id": "93acba75-d653-428d-9944-9cb25459140e",
+          "props": {}
+        },
+        {
+          "id": "e8d5807f-0fc5-49ba-906a-9b9aa89b47bb",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "b50c909f-348d-4454-adac-c9158d4cd322",
+      "endpoints": [
+        {
+          "id": "cab5a201-f810-4a69-bdf3-708af3495992",
+          "props": {}
+        },
+        {
+          "id": "267d91e7-4c12-4906-b128-d012c2bcb271",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "11eed42b-56de-48c2-b88a-6a07b8b3967b",
+      "endpoints": [
+        {
+          "id": "046b7753-14ac-4d30-b124-94dbf0f2811c",
+          "props": {}
+        },
+        {
+          "id": "2307c958-286f-4514-b7b2-85c41a3b340e",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "dc851fab-fbec-4a5c-9340-8c8e7da77baf",
+      "endpoints": [
+        {
+          "id": "654e5d9c-6aa5-41c3-941b-23f21aeeadb5",
+          "props": {}
+        },
+        {
+          "id": "fd9071f7-7b5b-49fd-888e-436021210f58",
+          "props": {}
+        }
+      ],
+      "props": {}
+    },
+    {
+      "id": "75574788-c963-461f-bc50-0b21aae96d5f",
+      "endpoints": [
+        {
+          "id": "fd9071f7-7b5b-49fd-888e-436021210f58",
+          "props": {}
+        },
+        {
+          "id": "3efc831b-2f52-452f-9019-8728e3db5657",
+          "props": {}
+        }
+      ],
+      "props": {}
+    }
+  ]
+}

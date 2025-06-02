@@ -1,0 +1,14 @@
+<div *ngIf="isViewEnable()" (keydown)="onKeyDown($event)" tabindex="-1" style="outline:none;">
+ 
+<experiment-info [id]="experimentId" (viewId)="show($event)"></experiment-info>
+
+  <div class="main">
+    <hlb *ngIf="viewID == 1"></hlb>
+    <dependency-graph *ngIf="viewID == 2" (navigate)="handleSlideNavigation($event)"></dependency-graph>
+    <topology-graph *ngIf="viewID == 5" (navigate)="handleSlideNavigation($event)"></topology-graph>
+    <experiment-slides *ngIf="viewID == 4" [experimentId]="experimentId" (navigate)="handleSlideNavigation($event)" ></experiment-slides>
+    <app-deterlab *ngIf="viewID == 3"></app-deterlab>
+    <single-experiment-slide *ngIf="viewID == 6" (navigate)="handleSlideNavigation($event)"></single-experiment-slide>
+    <design-page *ngIf="viewID==7" (navigate)="handleSlideNavigation($event)"></design-page>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div mat-dialog-content>
+    <h3>Versions</h3>
+    <div class="row" style="margin: .5em;" >
+      <div class="col-md-12" style="padding: 0;">
+    
+        <table class="table">
+            <thead >
+                <tr >
+                 
+                    <th style="min-width:250px">Content</th>
+                    <th style="min-width:50px">Time saved</th>
+                    <th style="min-width:50px">Action</th> 
+                   
+                    <th ></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="experimentVersions.length!=0" >
+                <tr *ngFor="let version of experimentVersions; let i=index" >
+                 
+                    <td style="max-width: 60%;"><pre>{{ version.dew_content }}</pre></td>
+                    <td><strong>{{ localTime(version.updated_at) }}</strong></td>
+    
+                    <td>
+           
+                    <button class="btn btn-danger" (click)="restoreVersion(version.content)">Revert</button></td>
+      
+                </tr>
+            </tbody>
+            <tbody style="text-align: center;"  *ngIf="experimentVersions.length==0" >
+              <tr >
+                <td colspan="3" ><span ><i>No versions exist for this experiment.</i> </span></td>
+                  
+      
+              </tr>
+          </tbody>
+       
+        </table>
+      </div>
+    </div> 
+  </div>

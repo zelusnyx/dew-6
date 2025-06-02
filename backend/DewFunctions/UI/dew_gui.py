@@ -1,0 +1,244 @@
+import argparse
+from time import sleep
+import inspect as ins
+import pprint
+# import the library
+try:
+    # Python 3
+    import tkinter as tk
+    import tkinter.messagebox as tkm
+    import tkinter.simpledialog as tkd
+except ImportError:
+    # Python 2
+    import Tkinter as tk
+    import tkMessageBox as tkm
+    import tkSimpleDialog as tkd
+
+
+from appJar import gui
+import re
+from HighLevelBehaviorLanguage.hlb import *
+NLPFLAG=True
+try:
+    import spacy
+except:
+    NLPFLAG=False
+    print("WARNING: spacy not installed. Will not include NLP input processing.")
+
+from output.handler import outputHandler
+from dependencyGraph.dg import dependencyGraphHandler
+from topology.topo import topoHandler
+from deploy.constraints import deployHandler
+import globals
+
+
+# IF WE ADD ANY ADDITIONAL MENUS/TOOLBARS ETC. WE MUST ADD CALLS TO THIS FUNCTION!!
+# The way AppJar structures the windows and Frames means we can't get
+# our actual x,y events for our canvas as it does not account for anything packed
+# above our canvas (such as menu and toolbars). This function gets these offsets
+# and relays this information to our canvas handlers.
+def fixYoffsets():
+    if globals.bdg_handler == None or globals.topo_handler == None or globals.app == None:
+        return
+    ta = globals.app.widgetManager.get(globals.app.Widgets.TabbedFrame, "TabbedArea")
+    tb = globals.app.widgetManager.get(globals.app.Widgets.Toolbar, "LOAD")
+    toolbarHeight = int(tb.master.winfo_height())
+    tabbedHeight = int(ta.tabContainer.winfo_height())
+    #print("Y offset total: %s and %s" % (str(tabbedHeight), str(toolbarHeight)))
+    globals.bdg_handler.setoffsets(yoffset=tabbedHeight+toolbarHeight, height=globals.app.appWindow.winfo_screenheight(), width=globals.app.appWindow.winfo_screenwidth())
+    #globals.topo_handler.setoffsets(yoffset=tabbedHeight+toolbarHeight, height=globals.app.appWindow.winfo_screenheight(), width=globals.app.appWindow.winfo_screenwidth())
+    globals.topo_handler.setoffsets(yoffset=tabbedHeight+toolbarHeight)
+
+def hlb_tab():
+    ## Tab1
+    #"row=1\ncolumn=2\ncolspan=1\nrowspan=2"
+    globals.app.startTab("HLB")
+    globals.app.startLabelFrame("Actors", 0,0,1,1)
+    globals.app.setSticky("ew")
+    globals.app.setStretch("both")
+    globals.app.addScrolledTextArea("actor")
+    globals.app.setTextAreaTooltip("actor","actors")
+
+    #globals.app.setTextAreaOverFunction("actor",[entered, left])
+    globals.app.getTextAreaWidget("actor").bind("<FocusOut>", actorleft, add="+")
+    globals.app.getTextAreaWidget("actor").bind("<FocusIn>", actorentered, add="+")
+    globals.app.stopLabelFrame()
+    globals.app.startLabelFrame("Behavior", 1,0,1,1)
+    globals.app.setSticky("ew")
+    globals.app.setStretch("both")
+    globals.app.addScrolledTextArea("behavior")
+    globals.app.setTextAreaTooltip("behavior","behavior")
+    globals.app.getTextAreaWidget("behavior").bind("<FocusOut>", behaviorleft, add="+")
+    globals.app.getTextAreaWidget("behavior").bind("<FocusIn>", behaviorentered, add="+")
+    #globals.app.setTextAreaOverFunction("behavior",[entered, left])
+    globals.app.setTextAreaChangeFunction("behavior",changed)
+    globals.app.stopLabelFrame()
+    globals.app.startLabelFrame("Constraints", 2,0,1,1)
+    globals.app.setSticky("ew")
+    globals.app.setStretch("both")
+    globals.app.addScrolledTextArea("constraints")
+    globals.app.setTextAreaTooltip("constraints","constraints")
+    #globals.app.setTextAreaOverFunction("constraints",[entered, left])
+    globals.app.getTextAreaWidget("constraints").bind("<FocusOut>", constraintsleft, add="+")
+    globals.app.getTextAreaWidget("constraints").bind("<FocusIn>", constraintsentered, add="+")
+    globals.app.setTextAreaChangeFunction("constraints",changed)
+    globals.app.stopLabelFrame()
+    # Suggestion
+    globals.app.startLabelFrame("Suggestions", 0,2,1,3)
+    globals.app.setLabelFrameOverFunction("Suggestions",[None, left])
+    globals.app.setSticky("news")
+    globals.app.startScrollPane("Suggestions")
+    globals.app.setPadding(0,0)
+    globals.app.setInPadding(0,0)
+    globals.app.setSticky("nesw")
+    globals.app.setStretch("both")
+    globals.app.stopScrollPane()
+    globals.app.stopLabelFrame()
+    globals.app.setAllScrollPaneWidths(50)
+    globals.app.stopTab()
+
+def nlp_tab():
+    ## TAB 2
+    globals.app.startTab("NLP")
+    if NLPFLAG:
+        from NLP.nlp import nlpHandler
+        globals.nlp_handler = nlpHandler()
+        globals.app.addScrolledTextArea("NLP Input")
+        globals.app.setTextArea("NLP Input",globals.nlp_help_str)
+        globals.app.setTextAreaChangeFunction("NLP Input",globals.nlp_handler.nlpChanged)
+    globals.app.stopTab()
+
+def bdg_tab():
+    ## TAB 3
+    globals.app.startTab("Behavior Dependency Graph")
+    globals.bdg_canvas = globals.app.addCanvas("Behavior Dependency Graph")
+    init_height = globals.app.appWindow.winfo_reqheight() * 2 
+    init_width = globals.app.appWindow.winfo_reqwidth() * 2 + 30
+    globals.bdg_canvas.config(width=init_width,height=init_height)
+    print("Width of GUI: %d" % globals.app.appWindow.winfo_screenwidth())
+    print("Requesting canvas width of %d" % init_width)
+    init_height = globals.app.appWindow.winfo_reqheight() * 2 
+    init_width = globals.app.appWindow.winfo_reqwidth() * 2 + 30
+    globals.bdg_handler = dependencyGraphHandler(globals.bdg_canvas, width=init_width, height=init_height)
+    print("Width of new canvas: %d" % globals.bdg_canvas.winfo_reqwidth())
+    globals.app.stopTab()
+
+def tpo_tab():
+    ## TAB 4
+    globals.app.startTab("Topology")
+    globals.app.topo_canvas = globals.app.addCanvas("Topology")
+    init_height = globals.app.appWindow.winfo_reqheight() * 2 
+    init_width = globals.app.appWindow.winfo_reqwidth() * 2 + 30
+    print("Requested hight/width (reqheight/width) is %dx%d" % (init_width, init_height))
+    globals.app.topo_canvas.config(width=init_width,height=init_height)
+    globals.topo_handler = topoHandler(globals.app.topo_canvas, width=init_width, height=init_height)
+    #globals.app.setTextAreaChangeFunction("constraints",globals.topo_handler.process_constraints)
+    globals.app.stopTab()
+
+def dpl_tab():
+    ## TAB 5
+    globals.app.startTab("Deployment")
+    globals.deploy_handler = deployHandler()
+    #
+    globals.app.startLabelFrame("Given Constraints", 0,0)
+    #globals.app.setLabelFrameChangeFunction("Given Constraints", globals.deploy_handler.checkConstraints)
+    globals.app.setStretch("both")
+    globals.app.setSticky("nesw")
+    globals.app.stopLabelFrame()
+    globals.app.startLabelFrame("Site Solutions", 1,0)
+    globals.app.setStretch("both")
+    globals.app.setSticky("nesw")
+    globals.app.addListBox("solution list", [])
+    globals.app.setStretch("both")
+    globals.app.stopLabelFrame()
+    globals.app.stopTab()
+
+
+def out_tab():
+    globals.app.startTab("Output")
+    globals.out_handler = outputHandler()
+
+    # Get the stretch and sticky we're set to now
+    # so we can go back to the orig after setting it
+    # for these widgets.
+    currentSticky = globals.app.getSticky()
+    currentStretch = globals.app.getStretch()
+
+    
+    # Output area
+    #globals.app.startFrame("NS File", row=1, column=0, rowspan=50)
+    globals.app.setSticky("nw")
+    globals.app.setStretch("both")
+    globals.out_msgArea = globals.app.addMessage("output", "")
+    # The width *SHOULD* be the number of characters per line
+    # but this appears to be 10*the number of characters?
+    # Maybe width is in pixels? and not as the documenation says.
+    globals.app.setMessageWidth("output", 800)
+    #globals.app.stopFrame()
+
+    # Button area
+    #globals.app.startFrame("NS Button", row=0, column=0, rowspan=1)
+    #globals.app.setPadding([0,0])
+    #globals.app.setInPadding([0,0])
+    #globals.app.setSticky("nw")
+    #globals.app.setStretch("none")
+    #globals.app.addIconButton("Refresh", globals.out_handler.produceOutput(), "refresh")
+    #globals.app.stopFrame()
+
+    globals.app.stopTab()
+    globals.app.setSticky(currentSticky)
+    globals.app.setStretch(currentStretch)
+    
+    
+# Handle arguments.
+parser = argparse.ArgumentParser(description='UI prototypes for Experiment Design')
+parser.add_argument('--survey', action='store_const', const=True, default=False)
+args = parser.parse_args()
+
+# create a GUI variable and assign our app var,
+# do not have appJar handle arguments so we can handle our own.
+globals.app = gui("Experiment","800x600", handleArgs=False)
+globals.app.setResizable(canResize=True)
+globals.app.setBg("white")
+globals.app.setFont(18)
+globals.app.setSticky("news")
+globals.app.setStretch("both")
+
+
+# The tool bar is cool, but will be present across all tabs (not sure we want that)
+# To have these buttons on *just* one tab, we should create a row of individual buttons.
+tools = ["LOAD", "SAVE", "REFRESH"]
+globals.app.addToolbar(tools, tbFunc, findIcon=True)
+
+# XXX TODO: Clean up and add more structure here.
+
+tabbed_frame = globals.app.startTabbedFrame("TabbedArea")
+
+globals.app.setFont(size=12)
+
+if args.survey:
+    nlp_tab()
+    hlb_tab()
+    out_tab()
+    bdg_tab()
+    tpo_tab()
+else:
+    hlb_tab()
+    nlp_tab()
+    bdg_tab()
+    tpo_tab()
+    dpl_tab()
+
+
+globals.app.stopTabbedFrame()
+
+# The way AppJar structures the windows and Frames means we can't get
+# our actual x,y events for our canvas as it does not account for anything packed
+# above our canvas (such as menu and toolbars).
+# We can't get the height of the tab frame + toolbar + whatever else we add,
+# until we've drawn the window - that won't happen until after we draw something
+# or hit the app.go.... so we register a function that checks how off our yoffsets are.
+globals.app.registerEvent(fixYoffsets)
+
+globals.app.go()
+

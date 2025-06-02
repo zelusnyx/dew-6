@@ -1,0 +1,68 @@
+<div class="container p-0" style="height: 100%;">
+    <div style="margin:0.5em; display: flex; " *ngIf="!errorFlag">
+        <div style="flex-grow: 1">
+            <div class="graph-box-dependency">
+                <div style="width: 200px; margin-top: 20px; margin-left: 40px; position: absolute;">
+                    <div class="row" *ngFor="let actor of actorsGroup | keyvalue">
+                      <div class="col-md-3 mt-1" [ngStyle]="{'background-color': graphColors[actor.value]}"></div><div class="col-md-9 mt-1">{{actor.key}}</div>
+                    </div>
+                </div>
+                <div style="width: 150px; position: absolute; bottom: 20px; margin-left: 20px;">
+                    <div  class="mt-1" *ngFor="let legend of statusLegends">
+                      <img [src]="legend.img" style="width: 15px; height: 15px; margin-right: 7px;">{{legend.label}}
+                    </div>
+                </div>
+                <div id="currentInfoNetwork" #currentInfoNetwork></div>
+            </div>
+        </div>
+        <div style="margin-left: 10px; width: 40%" *ngIf="filteredExecutionScript && filteredExecutionScript.length">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let s of filteredExecutionScript;let i=index">
+                    <mat-expansion-panel-header [collapsedHeight]="'fit-content'" [expandedHeight]="'fit-content'"
+                        style="padding: 10px">
+                        <mat-panel-title style="width: 35%;">
+                            <p style="word-break: break-all;">{{s.node}} : <span
+                                    style="color:blue;">{{s.action}}</span>
+                            </p>
+                        </mat-panel-title>
+                        <mat-panel-description style="width: 65%;">
+                            <div class="row" style="width: 100%;">
+                                <div class="col-7">
+                                    {{s.cmd}}
+                                </div>
+                                <div class="col-5">
+                                    <span style="margin-right: 5px;">
+                                        Status:
+                                    </span>
+                                    <span style="color:green" *ngIf="(s.status=='0')">
+                                        Successful
+                                    </span>
+                                    <span style="color:#17a2b8" *ngIf="s.status=='' && s.time!=''">
+                                        In Progress
+                                    </span>
+                                    <span style="color:#f0c929" *ngIf="s.status=='' && s.time==''">
+                                        Waiting
+                                    </span>
+                                    <span style="color:red" *ngIf="s.status!='0' && s.error!=''">
+                                        Unsuccessful
+                                    </span>
+                                    <span style="color:gray;" *ngIf="s.time!=''">{{getLocalTime(s.time)}}</span>
+                                </div>
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="col-md-12">
+                        <span style="color:red" *ngIf="(s.error!='')" [innerHTML]="'Error: *'+ s.error.replace('\n', '<br>') +'*'">
+                        </span>
+                        <div class="col-md-12" *ngIf="(s.output!='')" style="background-color: black;color: white;">
+                            <p [innerHTML]="s.output.replace('\n', '<br>')"></p>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+    <div [hidden]="!errorFlag">
+        <p>{{error}}</p>
+    </div>
+</div>

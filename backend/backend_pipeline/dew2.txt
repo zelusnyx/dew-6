@@ -1,0 +1,4 @@
+1  "ping www.bing.com" then 
+2  "ping users.deterlab.net" then 
+3  "ls -la" then 
+4  "touch f1.txt"

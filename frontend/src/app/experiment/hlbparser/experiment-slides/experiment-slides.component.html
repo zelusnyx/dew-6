@@ -1,0 +1,41 @@
+
+<div class="container-fluid">
+	<div class="row sticky-top">
+    <mat-toolbar>
+		<button mat-raised-button color="warn" class="col-md-2" (click)="showTopology()">Previous : Edit topology</button>
+		<div class="col-md-2"></div>
+		<button mat-raised-button color="primary" class="col-md-4" (click)="createSlide()">Create new slide</button>
+		<div class="col-md-2"></div>
+		<button mat-raised-button color="accent" class="col-md-2" (click)="showDependencyGraph()">Next : Update dependencies</button>
+  </mat-toolbar>
+	</div>
+	<div class="row table">
+		<div class="col-md-12">
+			<div class="row table-row pointer" style="margin-top: 14px;" *ngFor="let slide of slides; let i = index">
+				
+				<div class="col-md-8" matTooltip="Edit {{ slide.actor_action_mapping }}" (click)="editSlide(slide)">
+          <div class="header-experiment">
+            {{ slide.actor_action_mapping }}
+          </div>
+          
+          <br />
+          <span><b>Created Date:</b> {{ dateView(slide.created_at) }}</span> |
+          <span><b>Updated Date:</b> {{ dateView(slide.updated_at) }}</span>
+        </div>
+        <div class="col-md-4">
+          
+          <button matTooltip="Delete the slide" class="bubble" (click)="deleteSlide(slide)">
+           <mat-icon class="fas fa-trash pointer"></mat-icon>
+         </button>
+         <button matTooltip="Move up" class="bubble" (click)="moveUpSlide(slide, i)">
+           <mat-icon class="fas fa-arrow-up pointer"></mat-icon>
+         </button>
+         <button matTooltip="Move down" class="bubble" (click)="moveDownSlide(slide, i)">
+           <mat-icon class="fas fa-arrow-down pointer"></mat-icon>
+         </button>
+       </div>
+       <hr />
+     </div>
+   </div>
+ </div>
+</div>
