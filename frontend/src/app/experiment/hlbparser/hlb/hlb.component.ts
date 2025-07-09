@@ -32,7 +32,7 @@ import { LogService, LogHeader, LogEntry } from '../common/logging-service';
 import { GoogleDriveService } from "src/app/google-drive-service.service";
 declare let $: any;
 import { AuthService } from '../../../@auth/auth.service';
-import { async } from "@angular/core/testing";
+import { waitForAsync as  } from "@angular/core/testing";
 
 Quill.register("modules/counter", EditorService);
 
@@ -938,7 +938,7 @@ export class HlbComponent implements OnInit, AfterViewInit {
     id_of_edge[name] = { from: from, to: to, id: max_count + 1 };
     console.log(id_of_edge)
     var temp = this.stateservice.getConstraints().source['_value'];
-    temp.push('link ' + swappedNodes[from] + ' ' + swappedNodes[to] + " [ bw 1, delay 0 ]");
+    temp.push('link ' + swappedNodes[from] + ' ' + swappedNodes[to] + " [ ]");
     // this.stateservice.setConstraints(temp);
     this.createNewGraphTypeObjectEdge(name);
     return max_count + 1;
@@ -946,8 +946,8 @@ export class HlbComponent implements OnInit, AfterViewInit {
 
   createNewGraphTypeObjectEdge(name) {
     var temp = {};
-    temp['bandwidth'] = '1';
-    temp['delay'] = '0';
+    temp['bandwidth'] = '';
+    temp['delay'] = '';
     temp['ipAddress'] = '';
     temp['operatingSystem'] = '';
     temp['hardwareType'] = '';
@@ -960,8 +960,8 @@ export class HlbComponent implements OnInit, AfterViewInit {
 
   createNewGraphTypeObject(isLAN, name) {
     var temp = {}
-    temp['bandwidth'] = isLAN ? '1' : '';
-    temp['delay'] = isLAN ? '0' : '';
+    temp['bandwidth'] = '';
+    temp['delay'] = '';
     temp['ipAddress'] = '';
     temp['operatingSystem'] = '';
     temp['hardwareType'] = '';
@@ -1053,8 +1053,8 @@ export class HlbComponent implements OnInit, AfterViewInit {
             temp_edges.push(temp);
             id_of_edge[source + '-' + target] = temp;
             temp = {};
-            temp['bandwidth'] = received_edges[i]['bw'] == 'default' ? '1' : received_edges[i]['bw']; //Default Value
-            temp['delay'] = received_edges[i]['delay'] == 'default' ? '0' : received_edges[i]['delay']; //Default Value
+            temp['bandwidth'] = received_edges[i]['bw'] == 'default' ? '' : received_edges[i]['bw'];
+            temp['delay'] = received_edges[i]['delay'] == 'default' ? '' : received_edges[i]['delay'];
             temp['ipAddress'] = '';
             temp['operatingSystem'] = '';
             temp['hardwareType'] = '';
@@ -1931,13 +1931,13 @@ export class HlbComponent implements OnInit, AfterViewInit {
     var temp = this.graphItemParametersList[currentGraphItemSelection['id']] ? this.graphItemParametersList[currentGraphItemSelection['id']] : null;
     if (!temp) {
       temp = {};
-      temp['bandwidth'] = '1'; //Default Value
-      temp['delay'] = '0'; //Default Value
+      temp['bandwidth'] = '';
+      temp['delay'] = '';
       temp['ipAddress'] = '';
       temp['operatingSystem'] = '';
       temp['hardwareType'] = '';
       temp['nodeName'] = '';
-      temp['num'] = '1'; //Default Value
+      temp['num'] = '1'; //Default Value - keep for number of nodes
       switch (currentGraphItemSelection['type']) {
         case 'node':
           temp['type'] = GraphItemType.NODE;
@@ -1968,12 +1968,10 @@ export class HlbComponent implements OnInit, AfterViewInit {
         $('#node-num').val(temp['num']);
         break;
       case 'link-bandwidth':
-        temp['bandwidth'] = currentValue == "" || (parseInt(currentValue) < 0) ? '1' : currentValue;
-        $('#link-bandwidth').val(temp['bandwidth']);
+        temp['bandwidth'] = currentValue == "" ? '' : (parseInt(currentValue) < 0 ? '' : currentValue);
         break;
       case 'link-delay':
-        temp['delay'] = currentValue == "" || (parseInt(currentValue) < 0) ? '0' : currentValue;
-        $('#link-delay').val(temp['delay']);
+        temp['delay'] = currentValue == "" ? '' : (parseInt(currentValue) < 0 ? '' : currentValue);
         break;
     }
     this.graphItemParametersList[currentGraphItemSelection['id']] = temp;

@@ -314,7 +314,7 @@
           <mat-form-field class="flex-grow-1" appearance="outline">
             <mat-label>BandWidth</mat-label>
             <div class="d-flex flex-row">
-              <input type="text" value="1" class="flex-grow-1 align-self-center" id="link-bandwidth" onkeypress="return ((event.charCode !=8 && event.charCode ==0) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46)" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+              <input type="text" class="flex-grow-1 align-self-center" id="link-bandwidth" onkeypress="return ((event.charCode !=8 && event.charCode ==0) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46)" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
               <div class="field-units align-self-center">
                 <span>Gbps</span>
               </div>
@@ -323,7 +323,7 @@
           <mat-form-field class="flex-grow-1" appearance="outline">
             <mat-label>Delay</mat-label>
             <div class="d-flex flex-row">
-              <input type="text" value="0" class="flex-grow-1 align-self-center" id="link-delay" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
+              <input type="text" class="flex-grow-1 align-self-center" id="link-delay" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" aria-label="string" (change)="onTopologyParametersChange($event)" matInput>
               <div class="field-units align-self-center">
                 <span>ms</span>
               </div>

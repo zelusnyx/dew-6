@@ -51,6 +51,36 @@ class MergeTBGenerator(Generator):
         bn = int(ipaddress.ip_address(b)) & ((2**24 - 1) << 8)
         return (an == bn)
     
+    def build_connect_params(self, current_bw, current_delay):
+        """Helper function to build the parameters for net.connect() calls"""
+        params = []
+        
+        # Only include capacity if bandwidth is set and not empty
+        if current_bw and current_bw != '' and current_bw != '0':
+            if 'Mb' in str(current_bw):
+                # Remove 'Mb' and use mbps
+                bw_value = str(current_bw).replace('Mb', '')
+                params.append(f"capacity==mbps({bw_value})")
+            elif 'Gb' in str(current_bw):
+                # Remove 'Gb' and use gbps
+                bw_value = str(current_bw).replace('Gb', '')
+                params.append(f"capacity==gbps({bw_value})")
+            else:
+                # No unit specified, assume mbps
+                params.append(f"capacity==mbps({current_bw})")
+        
+        # Only include latency if delay is set and not empty
+        if current_delay and current_delay != '' and current_delay != '0':
+            if 'ms' in str(current_delay):
+                # Remove 'ms' unit
+                delay_value = str(current_delay).replace('ms', '')
+                params.append(f"latency==ms({delay_value})")
+            else:
+                # No unit specified, assume ms
+                params.append(f"latency==ms({current_delay})")
+        
+        return ", ".join(params)
+
     def generateMergeTB(self):
         
         # Collect all actors
@@ -184,18 +214,25 @@ class MergeTBGenerator(Generator):
 
         # Generate links 
         cnt = 0
+        # Track already created connections to avoid duplicates
+        created_connections = set()
+        
         for a in links.keys():
             if a in self.num.keys():
                 for i in range (1, self.num[a]+1):
                     for b in links[a].keys():
-                        current_bw = '100'
-                        current_delay = '0'
+                        current_bw = ''
+                        current_delay = ''
                         if(set([a,b]) in [set(x.split(' ')) for x in bw.keys()]):
                             current_bw = bw[a + ' ' + b] if ((a + ' ' + b) in bw) else bw[b + ' ' + a]
                             current_bw = str(float(current_bw)*1000)  
                         if(set([a,b]) in [set(x.split(' ')) for x in delay.keys()]):
                             current_delay = delay[a + ' ' + b] if ((a + ' ' + b) in delay) else delay[b + ' ' + a] 
                             current_delay = str(current_delay)  
+                        
+                        params = self.build_connect_params(current_bw, current_delay)
+                        params_str = f", {params}" if params else ""
+                        
                         if b in self.num.keys():
                             for j in range (1,self.num[b]+1):
                                 pointer_a = ""
@@ -204,7 +241,13 @@ class MergeTBGenerator(Generator):
                                     pointer_a = f"-{str(i)}"
                                 if self.num[b]!=1:
                                     pointer_b = f"-{str(j)}"
-                                line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}{pointer_a}')}], nodes[{nodeName_in_list.index(f'{b}{pointer_b}')}]], capacity==mbps({current_bw}), latency==ms({current_delay}))\n"
+                                
+                                # Track this connection
+                                node1, node2 = sorted([f'{a}{pointer_a}', f'{b}{pointer_b}'])
+                                connection_key = f"{node1}-{node2}"
+                                created_connections.add(connection_key)
+                                
+                                line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}{pointer_a}')}], nodes[{nodeName_in_list.index(f'{b}{pointer_b}')}]]{params_str})\n"
                                 longlinks[cnt] = []
                                 longlinks[cnt].append(f'{a}{pointer_a}')
                                 longlinks[cnt].append(f'{b}{pointer_b}')
@@ -216,7 +259,13 @@ class MergeTBGenerator(Generator):
                             pointer_b = ""
                             if self.num[a]!=1:
                                 pointer_a = f"-{str(i)}"
-                            line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}{pointer_a}')}], nodes[{nodeName_in_list.index(f'{b}')}]], capacity==mbps({current_bw}), latency==ms({current_delay}))\n"
+                            
+                            # Track this connection
+                            node1, node2 = sorted([f'{a}{pointer_a}', f'{b}'])
+                            connection_key = f"{node1}-{node2}"
+                            created_connections.add(connection_key)
+                            
+                            line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}{pointer_a}')}], nodes[{nodeName_in_list.index(f'{b}')}]]{params_str})\n"
                             self.run[label] += line
                             link_lines.append(line)
                             longlinks[cnt] = []
@@ -225,21 +274,31 @@ class MergeTBGenerator(Generator):
                             cnt += 1
             else:
                  for b in links[a].keys():
-                    current_bw = '100'
-                    current_delay = '0'
-                    if(set(a,b) == set(x.split(' ')) for x in bw.keys()):
+                    current_bw = ''
+                    current_delay = ''
+                    if(set([a,b]) in [set(x.split(' ')) for x in bw.keys()]):
                         current_bw = bw[a + ' ' + b] if ((a + ' ' + b) in bw) else bw[b + ' ' + a]
                         current_bw = str(float(current_bw)*1000) + 'Mb'  
-                    if(set(a,b) == set(x.split(' ')) for x in delay.keys()):
+                    if(set([a,b]) in [set(x.split(' ')) for x in delay.keys()]):
                         current_delay = delay[a + ' ' + b] if ((a + ' ' + b) in delay) else delay[b + ' ' + a]
                         current_delay = str(current_delay) + 'ms' 
+                    
+                    params = self.build_connect_params(current_bw, current_delay)
+                    params_str = f", {params}" if params else ""
+                    
                     if b in self.num.keys():
                         for j in range (1,self.num[b]+1):
                             pointer_a = ""
                             pointer_b = ""
                             if self.num[b]!=1:
                                 pointer_b = f"-{str(j)}"
-                            line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}')}], nodes[{nodeName_in_list.index(f'{b}{pointer_b}')}]], capacity==gbps({current_bw}), latency==ms({current_delay}))\n"
+                            
+                            # Track this connection
+                            node1, node2 = sorted([f'{a}', f'{b}{pointer_b}'])
+                            connection_key = f"{node1}-{node2}"
+                            created_connections.add(connection_key)
+                            
+                            line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}')}], nodes[{nodeName_in_list.index(f'{b}{pointer_b}')}]]{params_str})\n"
                             self.run[label] += line
                             longlinks[cnt] = []
                             longlinks[cnt].append(f'{a}{pointer_a}')
@@ -249,7 +308,13 @@ class MergeTBGenerator(Generator):
                     else:
                         pointer_a = ""
                         pointer_b = ""
-                        line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}{pointer_a}')}], nodes[{nodeName_in_list.index(f'{b}{pointer_b}')}]], capacity==gbps({current_bw}), latency==ms({current_delay}))\n"
+                        
+                        # Track this connection
+                        node1, node2 = sorted([f'{a}', f'{b}'])
+                        connection_key = f"{node1}-{node2}"
+                        created_connections.add(connection_key)
+                        
+                        line = f"link{str(cnt)} = net.connect([nodes[{nodeName_in_list.index(f'{a}{pointer_a}')}], nodes[{nodeName_in_list.index(f'{b}{pointer_b}')}]]{params_str})\n"
                         self.run[label] += line
                         longlinks[cnt] = []
                         longlinks[cnt].append(f'{a}{pointer_a}')
@@ -258,10 +323,21 @@ class MergeTBGenerator(Generator):
                         cnt += 1
 
         print("Nodes ",nodeName_in_list)
+        
         # Generate lans
+        created_lan_lines = set()  # Track exact LAN lines to prevent duplicates
         for l in lans.keys():
             lannodes = []
             lanindexes = []
+            
+            # Skip if this LAN connection was already created
+            lan_nodes_sorted = sorted(lans[l])
+            connection_key = "-".join(lan_nodes_sorted)
+            if connection_key in created_connections:
+                print(f"Skipping duplicate LAN connection: {connection_key}")
+                continue
+            created_connections.add(connection_key)
+            
             line = "lan" + str(l) + " = net.connect(["
             for le in lans[l]:
                 litems = le.split('-')
@@ -281,8 +357,8 @@ class MergeTBGenerator(Generator):
                     nline += f"nodes[{nodeName_in_list.index(f'{ln}')}]"
                 li += 1
             line += nline 
-            current_bw = '100'
-            current_delay = '0'
+            current_bw = ''
+            current_delay = ''
             for b in bw.keys():
                 found = True
                 for nbw in b.split(' '):
@@ -306,8 +382,15 @@ class MergeTBGenerator(Generator):
                 if found:
                     current_delay = str(delay[d])
 
-
-            line = line + f"], capacity==mbps({current_bw}), latency==ms({current_delay}))\n"
+            params = self.build_connect_params(current_bw, current_delay)
+            params_str = f", {params}" if params else ""
+            line = line + f"]{params_str})\n"
+            
+            # Check for exact duplicate LAN lines before adding
+            if line in created_lan_lines:
+                continue
+            
+            created_lan_lines.add(line)
             self.run[label] += line
             lan_lines.append(line)
 
@@ -318,10 +401,12 @@ class MergeTBGenerator(Generator):
 #            actor.append(act)
 
 
+        # IP assignment for LANs
         for lan in lans:
             a = b = None
             mask = 31
             found = False
+            ip_assignment_lines = ""  # Renamed to be more specific
             for n in lans[lan]:
                 if n in ip.keys():
                     found = True
@@ -331,21 +416,21 @@ class MergeTBGenerator(Generator):
                         b = n
                     else:
                         m = self.findsubnet(ip[a], ip[b])
-                        if (m < mask):
+                        if m is not None and (m < mask):
                             mask = m
                         b = None
             if a != None and b != None:
                 m = self.findsubnet(ip[a], ip[b])
-                if (m < mask):
+                if m is not None and (m < mask):
                     mask = m
             # If there is any IP directive go through assignment
             if found:
                 for n in lans[lan]:
                     if n in ip.keys():
                         node_idx = nodeName_in_list.index(f'{n}')
-                        line += "lan" + str(lan) + "[nodes[" + str(node_idx) + "]].socket.addrs = ip4(\'" + ip[n] + '/' + str(mask) +  "\')\n"
+                        ip_assignment_lines += "lan" + str(lan) + "[nodes[" + str(node_idx) + "]].socket.addrs = ip4(\'" + ip[n] + '/' + str(mask) +  "\')\n"
 
-            self.run[label] += line        
+            self.run[label] += ip_assignment_lines        
 
 
         # Force links to have /24 mask

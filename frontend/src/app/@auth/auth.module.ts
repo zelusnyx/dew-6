@@ -12,6 +12,8 @@ import { GoogleDriveCallbackComponent } from "./components/googledrivecallback/g
 import { AuthResult } from "./auth-result";
 import { InitUserService } from "./init-user.service";
 import { LogoutComponent } from "./components/logout/logout.component";
+import { SphereLoginComponent } from "./components/sphere-login/sphere-login.component";
+import { SphereAuthService } from "./sphere-auth.service";
 import {
   MatCard,
   MatLabel,
@@ -36,7 +38,8 @@ import { HttpService } from '../http-service.service';
     GoogleOAuth2CallbackComponent,
     GoogleDriveCallbackComponent,
     LogoutComponent,
-    GoogleRegistrationComponent
+    GoogleRegistrationComponent,
+    SphereLoginComponent
   ],
   imports: [
     CommonModule,
@@ -51,10 +54,10 @@ import { HttpService } from '../http-service.service';
   ]
 })
 export class AuthModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<AuthModule> {
     return {
       ngModule: AuthModule,
-      providers: [AuthService, AuthGuard],
+      providers: [AuthService, AuthGuard, SphereAuthService],
     };
   }
 }

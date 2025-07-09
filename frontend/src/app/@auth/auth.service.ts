@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { SocialAuthService } from "angularx-social-login";
 //Import angular social login providers
 import { GoogleLoginProvider, SocialUser } from "angularx-social-login";
+// Import SPHERE authentication service
+import { SphereAuthService } from './sphere-auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +14,11 @@ import { GoogleLoginProvider, SocialUser } from "angularx-social-login";
 export class AuthService {
  
  
-  constructor(protected http:HttpService, protected socialAuthService: SocialAuthService){ }
+  constructor(
+    protected http:HttpService, 
+    protected socialAuthService: SocialAuthService,
+    protected sphereAuthService: SphereAuthService
+  ){ }
 
   login:boolean=false;
   token:String;
@@ -193,6 +199,58 @@ export class AuthService {
     return new Promise(prom)
   }
 
+  /**
+   * Login to SPHERE with username and password
+   * @param username SPHERE username  
+   * @param password SPHERE password
+   * @returns Promise that resolves when login is complete
+   */
+  loginWithSphere(username: string, password: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.sphereAuthService.loginToSphere(username, password).subscribe({
+        next: (response) => {
+          if (response.token) {
+            // Store the SPHERE token as the main token for the app
+            this.token = response.token;
+            this.enableAuthentication();
+            console.log('SPHERE authentication successful');
+            resolve(response);
+          } else {
+            reject('No token received from SPHERE');
+          }
+        },
+        error: (error) => {
+          console.error('SPHERE login failed:', error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  /**
+   * Check if user is authenticated to SPHERE
+   * @returns True if authenticated to SPHERE
+   */
+  isSphereAuthenticated(): boolean {
+    return this.sphereAuthService.isSphereAuthenticated();
+  }
+
+  /**
+   * Get SPHERE authentication token
+   * @returns SPHERE token or null
+   */
+  getSphereToken(): string | null {
+    return this.sphereAuthService.getSphereToken();
+  }
+
+  /**
+   * Get observable for SPHERE authentication state
+   * @returns Observable that emits SPHERE auth state changes
+   */
+  getSphereAuthState(): Observable<boolean> {
+    return this.sphereAuthService.sphereAuthState$;
+  }
+
   logout() {
     try {
       this.isAuthenticate.next(false);
@@ -205,11 +263,23 @@ export class AuthService {
       this.setCookie("lastName","",0, true);
       this.setCookie("img","",0, true);
       this.setCookie("userHandle","",0, true);
+      
+      // Logout from Google OAuth
       this.socialAuthService.authState.subscribe((user) => {
         this.user = user;
         this.login = (user != null);
       });
       this.socialAuthService.signOut(true);
+      
+      // Logout from SPHERE
+      this.sphereAuthService.logoutFromSphere().subscribe({
+        next: () => {
+          console.log('SPHERE logout successful');
+        },
+        error: (error) => {
+          console.error('SPHERE logout error:', error);
+        }
+      });
     } catch (ex) {
       //Do nothing
     }

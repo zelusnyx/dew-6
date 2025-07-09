@@ -25,11 +25,24 @@ export class LoginComponent implements OnInit {
   password:string="";
   hide:boolean=true;
   showAlternatelogin:boolean=true;
+
+  // SPHERE login properties
+  showSphereLoginForm: boolean = false;
+  sphereLoginForm: FormGroup;
+  isLoading: boolean = false;
+
   constructor(
     protected cd: ChangeDetectorRef,
     private fb: FormBuilder,
     protected router: Router,
-    protected authService:AuthService) { }
+    protected authService:AuthService) { 
+    
+    // Initialize SPHERE login form
+    this.sphereLoginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit(): void {
       if(this.authService.checkAuthentication()){
@@ -59,6 +72,39 @@ login(){
     }).catch((result)=> {
       $('.SignInOrContent').toggleClass('hide');
     });
+  }
+
+  // SPHERE login methods
+  showSphereForm() {
+    this.showSphereLoginForm = true;
+    this.cd.detectChanges(); // Trigger change detection
+  }
+
+  hideSphereForm() {
+    this.showSphereLoginForm = false;
+    this.sphereLoginForm.reset();
+    this.cd.detectChanges(); // Trigger change detection
+  }
+
+  submitSphereLogin() {
+    if (this.sphereLoginForm.valid && !this.isLoading) {
+      this.isLoading = true;
+      this.cd.detectChanges(); // Trigger change detection
+      
+      const { username, password } = this.sphereLoginForm.value;
+
+      this.authService.loginWithSphere(username, password).then((result) => {
+        this.isLoading = false;
+        // Direct login to DEW without backend validation
+        this.authService.enableAuthentication();
+        this.router.navigate(['dashboard']);
+      }).catch((error) => {
+        this.isLoading = false;
+        alert("SPHERE login failed. Please check your credentials.");
+        console.error('SPHERE login failed:', error);
+        this.cd.detectChanges(); // Trigger change detection
+      });
+    }
   }
 
   enablePassword(){

@@ -30,9 +30,55 @@
         <h1 class="title">DISTRIBUTED EXPERIMENT WORKFLOWS</h1>
       </div>
       <div class="col-md-3 center-aligned">
-        <button mat-stroked-button (click)="login()">
-          Login using Google!
-        </button>
+        <!-- Login Options -->
+        <div class="login-options" *ngIf="!showSphereLoginForm">
+          <button mat-stroked-button (click)="login()" class="login-btn google-btn">
+            Login using Google!
+          </button>
+          <button mat-stroked-button (click)="showSphereForm()" class="login-btn sphere-btn">
+            Login using SPHERE
+          </button>
+        </div>
+        
+        <!-- SPHERE Login Form -->
+        <div class="sphere-form" *ngIf="showSphereLoginForm">
+          <h4>SPHERE Login</h4>
+          <form [formGroup]="sphereLoginForm" (ngSubmit)="submitSphereLogin()">
+            <div class="form-group">
+              <input type="text" 
+                     formControlName="username" 
+                     placeholder="SPHERE Username"
+                     class="form-control sphere-input">
+              <div class="error" *ngIf="sphereLoginForm.get('username')?.invalid && sphereLoginForm.get('username')?.touched">
+                Username is required
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <input type="password" 
+                     formControlName="password" 
+                     placeholder="SPHERE Password"
+                     class="form-control sphere-input">
+              <div class="error" *ngIf="sphereLoginForm.get('password')?.invalid && sphereLoginForm.get('password')?.touched">
+                Password is required
+              </div>
+            </div>
+            
+            <div class="button-group">
+              <button type="submit" 
+                      [disabled]="sphereLoginForm.invalid || isLoading"
+                      class="btn btn-primary sphere-submit">
+                {{ isLoading ? 'Logging in...' : 'Login to DEW' }}
+              </button>
+              
+              <button type="button" 
+                      (click)="hideSphereForm()" 
+                      class="btn btn-secondary sphere-cancel">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -49,7 +95,7 @@
           DEW views an experiment as a collection of <b>scenario</b>(who does what and when), <b>bindings</b>(how is each action performed) and <b>constraints</b>(topology/hardware specifics guiding experiment materialization).Our portal enables you to design an experiment using these abstractions and visualize it. You can then export it as a topology file (NS file) and a runnable script (Bash script) and deploy it on a testbed. This is illustrated in the figure on the left.
         </p>
         <p>DEW is currently closely coupled with the <a href="https://www.isi.deterlab.net/">Deterlab testbed</a>, but we are looking forward to support more testbeds in the near future.</p>
-        <p>Please click on the button at the top right to login using your Google credentials. Feel free to <a href="/docs">view the documentation</a> and/or <a href="/docs/contact_us">contact us</a> with your suggestions and feedback.</p>
+        <p>Please click on the buttons at the top right to login using your Google or SPHERE credentials. Feel free to <a href="/docs">view the documentation</a> and/or <a href="/docs/contact_us">contact us</a> with your suggestions and feedback.</p>
       </div>
     </div>
     <div class="row">
