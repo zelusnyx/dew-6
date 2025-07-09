@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import * as Quill from "quill";
 import EditorService from "../common/editor-service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from "src/app/http-service.service";
 import { StateService } from 'src/app/state-service.service';
 

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import * as Quill from "quill";
 import EditorService from "../common/editor-service";
 import { StateService } from "../../../state-service.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from 'src/app/http-service.service';
 
 Quill.register("modules/counter", EditorService);

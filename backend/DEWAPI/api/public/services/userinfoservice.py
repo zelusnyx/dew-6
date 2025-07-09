@@ -23,7 +23,7 @@ class GoogleLogin():
     def googleUserInfo(self,token):
         try:
             # Specify the CLIENT_ID of the app that accesses the backend:
-            CLIENT_ID = '926607687771-0lll564e4sbjo4davt10fufmhuehgl1s.apps.googleusercontent.com'
+            CLIENT_ID = '789341153375-qeeo9deuouq9ea3ke4ou0ipqr2gjd0vr.apps.googleusercontent.com'
             response = requests.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+token).json()
             # response.content
             # print(request.get_json(response.content))

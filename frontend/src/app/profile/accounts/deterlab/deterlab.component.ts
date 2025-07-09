@@ -5,7 +5,7 @@ import { HttpService } from 'src/app/http-service.service';
 import { HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'deterlab',

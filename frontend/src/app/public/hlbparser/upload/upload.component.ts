@@ -4,7 +4,7 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from "ngx-file-drop";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatDialog,
   MatDialogRef,

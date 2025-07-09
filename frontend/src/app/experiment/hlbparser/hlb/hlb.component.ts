@@ -12,7 +12,7 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import * as Quill from "quill";
 import EditorService from "../common/editor-service";
 import { StateService } from "../../../state-service.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatDialog,
   MatDialogRef,
@@ -32,7 +32,7 @@ import { LogService, LogHeader, LogEntry } from '../common/logging-service';
 import { GoogleDriveService } from "src/app/google-drive-service.service";
 declare let $: any;
 import { AuthService } from '../../../@auth/auth.service';
-import { waitForAsync as  } from "@angular/core/testing";
+import { waitForAsync } from "@angular/core/testing";
 
 Quill.register("modules/counter", EditorService);
 

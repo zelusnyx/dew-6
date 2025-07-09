@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter, OnInit, Inject, Input, ViewChild, HostListener } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Edge, Node, Layout, ClusterNode, NodePosition, GraphComponent } from '@swimlane/ngx-graph';
 import { Subject } from 'rxjs';
 import * as shape from 'd3-shape';

@@ -8,7 +8,10 @@ import { MatCardModule } from "@angular/material/card";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { QuillModule } from "ngx-quill";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { MatButtonModule, MatSnackBarModule, MatDialogModule, MatTableModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { HLBParserComponent } from './hlpparser.component';
 import {NgxGraphModule} from "@swimlane/ngx-graph"

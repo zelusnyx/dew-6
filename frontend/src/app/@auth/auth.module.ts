@@ -14,16 +14,11 @@ import { InitUserService } from "./init-user.service";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { SphereLoginComponent } from "./components/sphere-login/sphere-login.component";
 import { SphereAuthService } from "./sphere-auth.service";
-import {
-  MatCard,
-  MatLabel,
-  MatFormField,
-  MatInput,
-  MatInputModule,
-  MatCardModule,
-  MatButtonModule,
-  MatIconModule,
-} from "@angular/material";
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from "@angular/platform-browser";
 import { GoogleRegistrationComponent } from './components/googleregistration/google-registration.component';
 import { StateService } from '../state-service.service';
@@ -50,7 +45,8 @@ import { HttpService } from '../http-service.service';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule
   ]
 })
 export class AuthModule {

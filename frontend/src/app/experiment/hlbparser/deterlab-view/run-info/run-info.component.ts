@@ -2,7 +2,9 @@ import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angul
 import {HttpService} from 'src/app/http-service.service';
 import {Router} from '@angular/router';
 import {HttpParams} from '@angular/common/http';
-import {MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'run-info',

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ChangeDetectorRef } from "@angular/core";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import * as Quill from "quill";
 import EditorService from "../common/editor-service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatDialog,
   MatDialogRef,
