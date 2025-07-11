@@ -1,4 +1,3 @@
-
 <div class="d-flex flex-column justify-content-center SignInOrContent hide">
   <div class="d-flex justify-content-center">
     <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -31,54 +30,57 @@
       </div>
       <div class="col-md-3 center-aligned">
         <!-- Login Options -->
-        <div class="login-options" *ngIf="!showSphereLoginForm">
+        <div class="login-options">
           <button mat-stroked-button (click)="login()" class="login-btn google-btn">
             Login using Google!
           </button>
+          <!-- SPHERE Login temporarily disabled
           <button mat-stroked-button (click)="showSphereForm()" class="login-btn sphere-btn">
             Login using SPHERE
           </button>
+          -->
         </div>
-        
-        <!-- SPHERE Login Form -->
+
+        <!-- SPHERE Login Form - TEMPORARILY DISABLED
         <div class="sphere-form" *ngIf="showSphereLoginForm">
           <h4>SPHERE Login</h4>
           <form [formGroup]="sphereLoginForm" (ngSubmit)="submitSphereLogin()">
             <div class="form-group">
-              <input type="text" 
-                     formControlName="username" 
+              <input type="text"
+                     formControlName="username"
                      placeholder="SPHERE Username"
                      class="form-control sphere-input">
               <div class="error" *ngIf="sphereLoginForm.get('username')?.invalid && sphereLoginForm.get('username')?.touched">
                 Username is required
               </div>
             </div>
-            
+
             <div class="form-group">
-              <input type="password" 
-                     formControlName="password" 
+              <input type="password"
+                     formControlName="password"
                      placeholder="SPHERE Password"
                      class="form-control sphere-input">
               <div class="error" *ngIf="sphereLoginForm.get('password')?.invalid && sphereLoginForm.get('password')?.touched">
                 Password is required
               </div>
             </div>
-            
+
             <div class="button-group">
-              <button type="submit" 
+              <button type="submit"
                       [disabled]="sphereLoginForm.invalid || isLoading"
                       class="btn btn-primary sphere-submit">
                 {{ isLoading ? 'Logging in...' : 'Login to DEW' }}
               </button>
-              
-              <button type="button" 
-                      (click)="hideSphereForm()" 
+
+              <button type="button"
+                      (click)="hideSphereForm()"
                       class="btn btn-secondary sphere-cancel">
                 Cancel
               </button>
             </div>
           </form>
         </div>
+        END SPHERE LOGIN FORM -->
       </div>
     </div>
     <div class="row justify-content-center">
@@ -106,97 +108,4 @@
   </div>
 </div>
 
-<!-- <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-1 center-aligned">
-      <a class="navbar-brand" href="#"><img src="./assets/isi-logo.jpg" style="border:none;height: 90px;" alt="logo" class="img-thumbnail" /></a>
-    </div>
-    <div class="col-md-9 center-aligned">
-      <h1 class="title">Distributed experiment workflows</h1>
-    </div>
-    <div class="col-md-2 center-aligned">
-      <button mat-stroked-button (click)="login()">
-        Login using Google!
-      </button>
-    </div>
-  </div>
-  <div class="row"></div>
-  <div class="row"></div>
-</div>
--->
-<!--   <div class="container">
-    <div class="col-md-12">
-      <mat-card>
-       
-        <div class="row" style="text-align: center;">
-          <div class="col-md-12"> <div class="navbar-header">
-            
-            <a class="navbar-brand" href="#">
-              <h3 style="font-family: serif; font-style: italic; margin-left: 3px; color: #900">Distributed Experiment Workflows</h3>
-            </a>
-           
-            </div></div>
-        </div>
-
-        <div class="row" style="text-align: center;">
-          <div class="col-md-12">
-          <p>Welcome to DEW - distributed experiment workflow portal. 
-            Our goal is to simplify design of testbed experiments. This work is based on research sponsored by the National Science Foundation (award #1835608). <br/>To access our documentation, <a href="/docs">click here</a>. <br/>Please enter using your Google account.
-          </p>
-        </div>
-        </div>
-        <div
-          class="row"
-          style="text-align: center;"
-          *ngIf="isAlternateLoginEnable()"
-        >
-          <div class="col-md-12">
-            <button mat-stroked-button (click)="login()">
-              Login using Google!
-            </button>
-          </div>
-        </div>
-        <div
-          class="row"
-          *ngIf="!isAlternateLoginEnable()"
-          style="text-align: center;"
-        >
-          <mat-form-field class="col-md-12">
-            <mat-label>Enter your password</mat-label>
-            <input
-              matInput
-              [type]="hide ? 'password' : 'text'"
-              [(ngModel)]="password"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hide = !hide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide"
-            >
-              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-            </button>
-            <button mat-icon-button matSuffix>
-              <mat-icon
-                *ngIf="password.length != 0"
-                class="fas fa-angle-right pointer green"
-                (click)="enablePassword()"
-              ></mat-icon>
-            </button>
-          </mat-form-field>
-          <div class="col-md-12">
-            <button mat-icon-button matSuffix>
-              <mat-icon
-                class="fas fa-angle-left pointer"
-                (click)="disablePassword()"
-              ></mat-icon>
-            </button>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-  </div> -->
-  <!-- </div> -->
-
-  <div style="bottom: 0;left:26%;position:absolute;"></div>
+<div style="bottom: 0;left:26%;position:absolute;"></div>

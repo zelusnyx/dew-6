@@ -1,0 +1,1 @@
+{"ast":null,"code":"export function isUndefined(val) {\n  return typeof val === 'undefined';\n}","map":null,"metadata":{},"sourceType":"module"}

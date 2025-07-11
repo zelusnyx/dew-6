@@ -6,18 +6,18 @@ import { SocialAuthService } from "angularx-social-login";
 //Import angular social login providers
 import { GoogleLoginProvider, SocialUser } from "angularx-social-login";
 // Import SPHERE authentication service
-import { SphereAuthService } from './sphere-auth.service';
+// import { SphereAuthService } from './sphere-auth.service';
 
 @Injectable({
     providedIn: 'root'
   })
 export class AuthService {
- 
- 
+
+
   constructor(
-    protected http:HttpService, 
+    protected http:HttpService,
     protected socialAuthService: SocialAuthService,
-    protected sphereAuthService: SphereAuthService
+    // protected sphereAuthService: SphereAuthService
   ){ }
 
   login:boolean=false;
@@ -28,7 +28,7 @@ export class AuthService {
   currentTime: number;
 
   startSession(id): Observable<any> {
-    
+
       var param = {
         token:id
       }
@@ -42,7 +42,7 @@ export class AuthService {
   }
 
   setRefreshTokenIntervals() {
-  
+
     //Code to Refresh Access Tokens
     setInterval(()=> {
       this.refreshToken();
@@ -80,7 +80,7 @@ export class AuthService {
       //Do nothing
     }
   }
-  
+
 
   enableAuthentication(){
     this.isAuthenticate.next(true);
@@ -147,7 +147,7 @@ export class AuthService {
           this.login = (user != null);
         });
         this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(()=> {
-          
+
           resolve(this.user);
         }).catch(()=> {
           reject(false);
@@ -156,27 +156,8 @@ export class AuthService {
         reject(false);
       }
     });
-    
-  }
 
-  // loginWithGoogleOldVersion(){
-  //   var redirect = environment.authRedirectUrl
-  //   var client_id = google_oauth_credentials.web.client_id;
-  //   var client_secret = google_oauth_credentials.web.client_secret;
-  //   var url = [];
-  //   var apiurl = "https://accounts.google.com/o/oauth2/auth";
-  //   url.push(apiurl);
-  //   url.push("?redirect_uri="+encodeURIComponent( redirect));
-  //   url.push("&access_type=offline&prompt=consent");
-  //   url.push("&response_type=code");
-  //   url.push("&scope=email%20profile%20openid%20"+encodeURIComponent("https://www.googleapis.com/auth/userinfo.profile")+"&fetch_basic_profile=true");
-  //   url.push("&client_id="+client_id);
-  //   //url.push("&client_secret="+client_secret);
-  //   //url.push('&grant_type=authorization_code');
-  //  // url.push("&ss_domain=https%3A%2F%2Fdevelopers-dot-devsite-v2-prod.appspot.com&gsiwebsdk=2");
-  //   //console.log(url.join(""));
-  //   window.location.href = url.join("");
-  // }
+  }
 
   authorizeGoogleDrive(experiment_id){
     const scopes = [
@@ -188,7 +169,7 @@ export class AuthService {
     ]
     var apiurl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${environment.googleClientId}&response_type=token&state=${experiment_id}&scope=${scopes.join("%20")}&redirect_uri=${encodeURIComponent(environment.googleDriveRedirectUrl)}&include_granted_scopes=true`
     var popupWindow = window.open(apiurl, 'authorize')
-    var prom = (resolve) => {  
+    var prom = (resolve) => {
       if(popupWindow.closed)
       {
         resolve();
@@ -200,55 +181,31 @@ export class AuthService {
   }
 
   /**
-   * Login to SPHERE with username and password
-   * @param username SPHERE username  
-   * @param password SPHERE password
-   * @returns Promise that resolves when login is complete
+   * Login to SPHERE with username and password - TEMPORARILY DISABLED
    */
   loginWithSphere(username: string, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.sphereAuthService.loginToSphere(username, password).subscribe({
-        next: (response) => {
-          if (response.token) {
-            // Store the SPHERE token as the main token for the app
-            this.token = response.token;
-            this.enableAuthentication();
-            console.log('SPHERE authentication successful');
-            resolve(response);
-          } else {
-            reject('No token received from SPHERE');
-          }
-        },
-        error: (error) => {
-          console.error('SPHERE login failed:', error);
-          reject(error);
-        }
-      });
-    });
+    return Promise.reject('SPHERE authentication temporarily disabled');
   }
 
   /**
-   * Check if user is authenticated to SPHERE
-   * @returns True if authenticated to SPHERE
+   * Check if user is authenticated to SPHERE - TEMPORARILY DISABLED
    */
   isSphereAuthenticated(): boolean {
-    return this.sphereAuthService.isSphereAuthenticated();
+    return false;
   }
 
   /**
-   * Get SPHERE authentication token
-   * @returns SPHERE token or null
+   * Get SPHERE authentication token - TEMPORARILY DISABLED
    */
   getSphereToken(): string | null {
-    return this.sphereAuthService.getSphereToken();
+    return null;
   }
 
   /**
-   * Get observable for SPHERE authentication state
-   * @returns Observable that emits SPHERE auth state changes
+   * Get observable for SPHERE authentication state - TEMPORARILY DISABLED
    */
   getSphereAuthState(): Observable<boolean> {
-    return this.sphereAuthService.sphereAuthState$;
+    return of(false);
   }
 
   logout() {
@@ -263,23 +220,15 @@ export class AuthService {
       this.setCookie("lastName","",0, true);
       this.setCookie("img","",0, true);
       this.setCookie("userHandle","",0, true);
-      
+
       // Logout from Google OAuth
       this.socialAuthService.authState.subscribe((user) => {
         this.user = user;
         this.login = (user != null);
       });
       this.socialAuthService.signOut(true);
-      
-      // Logout from SPHERE
-      this.sphereAuthService.logoutFromSphere().subscribe({
-        next: () => {
-          console.log('SPHERE logout successful');
-        },
-        error: (error) => {
-          console.error('SPHERE logout error:', error);
-        }
-      });
+
+      // SPHERE logout temporarily disabled
     } catch (ex) {
       //Do nothing
     }
